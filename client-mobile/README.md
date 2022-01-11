@@ -1,5 +1,6 @@
 # Setting up development environment
 
+### Requirement
 `npm install -g expo-cli`
 
 ### `npm start`
