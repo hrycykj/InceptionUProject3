@@ -1,10 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Alert, View, Button } from 'react-native';
+import { HOST_SERVER } from './util'
 
 export default function App() {
+
+  const handleButtonClicked = async () => {
+    let response = await fetch(`${HOST_SERVER}/api/ping`)
+    let data = await response.json()
+    console.log(data)
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Button
+        title="Press me"
+        onPress={() => handleButtonClicked()}
+      />
       <StatusBar style="auto" />
     </View>
   );
