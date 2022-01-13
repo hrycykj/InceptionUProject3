@@ -6,6 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var questRouter = require('./routes/quest');
+var checkPointRouter = require('./routes/checkPoint');
+
 
 var app = express();
 const port = process.env.PORT || 5000
@@ -20,7 +23,10 @@ app.use('/api/ping', (req, res)=>{
   console.log('Server health check')
   res.send({response: 'pong'})
 });
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/quest', questRouter);
+app.use('/api/checkPoint', checkPointRouter);
+
 
 app.use('/', indexRouter);
 app.use('/', express.static('../client/build'))
