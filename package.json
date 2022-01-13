@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/hrycykj/InceptionUProject3/issues"
   },
-  "homepage": "https://github.com/hrycykj/InceptionUProject3#readme"
+  "homepage": "https://github.com/hrycykj/InceptionUProject3#readme",
+  "dependencies": {
+    "react-router-dom": "^6.2.1"
+  }
 }

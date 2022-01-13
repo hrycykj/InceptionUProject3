@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import Button from '@mui/material/Button'
+import Login from './components/Login'
+
+
 function App() {
 
   const pingServer = async () => {
@@ -16,9 +19,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-
         <Button variant="contained" onClick={() => pingServer()} >Text</Button>
-      </header>
+      </header>  
+      <Login /> 
     </div>
   );
 }
