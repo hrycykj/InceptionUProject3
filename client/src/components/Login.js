@@ -1,3 +1,7 @@
+//*****!!IMPORTANT!!
+// THIS IS A NON-FUNCTIONAL LOGIN FORM!! FUNCTIONAL ONE IS CALLED SIGNIN SCREEN IN THE COPONENTS FOLDER!!
+//
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -12,6 +16,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createRoutesFromChildren } from 'react-router-dom'
 
 function Copyright(props) {
   return (

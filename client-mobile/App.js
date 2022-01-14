@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Alert, View, Button } from 'react-native';
+import login from './components/login';
 import { HOST_SERVER } from './util'
 
 export default function App() {
