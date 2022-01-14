@@ -14,6 +14,10 @@ const NavBar = () => {
       <span>
         <h1 onClick={navigateHome}>Rabbit Hole</h1>
       </span>
+      <span>How to Play</span>
+      <span>Download </span>
+      <button>Sign Up</button>
+      <button>Log In</button>
     </div>
   );
 };

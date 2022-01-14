@@ -3,6 +3,10 @@ import './App.css';
 import Button from '@mui/material/Button'
 import Login from './components/Login'
 import SignInScreen from './components/SignInScreen'
+import NavBar from './components/NavBar';
+import MainArea from './components/MainArea';
+import Footer from './components/Footer';
+
 
 
 
@@ -25,6 +29,9 @@ function App() {
       </header>  
       {/* <Login />  */}
       <SignInScreen />
+      <NavBar />
+      <MainArea />
+      <Footer />
     </div>
   );
 }
