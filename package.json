@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/hrycykj/InceptionUProject3#readme",
   "dependencies": {
-    "react-router-dom": "^6.2.1"
+    "firebase": "^9.6.3",
+    "react-firebaseui": "^6.0.0",
+    "react-router-dom": "^6.2.1",
+    "save": "^2.4.0"
   }
 }
