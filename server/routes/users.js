@@ -2,6 +2,19 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db.js')
 
+/*
+// future feature: Group of user doing the same quest
+let user = {
+  uid: string,
+  // userType: number,
+  username: stirng,
+  currentQuest: quest,
+  completedQuests: quest[],
+  coins: coins[],
+  baseLocation: string,
+}
+*/
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
