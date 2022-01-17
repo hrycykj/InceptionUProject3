@@ -1,23 +1,30 @@
 import React from "react";
-import "./NavBar.css";
-import { useNavigate } from "react-router-dom";
+import './NavBar.css'
+
+
 
 const NavBar = () => {
-  const navigate = useNavigate();
-
-  const navigateHome = () => {
-    navigate("/");
-  };
-
   return (
     <div>
-      <span>
-        <h1 onClick={navigateHome}>Rabbit Hole</h1>
-      </span>
-      <span>How to Play</span>
-      <span>Download </span>
-      <button>Sign Up</button>
-      <button>Log In</button>
+        
+      <div className="container">
+      <div>Rabbit Hole</div>
+        <div className="header">
+          <nav>
+            <ul>
+              
+              <li>How to Play</li>
+              <li>Download</li>
+            </ul>
+          </nav>
+          <button className="btn" id="btn1">
+            Log In
+          </button>
+          <button className="btn" id="btn2">
+            Sign Up
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
