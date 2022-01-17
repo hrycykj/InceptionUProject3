@@ -5,7 +5,7 @@ import {TextInput, Button, StyleSheet, Text, View } from 'react-native';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, SignOut } from "firebase/auth";
 
 
-const App =() => {
+export default function App () {
 
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const RegisterUser =()=>{
   .catch((re) => {
   console.log(err);
   })
-
+}
 
 const SignInUser =()=>{
       signInWithEmailAndPassword(auth, email, password)
@@ -31,6 +31,7 @@ const SignInUser =()=>{
     .catch((re) => {
     console.log(err);
     })
+  }
 
 const SignOutUser =()=>{
       signOut(auth)
@@ -41,8 +42,7 @@ const SignOutUser =()=>{
       .catch((err) => {
       console.log(err);
     })
-
-
+  }
   return (
     <View>
       <TextInput placeholder='Email' value={email} onChangeText={text=>setEmail(text)}/>
@@ -56,6 +56,3 @@ const SignOutUser =()=>{
     </View>
   );
 }
-
-
-export default App;
