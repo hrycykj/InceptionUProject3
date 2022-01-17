@@ -1,5 +1,5 @@
 import React from 'react'
-import 'MainArea.css'
+import './MainArea.css'
 
 const MainArea = () => {
     return (

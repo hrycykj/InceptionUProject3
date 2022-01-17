@@ -1,23 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Alert, View, Button } from 'react-native';
-import login from './components/login';
-import { HOST_SERVER } from './util'
+import {Auth} from './firebase/firebase-config';
+import { HOST_SERVER } from './util';
+import React, {useState} from 'react';
+import { TextInput, Button, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+const App =() => {
 
-  const handleButtonClicked = async () => {
-    let response = await fetch(`${HOST_SERVER}/api/ping`)
-    let data = await response.json()
-    console.log(data)
-  }
-
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
   return (
-    <View style={styles.container}>
-      <Button
-        title="Press me"
-        onPress={() => handleButtonClicked()}
-      />
-      <StatusBar style="auto" />
+    <View>
+      <TextInput placeholder='Username' />
+      <TextInput placeholder='Password' />
+      <Button title='Sign In' />
     </View>
   );
 }
@@ -30,3 +28,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+export default App;
