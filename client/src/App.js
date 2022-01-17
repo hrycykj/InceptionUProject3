@@ -28,8 +28,8 @@ function App() {
         <Button variant="contained" onClick={() => pingServer()} >Text</Button>
       </header>  
       {/* <Login />  */}
-      <SignInScreen />
       <NavBar />
+      <SignInScreen />
       <MainArea />
       <Footer />
     </div>

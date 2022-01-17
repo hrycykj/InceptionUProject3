@@ -1,32 +1,58 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Alert, View, Button } from 'react-native';
-import login from './components/login';
-import { HOST_SERVER } from './util'
 
-export default function App() {
+import {auth} from './firebase/firebase-config';
+import React, {useState} from 'react';
+import {TextInput, Button, StyleSheet, Text, View } from 'react-native';
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, SignOut } from "firebase/auth";
 
-  const handleButtonClicked = async () => {
-    let response = await fetch(`${HOST_SERVER}/api/ping`)
-    let data = await response.json()
-    console.log(data)
+
+export default function App () {
+
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+const RegisterUser =()=>{
+    createUserWithEmailAndPassword(auth, email, password)
+  .then((re) => {
+    console.log(re);
+    setIsSignedIn(true)
+  })
+  .catch((re) => {
+  console.log(err);
+  })
+}
+
+const SignInUser =()=>{
+      signInWithEmailAndPassword(auth, email, password)
+    .then((re) => {
+    console.log(re);
+    setIsSignedIn(true);
+    })
+    .catch((re) => {
+    console.log(err);
+    })
   }
 
+const SignOutUser =()=>{
+      signOut(auth)
+      .then((re) => {
+        console.log(re);
+        setIsSignedIn(false);
+      })
+      .catch((err) => {
+      console.log(err);
+    })
+  }
   return (
-    <View style={styles.container}>
-      <Button
-        title="Press me"
-        onPress={() => handleButtonClicked()}
-      />
-      <StatusBar style="auto" />
+    <View>
+      <TextInput placeholder='Email' value={email} onChangeText={text=>setEmail(text)}/>
+      <TextInput placeholder='Password' value={password} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
+      <Button title='Register' onPress={RegisterUser} />
+      {isSignedIn === true?
+      <Button title='Sign Out' onPress={SignOutUser} />
+      :
+      <Button title='Sign In' onPress={SignInUser} />      
+      }
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
