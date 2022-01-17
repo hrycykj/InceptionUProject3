@@ -27,7 +27,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/quest', questRouter);
 app.use('/api/checkPoint', checkPointRouter);
 
-
 app.use('/', indexRouter);
 app.use('/', express.static('../client/build'))
 app.use('*', (req, res) => {

@@ -6,14 +6,16 @@ const db = require('../db.js')
   quest = {
     id,
     creator: user,
+    title: string,
     description: stirng,
-    title: string
+    completionStory: string,
     location: string,
     estimatedTime: number,
     avgTimeCompleted: number,
     startCount: number,
     completedCount: number,
-    quest: quest[]
+    likes, number,
+    checkPoints: checkPoints[]
   }
 */
 
