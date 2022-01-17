@@ -8,7 +8,7 @@ const NavBar = () => {
     <div>
         
       <div className="container">
-      <div>Rabbit Hole</div>
+      <div className="logo">Rabbit Hole</div>
         <div className="header">
           <nav>
             <ul>
