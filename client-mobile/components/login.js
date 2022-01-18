@@ -1,47 +1,75 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { Input, Icon } from 'react-native-elements';
+import { auth } from "../firebase/firebase-config";
+import React, { useState } from "react";
+import { TextInput, Button, StyleSheet, Text, View, Image, ScrollView, Alert } from "react-native";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { SafeAreaFrameContext, SafeAreaView } from "react-native-safe-area-context";
 
-export default () => {
+export default function Login() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const RegisterUser = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((re) => {
+        console.log(re);
+        setIsSignedIn(true);
+      })
+      .catch((re) => {
+        console.log(err);
+      });
+  };
+
+  const SignInUser = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((re) => {
+        console.log(re);
+        setIsSignedIn(true);
+      })
+      .catch((re) => {
+        console.log(err);
+      });
+  };
+
+  const SignOutUser = () => {
+    signOut(auth)
+      .then((re) => {
+        console.log(re);
+        setIsSignedIn(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
-    <>
-      <Input
-        placeholder='BASIC INPUT'
-      />
-
-      <Input
-        placeholder='INPUT WITH ICON'
-        leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
-      />
-
-      <Input
-        placeholder='INPUT WITH CUSTOM ICON'
-        leftIcon={
-          <Icon
-            name='user'
-            size={24}
-            color='black'
-          />
-        }
-      />
-
-
-      <Input
-        placeholder="Comment"
-        leftIcon={{ type: 'font-awesome', name: 'comment' }}
-        onChangeText={value => this.setState({ comment: value })}
+    <View>
+        <SafeAreaView>
+<Text style={{fontSize: 40}}>Log In / Sign In</Text>
+     
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
 
 
-      <Input
-        placeholder='INPUT WITH ERROR MESSAGE'
-        errorStyle={{ color: 'red' }}
-        errorMessage='ENTER A VALID ERROR HERE'
-      />
-
-      <Input placeholder="Password" secureTextEntry={true} />
-    </>
+        <TextInput
+          placeholder="Password"
+          value={password}
+          secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <Button title="Register" onPress={RegisterUser} />
+        {isSignedIn === true ? (
+          <Button title="Sign Out" onPress={SignOutUser} />
+        ) : (
+          <Button title="Sign In" onPress={SignInUser} />
+        )}
+</SafeAreaView>
+  </View>
   );
-};
-
+}
