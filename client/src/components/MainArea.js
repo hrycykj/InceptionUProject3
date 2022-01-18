@@ -4,8 +4,8 @@ import './MainArea.css'
 const MainArea = () => {
     return (
         <div>
-    <div class="content">
-            <div class="text">
+    <div className="content">
+            <div className="text">
             <h1>Start Your Adventure</h1>
             </div>
             

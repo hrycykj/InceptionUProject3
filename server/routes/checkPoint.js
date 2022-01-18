@@ -7,6 +7,7 @@ const db = require('../db.js')
     id,
     title: string
     description: stirng,
+    completionText: string
     position: {
       longitude: number,
       latitude: number
@@ -14,8 +15,7 @@ const db = require('../db.js')
     objectToFind: {
       format: string,
       url: string
-    },
-  }
+  },
 */
 
 //Get all checkpoints
