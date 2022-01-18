@@ -17,17 +17,10 @@
     "firebase": "^9.6.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-<<<<<<< HEAD
     "react-firebaseui": "^6.0.0",
     "react-native": "0.64.3",
     "react-native-elements": "^3.4.2",
     "react-native-firebaseui-auth": "^1.3.43",
-=======
-    "react-native": "0.64.3",
-    "react-native-web": "0.17.1",
-    "firebase": "^9.6.3",
-    "react-native-firebaseui-auth": "^1.3.0",
->>>>>>> 5b9880a4e03366c69f85eb2d7a2145e68e17abd5
     "react-native-safe-area-context": "^3.3.2",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
