@@ -15,19 +15,22 @@ let user = {
 }
 */
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+/* GET a user by uid. */
+router.get('/:uid', function(req, res, next) {
+  res.send('ok');
 });
 
-
-/*
-docRef.set({
-  first: 'Ada',
-  last: 'Lovelace',
-  born: 1815
+/* Log user out  */
+router.post('logOut/:uid', function(req, res, next) {
+  res.send('ok');
 });
-*/
+
+/* update a user by uid. */
+router.put('/:uid', function(req, res, next) {
+  res.send('ok');
+});
+
+//test
 router.get('/test', async function(req, res, next) {
   // res.send('ok')
   let testUserRef = db.collection('users').doc('alovelace')
