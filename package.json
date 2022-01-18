@@ -4,7 +4,7 @@
   "description": "Project 3 Repo",
   "main": "index.js",
   "scripts": {
-    "install": "npm run install-client && npm run install-server",
+    "install": "npm run install-client && npm run install-server && npm run install-client-mobile",
     "install-client": "cd client && npm install && cd ..",
     "install-client-mobile": "cd client-mobile && npm install && cd ..",
     "install-server": "cd server && npm install && cd ..",
@@ -23,7 +23,5 @@
     "url": "https://github.com/hrycykj/InceptionUProject3/issues"
   },
   "homepage": "https://github.com/hrycykj/InceptionUProject3#readme",
-  "dependencies": {
-   
-  }
+  "dependencies": {}
 }
