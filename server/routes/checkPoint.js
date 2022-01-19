@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db.js')
-
+const {
+  getAllCheckPoints,
+  getCheckPointById
+} = require('../model/checkPoint')
 /*
   checkPoint = {
     id,
@@ -19,13 +21,16 @@ const db = require('../db.js')
 */
 
 //Get all checkpoints
-router.get('/', function(req, res, next) {
-  res.send('ok');
+router.get('/', async function(req, res, next) {
+  const checkPoints = await getAllCheckPoints()
+  res.send(checkPoints);
 });
 
 //Get a single checkPoint by id
-router.get('/:id', function(req, res, next) {
-  res.send('ok');
+router.get('/:id', async function(req, res, next) {
+  const id = req.params.id
+  const checkPoint = await getCheckPointById(id)
+  res.send(checkPoint)
 });
 
 

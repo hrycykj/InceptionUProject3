@@ -6,9 +6,7 @@ import SignInScreen from './components/SignInScreen'
 import NavBar from './components/NavBar';
 import MainArea from './components/MainArea';
 import Footer from './components/Footer';
-
-
-
+import axios from 'axios'
 
 function App() {
 
