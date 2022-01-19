@@ -19,7 +19,7 @@ export default function Login() {
         console.log(re);
         setIsSignedIn(true);
       })
-      .catch((re) => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -30,7 +30,7 @@ export default function Login() {
         console.log(re);
         setIsSignedIn(true);
       })
-      .catch((re) => {
+      .catch((err) => {
         console.log(err);
       });
   };
