@@ -4,15 +4,16 @@ import { Text, View } from "react-native";
 import Login from "./components/Login";
 import {HOST_SERVER} from './util/hostServer'
 
-export default function App() {
-  console.log(HOST_SERVER)
+import MappingTest from './components/MappingTest'
 
-  fetch(`${HOST_SERVER}/api/checkPoint`).then(res=>res.json()).then(data=>{
-    console.log(data)
-  })
+export default function App() {
+
   return (
     <View>
-          <Login />
+          {/* <Login /> */}
+          <MappingTest 
+          checkpointCoords = {{latitude: 51.0452995902993, longitude: -114.0545529482637}}
+          />
     </View>
   );
 }
