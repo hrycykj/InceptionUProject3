@@ -4,15 +4,17 @@ import { Text, View } from "react-native";
 import Login from "./components/Login";
 import {HOST_SERVER} from './util/hostServer'
 
-import MappingTest from './components/MappingTest'
+import SelectedQuest from './components/SelectedQuest'
 
 export default function App() {
+
+  console.log (HOST_SERVER)
 
   return (
     <View>
           {/* <Login /> */}
-          <MappingTest 
-          checkpointCoords = {{latitude: 51.0452995902993, longitude: -114.0545529482637}}
+          <SelectedQuest 
+            questName = "Downtown Tour Calgary"
           />
     </View>
   );
