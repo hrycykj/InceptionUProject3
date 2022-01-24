@@ -5,17 +5,22 @@ import Login from "./components/Login";
 import {HOST_SERVER} from './util/hostServer'
 
 import SelectedQuest from './components/SelectedQuest'
+import QrScanner from './components/QrScanner'
 
 export default function App() {
 
   console.log (HOST_SERVER)
 
   return (
-    <View>
-          {/* <Login /> */}
-          <SelectedQuest 
-            questName = "Downtown Tour Calgary"
-          />
-    </View>
+    <>
+      <QrScanner />
+    {/* <View> */}
+    {/* <Login /> */}
+    <SelectedQuest 
+          questName = "Downtown Tour Calgary"
+           />
+    {/* </View> */}
+    </>
   );
 }
+

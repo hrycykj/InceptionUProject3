@@ -40,8 +40,8 @@ let styles = StyleSheet.create({
       justifyContent: 'center',
     },
     map: {
-      width: screenMapWidth,
-      height: screenMapHeight,
+      width: 300,
+      height: 300,
     },
   });
 
