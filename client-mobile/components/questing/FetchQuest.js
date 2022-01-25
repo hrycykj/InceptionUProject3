@@ -6,6 +6,7 @@ const FetchQuest = (props) => {
     let questName=props.questName
     let quest=props.quest
     let setQuest=props.setQuest
+    let setCoords=props.setCoords
     let [message, setMessage] = useState('Fetching your Quest...')
 
     useEffect(() => {
@@ -13,9 +14,10 @@ const FetchQuest = (props) => {
             let fetchedData = await fetch (`${HOST_SERVER}/api/quest/`+questName)
             fetchedData.json().then ((data)=>{
                 setQuest(data)
+                setCoords(data.checkPoints)
                 setMessage('')
             })
-            // console.log(quest)
+            // console.log('fetched Quest data:', await quest)
         })();
     }, []);
 

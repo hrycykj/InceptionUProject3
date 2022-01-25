@@ -1,6 +1,6 @@
-import { Button, StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
-import MapView, { Marker, Polyline } from 'react-native-maps'
+import MapView from 'react-native-maps'
 
 const screenMapWidth = Dimensions.get('window').width
 const screenMapHeight = Dimensions.get('window').height
@@ -33,15 +33,9 @@ const CurrentMapview = (props) => {
 // figure out what the styles should really be for this!
 
 let styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     map: {
-      width: 300,
-      height: 300,
+      width: screenMapWidth,
+      height: screenMapHeight,
     },
   });
 
