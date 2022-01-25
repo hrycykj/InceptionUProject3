@@ -5,27 +5,26 @@ import './NavBar.css'
 
 const NavBar = () => {
   return (
-    <div>
-        
-      <div className="container">
-      <div className="logo">Rabbit Hole</div>
-        <div className="header">
-          <nav>
-            <ul>
-              
-              <li>How to Play</li>
-              <li>Download</li>
-            </ul>
-          </nav>
-          <button className="btn" id="btn1">
-            Log In
-          </button>
-          <button className="btn" id="btn2">
-            Sign Up
-          </button>
+    <header>
+    <div class="inner">
+    <div class="logo">
+        <div>
+            
+            <img src="https://i.ibb.co/6rmpGgR/Logo-trail.png" alt="Logo-trail" border="0"></img>
+            
         </div>
-      </div>
     </div>
+
+    <nav>
+      
+        <li><span class="under"> Player</span></li>
+        <li><span class="under"> Download</span></li>
+        <li><span class="button"> Login</span></li>
+        <li><span class="button"> Sign Up </span></li>
+       
+    </nav>
+  </div>
+  </header>
   );
 };
 

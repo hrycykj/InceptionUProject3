@@ -67,8 +67,8 @@ const MappingTest = (props) => {
                                 />
                             </CheckpointMarker>
                             <CheckpointMarker
-                                latitude= {51.0452995902993}
-                                longitude= {-114.0545529482637}
+                                latitude= {checkpointCoords.latitude}
+                                longitude= {checkpointCoords.longitude}
                             >
                                 <Image source={require('../assets/Pin_Trans.png')}
                                     style={{

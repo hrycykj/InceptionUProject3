@@ -2,6 +2,9 @@ import { Button, StyleSheet, Text, View, Dimensions } from 'react-native'
 
 import MapView, { Marker, Polyline } from 'react-native-maps'
 
+const screenMapWidth = Dimensions.get('window').width
+const screenMapHeight = Dimensions.get('window').height
+
 const CurrentMapview = (props) => {
     console.log('made it into the CurrentMapview component')
 
