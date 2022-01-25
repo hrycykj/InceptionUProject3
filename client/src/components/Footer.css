@@ -1,16 +1,26 @@
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 0 15px;
-    
-    
+footer{
+    background-color: #3fddc1;
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
 }
 
-.footer {
-    height: 70px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    background-color: aqua;
+footer .foot{
+    width: 55%; /* This is the inner width of the content inside of your header (80%, etc) */
+    height: 100%;
+    display: block;
+    margin: 0 auto;
 }
+
+footer nav li{
+   
+    display: table;
+    float: right;
+    font-size: 22px;
+    font-weight: 700;
+    margin-right: 140px;
+    margin-top: 25px;
+    color: #1d1d1f;
+    text-decoration: underline;
+}
+

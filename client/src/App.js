@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <NavBar />
       {/* <SignInScreen /> */}
-      <SideNavBar />
+      {/* <SideNavBar /> */}
       <MainArea />
       <Footer />
     </div>
