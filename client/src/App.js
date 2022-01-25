@@ -14,6 +14,9 @@ import Faq from "./pages/Faq";
 import PartnerWithUs from "./pages/PartnerWithUs";
 import Player from "./pages/Player";
 import SignUp from "./pages/SignUp";
+import CreateYourQuest from "./pages/CreateYourQuest";
+import HostHunt from "./pages/HostHunt";
+import JoinHunt from "./pages/JoinHunt";
 
 function App() {
   const pingServer = async () => {
@@ -33,7 +36,7 @@ function App() {
           path="/"
           element={
             <div>
-              <MainArea /> <Footer />{" "}
+              <MainArea /> <Footer />
             </div>
           }
         ></Route>
@@ -98,6 +101,38 @@ function App() {
           element={
             <div>
               <SignUp /> <Footer />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/create-your-quest"
+          element={
+            <div>
+              <CreateYourQuest /> <Footer />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/host-a-hunt"
+          element={
+            <div>
+              <HostHunt /> <Footer />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/join-a-hunt"
+          element={
+            <div>
+              <JoinHunt /> <Footer />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="*"
+          element={
+            <div>
+              <MainArea /> <Footer />
             </div>
           }
         ></Route>
