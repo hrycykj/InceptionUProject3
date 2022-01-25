@@ -1,12 +1,15 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Button from '@mui/material/Button'
-import Login from './components/Login'
 import SignInScreen from './components/SignInScreen'
-import NavBar from './components/NavBar';
 import MainArea from './components/MainArea';
+import NavBar from './components/NavBar';
+import SideNavBar from './components/SideNavBar';
 import Footer from './components/Footer';
 import axios from 'axios'
+
+
+
 
 function App() {
 
@@ -18,16 +21,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button variant="contained" onClick={() => pingServer()} >Text</Button>
-      </header>   */}
-      {/* <Login />  */}
       <NavBar />
       {/* <SignInScreen /> */}
+      <SideNavBar />
       <MainArea />
       <Footer />
     </div>

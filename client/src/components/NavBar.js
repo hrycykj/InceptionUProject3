@@ -7,14 +7,15 @@ const NavBar = () => {
   return (
     <div>
         
-      <div className="container">
+      <div className="navbar-main">
       <div className="logo">Rabbit Hole</div>
         <div className="header">
           <nav>
             <ul>
               
               <li>How to Play</li>
-              <li>Download</li>
+                
+              <li>Download App</li>
             </ul>
           </nav>
           <button className="btn" id="btn1">
