@@ -8,6 +8,12 @@ import Footer from "./components/Footer";
 import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Download from "./pages/Download";
+import Faq from "./pages/Faq";
+import PartnerWithUs from "./pages/PartnerWithUs";
+import Player from "./pages/Player";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const pingServer = async () => {
@@ -31,10 +37,70 @@ function App() {
             </div>
           }
         ></Route>
-        <Route path="/about" element={<div><About /> <Footer /> </div>}></Route>
-        <Route path="/login" element={<div><SignInScreen /> <Footer /> </div>}>
-
-        </Route>
+        <Route
+          path="/about"
+          element={
+            <div>
+              <About /> <Footer />{" "}
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/login"
+          element={
+            <div>
+              <SignInScreen /> <Footer />{" "}
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/contact"
+          element={
+            <div>
+              <Contact /> <Footer />
+            </div>
+          }
+        ></Route>
+         <Route
+          path="/download"
+          element={
+            <div>
+              <Download /> <Footer />
+            </div>
+          }
+        ></Route>
+         <Route
+          path="/faq"
+          element={
+            <div>
+              <Faq /> <Footer />
+            </div>
+          }
+        ></Route>
+         <Route
+          path="/partner"
+          element={
+            <div>
+              <PartnerWithUs /> <Footer />
+            </div>
+          }
+        ></Route>
+         <Route
+          path="/player"
+          element={
+            <div>
+              <Player /> <Footer />
+            </div>
+          }
+        ></Route>
+         <Route
+          path="/sign-up"
+          element={
+            <div>
+              <SignUp /> <Footer />
+            </div>
+          }
+        ></Route>
       </Routes>
     </div>
   );
