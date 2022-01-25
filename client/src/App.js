@@ -32,6 +32,9 @@ function App() {
           }
         ></Route>
         <Route path="/about" element={<div><About /> <Footer /> </div>}></Route>
+        <Route path="/login" element={<div><SignInScreen /> <Footer /> </div>}>
+
+        </Route>
       </Routes>
     </div>
   );
