@@ -81,7 +81,7 @@ function App() {
           }
         ></Route>
          <Route
-          path="/partner"
+          path="/partner-with-us"
           element={
             <div>
               <PartnerWithUs /> <Footer />

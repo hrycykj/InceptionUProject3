@@ -7,10 +7,10 @@ const Footer = () => {
     <footer>
 		<div class="foot"> 
 			<nav>
-				<li>Contact</li>
+				<li><NavLink to="/contact">Contact</NavLink></li>
 				<li><NavLink to="/about">About</NavLink></li>
-				<li>Partner with us</li>
-				<li>FAQ</li>
+				<li><NavLink to="/partner-with-us">Partner With Us</NavLink></li>
+				<li><NavLink to="/faq">FAQ</NavLink></li>
 			</nav>
 		</div>
   </footer>
