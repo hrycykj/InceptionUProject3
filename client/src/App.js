@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import SideNavBar from './components/SideNavBar';
 import Footer from './components/Footer';
 import axios from 'axios'
+import { Route } from "react-router-dom";
 
 
 
@@ -20,13 +21,16 @@ function App() {
   }
 
   return (
+    
     <div className="App">
       <NavBar />
       {/* <SignInScreen /> */}
       {/* <SideNavBar /> */}
       <MainArea />
       <Footer />
+      
     </div>
+    
   );
 }
 
