@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import './NavBar.css'
 
 
@@ -7,6 +8,7 @@ const NavBar = () => {
   return (
     <header>
     <div class="inner">
+<NavLink to="/">
     <div class="logo">
         <div>
             
@@ -14,6 +16,7 @@ const NavBar = () => {
             
         </div>
     </div>
+    </NavLink>
 
     <nav>
       
@@ -29,3 +32,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
