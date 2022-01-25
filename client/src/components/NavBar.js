@@ -20,10 +20,10 @@ const NavBar = () => {
 
     <nav>
       
-        <li><span class="under"> Player</span></li>
-        <li><span class="under"> Download</span></li>
-        <li><span class="button"> Login</span></li>
-        <li><span class="button"> Sign Up </span></li>
+        <li><NavLink to="/player"><span class="under"> Player</span></NavLink></li>
+        <li><NavLink to="/download"><span class="under"> Download</span></NavLink></li>
+        <li><NavLink to="/login"><span class="button"> Login</span></NavLink></li>
+        <li><NavLink to="/sign-up"><span class="button"> Sign Up </span></NavLink></li>
        
     </nav>
   </div>
@@ -33,3 +33,4 @@ const NavBar = () => {
 
 export default NavBar;
 
+<NavLink to="/faq">FAQ</NavLink>
