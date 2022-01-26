@@ -18,10 +18,10 @@ export default function App() {
     />
     {/* <QrScanner /> */}
     {/* <Login /> */}
-    </>
     <PaperProvider theme={theme}>
       <Navigation />
     </PaperProvider>
+    </>
   );
 }
 
