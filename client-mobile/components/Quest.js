@@ -15,6 +15,7 @@ const Quest = (props) => {
     let [currentCheckPoint, setCurrentCheckPoint] = useState(props.checkPoint || 0)
     let [coords, setCoords] = useState(null)
     let [checkPoint, setCheckPoint] = useState(null)
+    let [checkPointComplete, setCheckPointComplete] = useState(null)
     
     let questName = props.questName
 
@@ -73,6 +74,8 @@ const Quest = (props) => {
                 <QrCodeChecker 
                     location = {location}
                     checkPoint = {checkPoint}
+                    setCheckPoint = {setCheckPoint}
+                    setCheckPointComplete = {setCheckPointComplete}
                 />
             }
 
