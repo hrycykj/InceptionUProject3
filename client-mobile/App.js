@@ -1,26 +1,20 @@
-
 import React from "react";
-import { Text, View } from "react-native";
-import Login from "./components/Login";
-import {HOST_SERVER} from './util/hostServer'
-
-import SelectedQuest from './components/SelectedQuest'
-import QrScanner from './components/QrScanner'
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import Navigation from "./components/Navigation";
 
 export default function App() {
-
-  console.log (HOST_SERVER)
-
   return (
-    <>
-      <QrScanner />
-    {/* <View> */}
-    {/* <Login /> */}
-    <SelectedQuest 
-          questName = "Downtown Tour Calgary"
-           />
-    {/* </View> */}
-    </>
+    <PaperProvider theme={theme}>
+      <Navigation />
+    </PaperProvider>
   );
 }
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "orange",
+    accent: "teal",
+  },
+};
