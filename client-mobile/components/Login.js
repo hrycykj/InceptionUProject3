@@ -1,80 +1,77 @@
 import { auth } from "../firebase/firebase-config";
-import React, { useState } from "react";
-import { TextInput, Button, StyleSheet, Text, View, Image, ScrollView, Alert } from "react-native";
+import React, { useState, useContext } from "react";
+import {
+  TextInput,
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Alert,
+} from "react-native";
 import {
   AuthErrorCodes,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { SafeAreaFrameContext, SafeAreaView } from "react-native-safe-area-context";
-let styles = {}
+import {
+  SafeAreaFrameContext,
+  SafeAreaView,
+} from "react-native-safe-area-context";
+import { AuthContext } from "../firebase/AuthContext";
+
+let styles = {};
 export default function Login() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const Auth = useContext(AuthContext);
+  const user = Auth.user;
+console.log (user)
+  const RegisterUser = Auth.RegisterUser;
 
-  const RegisterUser = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((re) => {
-        console.log(re);
-        setIsSignedIn(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const SignInUser = Auth.SignInUser;
 
-  const SignInUser = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((re) => {
-        console.log(re);
-        setIsSignedIn(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const SignOutUser = Auth.SignOutUser;
 
-  const SignOutUser = () => {
-    signOut(auth)
-      .then((re) => {
-        console.log(re);
-        setIsSignedIn(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   return (
     <View style={styles.container}>
-        <SafeAreaView>
-          <Text style={{fontSize: 40}}>Log In / Sign In</Text>
-    <View style={{marginTop: 10, padding: 5}}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        /></View>
+      <SafeAreaView>
+        <Text style={{ fontSize: 40 }}>Log In / Sign In</Text>
+        <View style={{ marginTop: 10, padding: 5 }}>
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
 
-    <View style={{marginTop: 10, padding: 5}}> 
-        <TextInput
-          placeholder="Password"
-          value={password}
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-        /></View>
-        <View style={{marginTop: 10, padding: 5, borderRadius: 10}}>
-        <Button title="Register" onPress={RegisterUser} /></View>
-        {isSignedIn === true ? (
-        <View style={{marginTop: 10, padding: 5, borderRadius: 10}}>  
-          <Button title="Sign Out" onPress={SignOutUser} /></View>
+        <View style={{ marginTop: 10, padding: 5 }}>
+          <TextInput
+            placeholder="Password"
+            value={password}
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
+          <Button title="Register" onPress={(email, password) => {RegisterUser(email, password)}
+} />
+        </View>
+        {user ? (
+          <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
+            <Button title="Sign Out" onPress={SignOutUser} />
+          </View>
         ) : (
-        <View style={{marginTop: 10, padding: 5, borderRadius: 10}}>  
-          <Button title="Sign In" onPress={SignInUser} /></View>
+          <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
+            <Button title="Sign In" onPress={(email, password) => {SignInUser(email, password)} }/>
+          </View>
         )}
-</SafeAreaView>
-</View>
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -83,11 +80,9 @@ styles = StyleSheet.create({
     // flex: 1,
     // backgroundColor: 'grey',
     marginTop: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
-
 
 //test test
