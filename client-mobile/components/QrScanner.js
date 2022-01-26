@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
 export default function QrScanner(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanning, setScanning] = useState(false);
+  let checkPoint = props.checkPoint
+  let setCheckPoint = props.setCheckPoint
+  let location = location
 
     console.log('inside the QrScanner component', scanning)
 
@@ -45,7 +48,7 @@ export default function QrScanner(props) {
   const handleBarCodeScanned = ({ type, data }) => {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     fetch(`${data}`).then(res=>res.json()).then(data=>{
-      console.log(data)
+      setCheckPoint(data)
     })
     setScanning(false);
   };
