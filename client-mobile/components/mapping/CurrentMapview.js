@@ -34,8 +34,8 @@ const CurrentMapview = (props) => {
 
 let styles = StyleSheet.create({
     map: {
-      width: screenMapWidth,
-      height: screenMapHeight,
+        width: screenMapWidth,
+        height: screenMapHeight,
     },
   });
 

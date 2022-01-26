@@ -13,7 +13,7 @@ import { HOST_SERVER } from '../util/hostServer'
 //test
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 5,
       flexDirection: "column",
       justifyContent: "center",
     },
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
   });
 
-export default function QrScanner() {
+export default function QrScanner(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanning, setScanning] = useState(false);
 
@@ -61,15 +61,31 @@ export default function QrScanner() {
   }
 
   return (
+    <>
     <View style={styles.container}>
+      {props.children}
       {!scanning && (
-        <Button
-          onPress={onScan}
-          title="Scan Code"
-          color="#841584"
-          accessibilityLabel="Scan QR code"
-        />
+        <View
+          style={{
+            position: 'absolute',//use absolute position to show button on top of the map
+            top: '0%', //for center align
+            alignSelf: 'center', //for align to right
+            padding: 0,
+            borderRadius: 10,
+            width: '20%',
+            borderWidth: 1,
+            backgroundColor: '#fff',
+          }}
+        >
+          <Button
+            onPress={onScan}
+            title="Scan Code"
+            accessibilityLabel="Scan QR code"
+            color= "#841584"
+          />
+        </View>
       )}
+    {/* </View>      */}
 
       {scanning && (
         <>
@@ -85,5 +101,6 @@ export default function QrScanner() {
         </>
       )}
     </View>
+    </>
   );
 }
