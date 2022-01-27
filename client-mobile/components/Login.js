@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  ImageBackground,
   ScrollView,
   Alert,
 } from "react-native";
@@ -27,8 +28,13 @@ export default function Login() {
   const SignOutUser = Auth.SignOutUser;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerMain}>
       <SafeAreaView>
+      <ImageBackground
+            style={styles.img}
+            source={require("../assets/ipad.jpg")}
+            
+          />
         <Text style={{ fontSize: 40 }}>Log In / Sign In</Text>
         <View style={{ marginTop: 10, padding: 5 }}>
           <TextInput
@@ -65,13 +71,19 @@ export default function Login() {
 }
 
 styles = StyleSheet.create({
-  container: {
-    // flex: 1,
+  containerMain: {
+    flex: 1,
     // backgroundColor: 'grey',
-    marginTop: 300,
+    
     alignItems: "center",
     justifyContent: "center",
   },
+  img:{
+    flex: 1,
+    width:"100%",
+    resizeMode: 'cover'
+ 
+  }
 });
 
 //test test
