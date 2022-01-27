@@ -4,9 +4,12 @@ import { View, Button, Text, Dimensions } from 'react-native'
 import FetchQuest from './questing/FetchQuest'
 import QuestSplash from './questing/QuestSplash'
 import MyLocation from './mapping/MyLocation'
-import QrScanner from './QrScanner'
+import QrScanner from './questing/QrScanner'
 import CheckPointMap from './questing/CheckPointMap'
+import CheckPointIsNear from './questing/CheckPointIsNear'
 import QrCodeChecker from './questing/QrCodeChecker'
+import CheckPointCongratsSplash from './questing/CheckPointCongratsSplash'
+import QuestCompletionSplash from './questing/QuestCompletionSplash'
 
 const Quest = (props) => {
     let [location, setLocation] = useState(null)
@@ -16,32 +19,30 @@ const Quest = (props) => {
     let [coords, setCoords] = useState(null)
     let [checkPoint, setCheckPoint] = useState(null)
     let [checkPointComplete, setCheckPointComplete] = useState(null)
+    let [questComplete, setQuestComplete] = useState(null)
     
     let questName = props.questName
 
-    if (checkPoint){
-        console.log('checkPoint data returned',checkPoint)
-    }
+    // if (checkPoint){
+    //     console.log('checkPoint data returned',checkPoint)
+    // }
 
-    // useEffect(() => {
-    //     (async () =>{
-    //             let b = await currentCheckPoint
-    //             let a = await quest
-    //             a.then (async (data) => {
-    //                 console.log('a: ',data)
-    //             })
-    //             // console.log ('coordinates: ', await a[b].position)
-    //     })();
-    // }, []);
+    useEffect(() => {
+        (()=>{
+                setCheckPoint(null)
+                setCheckPointComplete (null)         
+        })()
+    }, [currentCheckPoint]);
 
     return (
         <>
-            <FetchQuest 
-                questName={questName}
-                quest={quest}
-                setQuest={setQuest}
-                setCoords={setCoords}
-            />
+            {!quest && 
+                <FetchQuest 
+                    questName={questName}
+                    quest={quest}
+                    setQuest={setQuest}
+                    setCoords={setCoords}
+                />}
             <QuestSplash />
             {/* wait for user to press start button inside QuestSplash*/}
             <MyLocation 
@@ -51,7 +52,7 @@ const Quest = (props) => {
                 setErrorMsg = {setErrorMsg}
             />
             {/* {(location) && <Text>{errorMsg}</Text>} */}
-            {(location&&coords) && 
+            {(location&&coords&&!checkPointComplete&&!questComplete) && 
                 (<>
                     <QrScanner
                         checkPoint = {checkPoint}
@@ -62,15 +63,14 @@ const Quest = (props) => {
                             myLocation= {{latitude: location.coords.latitude, longitude: location.coords.longitude}} 
                             checkPointLocation= {coords[currentCheckPoint].position}
                         >
-                        </CheckPointMap>
+                        </CheckPointMap> 
                     </QrScanner>
+                    {/* monitor and update user's location on map, check if location falls within checkpoint's geofence */}
+                    <CheckPointIsNear />
                 </>)   
             }
-            {/* monitor and update user's location on map */}
-            {/* check if location falls within checkpoint's geofence */}
-            {/* <CheckpointIsNear /> */}
-            {/* confirm Qr code returns coordinates of checkpoint and location is within checkpoint geofence */}
-            {(checkPoint&&location) &&
+            
+            {(checkPoint&&location) && // confirm Qr code returns coordinates of checkpoint and location is within checkpoint geofence
                 <QrCodeChecker 
                     location = {location}
                     checkPoint = {checkPoint}
@@ -79,10 +79,19 @@ const Quest = (props) => {
                 />
             }
 
-            {/* <CheckpointCongratsSplash /> */}
-            {/* check if quest is finished */}
-            {/* <QuestCompletionSplash /> only if last checkpoint */}
-            {/* <NewCheckpoint /> if more checkpoints, update to next checkpoint */}
+            {(checkPointComplete&&!questComplete) && // check if quest is finished and if more checkpoints, update to next checkpoint
+                <CheckPointCongratsSplash 
+                    quest = {quest}
+                    checkPoint = {checkPoint}
+                    currentCheckPoint = {currentCheckPoint}
+                    setCurrentCheckPoint = {setCurrentCheckPoint}
+                    setCheckPointComplete = {setCheckPointComplete}
+                    setQuestComplete = {setQuestComplete}
+                />
+            }
+            {(questComplete) && 
+                <QuestCompletionSplash />
+            }
         </>
     )
 }

@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { HOST_SERVER } from '../util/hostServer'
+import { HOST_SERVER } from '../../util/hostServer'
 
 //test
 const styles = StyleSheet.create({
@@ -97,7 +97,7 @@ export default function QrScanner(props) {
             style={styles.scanner}
           >
             <Image
-              source={require("../assets/camera_frame.png")}
+              source={require("../../assets/camera_frame.png")}
               style={styles.frame}
             />
           </BarCodeScanner>

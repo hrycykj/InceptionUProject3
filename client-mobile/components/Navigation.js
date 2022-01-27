@@ -2,7 +2,7 @@ import * as React from "react";
 import { BottomNavigation, Text, Surface } from "react-native-paper";
 import QuestList from "./QuestList";
 import { StyleSheet } from "react-native";
-import QrScanner from './QrScanner'
+import QrScanner from './questing/QrScanner'
 import Quest from './Quest'
 
 const QuestRoute = () => {

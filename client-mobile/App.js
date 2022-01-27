@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import {HOST_SERVER} from './util/hostServer'
 
 import SelectedQuest from './components/SelectedQuest'
-import QrScanner from './components/QrScanner'
+import QrScanner from './components/questing/QrScanner'
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import Navigation from "./components/Navigation";
 
