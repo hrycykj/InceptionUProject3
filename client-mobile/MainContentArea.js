@@ -9,7 +9,7 @@ import { AuthContext } from "./firebase/AuthContext";
 export default function MainContentArea() {
   const Auth = useContext(AuthContext);
   const user = Auth.user
-  console.log('eeee')
+  // console.log('eeee')
 
   return (
     <>

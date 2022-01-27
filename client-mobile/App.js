@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { Text, View } from "react-native";
+import { Text, View, SafeAreaView,  } from "react-native";
 import Login from "./components/Login";
 import { HOST_SERVER } from "./util/hostServer";
 
@@ -14,9 +14,11 @@ export default function App() {
   const Auth = useContext(AuthContext);
   console.log(Auth)
   return (
-    <AuthContextProvider>
+    <SafeAreaView>
+     <AuthContextProvider>
       <MainContentArea/>     
-    </AuthContextProvider>
+     </AuthContextProvider>
+    </SafeAreaView>
   );
 }
 
