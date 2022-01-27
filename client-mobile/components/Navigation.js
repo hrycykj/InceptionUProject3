@@ -33,7 +33,7 @@ const ProfileRoute = () => <Text>Profile</Text>;
 const Navigation = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "quest", title: "Quest", icon: "map-plus" },
+    { key: "quest", title: "Quest", icon: "map-marker-distance" },
     { key: "map", title: "Map", icon: "map-search" },
     { key: "profile", title: "Profile", icon: "account-circle" },
   ]);

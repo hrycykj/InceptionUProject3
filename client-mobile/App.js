@@ -1,26 +1,22 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Text, View } from "react-native";
 import Login from "./components/Login";
-import {HOST_SERVER} from './util/hostServer'
+import { HOST_SERVER } from "./util/hostServer";
 
-import SelectedQuest from './components/SelectedQuest'
-import QrScanner from './components/questing/QrScanner'
+import SelectedQuest from "./components/SelectedQuest";
+import QrScanner from "./components/QrScanner";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-import Navigation from "./components/Navigation";
 
+import { AuthContextProvider, AuthContext } from "./firebase/AuthContext";
+import MainContentArea from "./MainContentArea";
 export default function App() {
+
+  const Auth = useContext(AuthContext);
+  console.log(Auth)
   return (
-    <>
-    {/* <Quest
-      questName = "Downtown Tour Calgary"
-      checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
-    /> */}
-    {/* <QrScanner /> */}
-    {/* <Login /> */}
-    <PaperProvider theme={theme}>
-      <Navigation />
-    </PaperProvider>
-    </>
+    <AuthContextProvider>
+      <MainContentArea/>     
+    </AuthContextProvider>
   );
 }
 
