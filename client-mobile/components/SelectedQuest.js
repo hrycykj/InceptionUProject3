@@ -14,17 +14,16 @@ const SelectedQuest = (props) => {
             fetchedData.json().then ((data)=>{
                 setQuest(data)
             })
-            console.log(quest)
+            // console.log(quest)
         })();
     }, []);
     
     
     if (quest&&quest.checkPoints) {
-        console.log('if',quest)
+        // console.log('if',quest)
         coordinates = quest.checkPoints[0].position
-        // coordinates.longitude = quest.checkPoints[0].position.latitude
     }
-    console.log ('coords',coordinates)
+    // console.log ('coords',coordinates)
 
     return(
         <View>

@@ -1,5 +1,4 @@
-import { Button, StyleSheet, Text, View, Dimensions } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { Marker } from "react-native-maps";
 
 const CheckpointMarker = (props) => {
   let coordinates = {

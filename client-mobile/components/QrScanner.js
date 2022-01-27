@@ -13,7 +13,7 @@ import { HOST_SERVER } from '../util/hostServer'
 //test
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 5,
       flexDirection: "column",
       justifyContent: "center",
     },
@@ -29,9 +29,12 @@ const styles = StyleSheet.create({
     },
   });
 
-export default function QrScanner() {
+export default function QrScanner(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanning, setScanning] = useState(false);
+  let checkPoint = props.checkPoint
+  let setCheckPoint = props.setCheckPoint
+  let location = location
 
     console.log('inside the QrScanner component', scanning)
 
@@ -45,7 +48,7 @@ export default function QrScanner() {
   const handleBarCodeScanned = ({ type, data }) => {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     fetch(`${data}`).then(res=>res.json()).then(data=>{
-      console.log(data)
+      setCheckPoint(data)
     })
     setScanning(false);
   };
@@ -61,15 +64,31 @@ export default function QrScanner() {
   }
 
   return (
+    <>
     <View style={styles.container}>
+      {props.children}
       {!scanning && (
-        <Button
-          onPress={onScan}
-          title="Scan Code"
-          color="#841584"
-          accessibilityLabel="Scan QR code"
-        />
+        <View
+          style={{
+            position: 'absolute',//use absolute position to show button on top of the map
+            top: '0%', //for center align
+            alignSelf: 'center', //for align to right
+            padding: 0,
+            borderRadius: 10,
+            width: '20%',
+            borderWidth: 1,
+            backgroundColor: '#fff',
+          }}
+        >
+          <Button
+            onPress={onScan}
+            title="Scan Code"
+            accessibilityLabel="Scan QR code"
+            color= "#841584"
+          />
+        </View>
       )}
+    {/* </View>      */}
 
       {scanning && (
         <>
@@ -85,5 +104,6 @@ export default function QrScanner() {
         </>
       )}
     </View>
+    </>
   );
 }

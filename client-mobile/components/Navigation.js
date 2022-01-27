@@ -3,7 +3,7 @@ import { BottomNavigation, Text, Surface } from "react-native-paper";
 import QuestList from "./QuestList";
 import { StyleSheet } from "react-native";
 import QrScanner from './QrScanner'
-import SelectedQuest from './SelectedQuest'
+import Quest from './Quest'
 
 const QuestRoute = () => {
   return (
@@ -16,10 +16,13 @@ const QuestRoute = () => {
 const MapRoute = () => {
   return (
     <>
-      <QrScanner />
+      {/* <QrScanner /> */}
       {/* <View> */}
       {/* <Login /> */}
-      <SelectedQuest questName="Downtown Tour Calgary" />
+      <Quest
+      questName = "Downtown Tour Calgary"
+      // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
+    />
       {/* </View> */}
     </>
   );

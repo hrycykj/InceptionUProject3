@@ -26,11 +26,11 @@ const MyLocation = (props) => {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
-    console.log(
-      location.coords.latitude,
-      location.coords.longitude,
-      location.coords.accuracy
-    );
+    // console.log(
+    //   location.coords.latitude,
+    //   location.coords.longitude,
+    //   location.coords.accuracy
+    // );
   }
 
   return (
