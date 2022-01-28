@@ -2,14 +2,12 @@ import Navigation from "./components/Navigation";
 import HomeScreen from "./components/HomeScreen";
 import React, {useContext} from "react";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-
 import { AuthContext } from "./firebase/AuthContext";
 
 
 export default function MainContentArea() {
   const Auth = useContext(AuthContext);
   const user = Auth.user
-  // console.log('eeee')
 
   return (
     <>

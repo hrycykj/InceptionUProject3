@@ -12,7 +12,7 @@ const AuthContext = React.createContext();
 
 const AuthContextProvider = (props) => {
   const children = props.children;
-  const [user, setUser] = useState();
+  const [user, setUser] = useState('tem user');
   
 
   const RegisterUser = (email, password) => {
