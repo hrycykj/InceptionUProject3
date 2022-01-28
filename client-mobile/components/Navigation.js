@@ -2,8 +2,10 @@ import * as React from "react";
 import { BottomNavigation, Text, Surface } from "react-native-paper";
 import QuestList from "./QuestList";
 import { StyleSheet } from "react-native";
-import QrScanner from './questing/QrScanner'
-import Quest from './Quest'
+import QrScanner from "./questing/QrScanner";
+import Quest from "./Quest";
+import UserInfo from "./UserInfo";
+import { AuthContext } from "../firebase/AuthProvider";
 
 const QuestRoute = () => {
   return (
@@ -14,23 +16,33 @@ const QuestRoute = () => {
 };
 
 const MapRoute = () => {
+  const authContext = React.useContext(AuthContext);
+  const user = authContext.user;
   return (
     <>
       {/* <QrScanner /> */}
       {/* <View> */}
       {/* <Login /> */}
-      <Quest
-      questName = "Downtown Tour Calgary"
-      // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
-    />
+      {user && (
+        <Quest
+          questName="Downtown Tour Calgary"
+          // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
+        />
+      )}
       {/* </View> */}
     </>
   );
 };
 
-const ProfileRoute = () => <Text>Profile</Text>;
+const ProfileRoute = () => {
+  const authContext = React.useContext(AuthContext);
+  const user = authContext.user;
+  return <UserInfo />
+};
 
 const Navigation = () => {
+  const authContext = React.useContext(AuthContext);
+  const user = authContext.user;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "quest", title: "Quest", icon: "map-marker-distance" },

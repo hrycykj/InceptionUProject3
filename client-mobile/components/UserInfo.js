@@ -15,24 +15,28 @@ import {
 
 import { HOST_SERVER } from "../util/hostServer";
 
-import Navigation from "./Navigation";
+// import Navigation from "./Navigation";
 import Login from "./Login";
-import {AuthContext} from "../firebase/AuthProvider";
+import { AuthContext } from "../firebase/AuthProvider";
+
 
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
 
-const HomeScreen = (props) => {
+const UserInfo = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const points = props.points;
   const [userData, setUserData] = useState();
-  const Auth = useContext (AuthContext)
-  
-  const user = Auth.user
-  const userDisplayName = user?.displayName
-  const userEmail = user?.email
+  const authContext = React.useContext(AuthContext);
+  const user = authContext.user;
 
-/*
+ 
+  const userDisplayName = user?.displayName;
+  const userEmail = user?.email;
+
+
+
+  /*
   useEffect(() => {
     (async () => {
       let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + userName);
@@ -47,25 +51,34 @@ const HomeScreen = (props) => {
   return (
     <SafeAreaView>
       <View style={styles.main_area}>
-        {/* {isSignedIn && (
-          <TouchableOpacity
-          style={styles.button}
-          onPress={<Navigation />}
-        >
-          <Text>Let's get started</Text>
-        </TouchableOpacity>
-        )} */}
         {/* {!isSignedIn && (
-          <Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />
+          <ImageBackground
+            style={styles.img}
+            source={require("../assets/ipad.jpg")}
+          />
         )} */}
+        {!user && (
+          <Login />
+        )}
 
         <View>
-          
-          {user && <Text style={styles.title}>Hello {userDisplayName || userEmail}</Text>}
-         
-          <Text style={styles.subtitle}>{points}</Text>
-          
-        
+          {/* {user && <Text>Already Logged in</Text>} */}
+          {user && (
+            <View>
+              <Text style={styles.title}>
+                Hello {userDisplayName || userEmail}
+              </Text>
+
+              <Text style={styles.subtitle}>{points} points</Text>
+
+              <TouchableOpacity
+                style={styles.button}
+                // onPress={onPress}
+              >
+                <Text>Let's get started</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -84,21 +97,16 @@ const styles = StyleSheet.create({
     width: "100%",
     // resizeMode: "contain",
   },
-  welcome: {
-  },
+  welcome: {},
   title: {
-   
     fontSize: 30,
     fontWeight: "bold",
     color: "purple",
-
   },
   subtitle: {
     fontSize: 18,
-    padding:10,
+    padding: 10,
     justifyContent: "center",
-
-    
   },
   button: {
     fontWeight: "bold",
@@ -106,11 +114,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#D56C06",
     borderRadius: 50,
     padding: 15,
- 
   },
 });
 
-export default HomeScreen;
+export default UserInfo;
 
 // import { useEffect, useState } from 'react'
 // import { View, Text } from 'react-native'

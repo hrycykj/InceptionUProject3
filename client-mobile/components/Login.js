@@ -1,16 +1,12 @@
 import React, { useState, useContext } from "react";
-import {
-  TextInput,
-  Button,
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+import { TextInput, Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import {SafeAreaView} from "react-native-safe-area-context";
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../firebase/AuthProvider";
 
-let styles = {};
+
+
 export default function Login() {
   const authContext = useContext(AuthContext);
   const RegisterUser = authContext.RegisterUser;
@@ -18,68 +14,80 @@ export default function Login() {
   const SignOutUser = authContext.SignOutUser;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-   const user = AuthContext.user;
-  
+  const user = AuthContext.user;
+
   return (
     <SafeAreaView>
       <View style={styles.containerMain}>
-     
-           <Text style={{ fontSize: 40 }}>Log In / Sign In</Text>
+        <Text style={{ fontSize: 40 }}>Log In / Sign In</Text>
         <View style={{ marginTop: 10, padding: 5 }}>
           <TextInput
             placeholder="Email"
             value={email}
-            onChangeText={(e) => setEmail(e.target.value)}
+            onChangeText={(e) => setEmail(e)}
           />
         </View>
-
+        
         <View style={{ marginTop: 10, padding: 5 }}>
           <TextInput
             placeholder="Password"
             value={password}
             secureTextEntry={true}
-            onChangeText={(e) => setPassword(e.target.value)}
+            onChangeText={(e) => setPassword(e)}
           />
         </View>
         <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
-          <Button title="Register" onPress={() => RegisterUser(email, password)
-} />
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => RegisterUser(email, password)}
+          >
+            <Text>Register</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => SignInUser(email, password)}
+          >
+            <Text>Sign In</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => SignOutUser(email, password)}
+          >
+            <Text>Sign Out</Text>
+          </TouchableOpacity>
+
+          {/* {user ? { SignOutUser } : <PaperProvider theme={theme}>
+        <Navigation />
+      </PaperProvider>} */}
         </View>
-        <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
-          <Button title="Sign In" onPress={() => SignInUser(email, password)
-} /></View>
-<View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
-          <Button title="Sign Out" onPress={() => SignOutUser(email, password)
-} /></View>
-        {/* {user ? (
-          <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
-            <Button title="Sign Out" onPress={SignOutUser} />
-          </View>
-        ) : (
-          <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
-            <Button title="Sign In" onPress={() => SignInUser(email, password) }/>
-          </View>
-        )} */}
-      
-    </View>
+      </View>
     </SafeAreaView>
   );
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerMain: {
     flex: 1,
     // backgroundColor: 'grey',
-    
+
     alignItems: "center",
     justifyContent: "center",
   },
-  img:{
+  img: {
     flex: 1,
-    width:"100%",
-    resizeMode: 'cover'
- 
-  }
+    width: "100%",
+    resizeMode: "cover",
+  },
+  btn: {},
 });
 
-
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "orange",
+    accent: "teal",
+  },
+};
