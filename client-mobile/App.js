@@ -1,32 +1,26 @@
 import React, {useContext} from "react";
-import { Text, View, SafeAreaView,  } from "react-native";
-import Login from "./components/Login";
+import { SafeAreaView,  } from "react-native";
 import { HOST_SERVER } from "./util/hostServer";
-
+import MainContentArea from "./MainContentArea";
 import SelectedQuest from "./components/SelectedQuest";
 import QrScanner from "./components/questing/QrScanner";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+// import { AuthContextProvider, AuthContext } from "./firebase/AuthContext";
+import AuthProvider from "./firebase/AuthProvider";
+import FirebaseProvider from "./firebase/FirebaseProvider";
 
-import { AuthContextProvider, AuthContext } from "./firebase/AuthContext";
-import MainContentArea from "./MainContentArea";
 export default function App() {
 
-  const Auth = useContext(AuthContext);
-  console.log(Auth)
+  // const Auth = useContext();
+  // console.log(Auth)
   return (
-    <SafeAreaView>
-     <AuthContextProvider>
-      <MainContentArea/>     
-     </AuthContextProvider>
-    </SafeAreaView>
+   
+    <FirebaseProvider>
+        <AuthProvider>
+          <MainContentArea />
+        </AuthProvider>
+      </FirebaseProvider>
+  
   );
 }
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "orange",
-    accent: "teal",
-  },
-};

@@ -17,7 +17,7 @@ import { HOST_SERVER } from "../util/hostServer";
 
 import Navigation from "./Navigation";
 import Login from "./Login";
-import {AuthContext} from "../firebase/AuthContext";
+import {AuthContext} from "../firebase/AuthProvider";
 
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
@@ -47,17 +47,17 @@ const HomeScreen = (props) => {
   return (
     <SafeAreaView>
       <View style={styles.main_area}>
-        {isSignedIn && (
+        {/* {isSignedIn && (
           <TouchableOpacity
           style={styles.button}
           onPress={<Navigation />}
         >
           <Text>Let's get started</Text>
         </TouchableOpacity>
-        )}
-        {!isSignedIn && (
+        )} */}
+        {/* {!isSignedIn && (
           <Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />
-        )}
+        )} */}
 
         <View>
           
