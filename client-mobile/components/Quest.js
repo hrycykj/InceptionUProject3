@@ -6,6 +6,7 @@ import QuestSplash from './questing/QuestSplash'
 import MyLocation from './mapping/MyLocation'
 import QrScanner from './questing/QrScanner'
 import CheckPointMap from './questing/CheckPointMap'
+import LocationUpdate from './mapping/LocationUpdate'
 import CheckPointIsNear from './questing/CheckPointIsNear'
 import QrCodeChecker from './questing/QrCodeChecker'
 import CheckPointCongratsSplash from './questing/CheckPointCongratsSplash'
@@ -61,9 +62,14 @@ const Quest = (props) => {
                     >
                         <CheckPointMap
                             myLocation= {{latitude: location.coords.latitude, longitude: location.coords.longitude}} 
-                            checkPointLocation= {coords[currentCheckPoint].position}
+                            checkPointLocation= {coords[currentCheckPoint].position}  // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      //
                         >
-                        </CheckPointMap> 
+                        </CheckPointMap>
+                        <LocationUpdate
+                            location = {location}
+                            setLocation = {setLocation}
+                            questComplete = {questComplete}
+                        />
                     </QrScanner>
                     {/* monitor and update user's location on map, check if location falls within checkpoint's geofence */}
                     <CheckPointIsNear />
