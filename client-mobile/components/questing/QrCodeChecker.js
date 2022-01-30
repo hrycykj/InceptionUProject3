@@ -8,7 +8,7 @@ const QrCodeChecker = (props) => {
     let setCheckPointComplete = props.setCheckPointComplete
 
     let [message, setMessage] = useState('checking QR code')
-    let checkPointGeofence = 15000 //metres
+    let checkPointGeofence = 15 //metres
 
     let userProximity = {latitude: (location.coords.latitude-checkPoint.position.latitude)}
     userProximity.longitude = location.coords.longitude-checkPoint.position.longitude
@@ -30,6 +30,7 @@ const QrCodeChecker = (props) => {
                 setCheckPointComplete (false)
                 setMessage ("You've either scanned the wrong QR code or are too far away from the checkpoint")
                 console.log ('location co-ordinates are too far away')
+                alert(`You've either scanned the wrong QR code or are too far away from the checkpoint`)
             })()
         }
         })()

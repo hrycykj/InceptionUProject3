@@ -21,7 +21,7 @@ const MapRoute = () => {
       {/* <View> */}
       {/* <Login /> */}
       <Quest
-      questName = "Downtown Tour Calgary"
+      questName="Cougar Ridge Testing Quest"
       // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
     />
       {/* </View> */}
