@@ -1,30 +1,15 @@
-import React, {useContext} from "react";
-import { Text, View } from "react-native";
-import Login from "./components/Login";
-import { HOST_SERVER } from "./util/hostServer";
-
-import SelectedQuest from "./components/SelectedQuest";
-import QrScanner from "./components/questing/QrScanner";
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-
+import React, { useContext } from "react";
 import { AuthContextProvider, AuthContext } from "./firebase/AuthContext";
+import { QuestContextProvider } from "./context/QuestContext";
 import MainContentArea from "./MainContentArea";
-export default function App() {
 
+export default function App() {
   const Auth = useContext(AuthContext);
-  console.log(Auth)
   return (
     <AuthContextProvider>
-      <MainContentArea/>     
+      <QuestContextProvider>
+        <MainContentArea />
+      </QuestContextProvider>
     </AuthContextProvider>
   );
 }
-
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "orange",
-    accent: "teal",
-  },
-};

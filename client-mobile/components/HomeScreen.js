@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import {
   Text,
   View,
@@ -14,7 +15,7 @@ import {
 
 import { HOST_SERVER } from "../util/hostServer";
 
-import MappingTest from "./MappingTest";
+import Navigation from "./Navigation";
 import Login from "./Login";
 import {AuthContext} from "../firebase/AuthContext";
 
@@ -47,10 +48,12 @@ const HomeScreen = (props) => {
     <SafeAreaView>
       <View style={styles.main_area}>
         {isSignedIn && (
-          <ImageBackground
-            style={styles.img}
-            source={require("../assets/ipad.jpg")}
-          />
+          <TouchableOpacity
+          style={styles.button}
+          onPress={<Navigation />}
+        >
+          <Text>Let's get started</Text>
+        </TouchableOpacity>
         )}
         {!isSignedIn && (
           <Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />
@@ -60,14 +63,9 @@ const HomeScreen = (props) => {
           
           {user && <Text style={styles.title}>Hello {userDisplayName || userEmail}</Text>}
          
-          <Text style={styles.subtitle}>{points} points</Text>
+          <Text style={styles.subtitle}>{points}</Text>
           
-        <TouchableOpacity
-          style={styles.button}
-          // onPress={onPress}
-        >
-          <Text>Let's get started</Text>
-        </TouchableOpacity>
+        
         </View>
       </View>
     </SafeAreaView>
