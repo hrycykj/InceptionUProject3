@@ -64,7 +64,7 @@ const Quest = (props) => {
                     >
                         <CheckPointMap
                             myLocation= {{latitude: location.coords.latitude, longitude: location.coords.longitude}} 
-                            checkPointLocation=  {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
+                            checkPointLocation= {coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
                         >
                         </CheckPointMap>
                         <LocationUpdate
@@ -74,12 +74,11 @@ const Quest = (props) => {
                         />
                         <CheckPointIsNear 
                             location = {location}
-                            geofenceCoords= {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}   //{coords[currentCheckPoint].position}
+                            geofenceCoords= {coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}   //{coords[currentCheckPoint].position}
                             geofenceSize = {geofenceSize}
                             setInsideGeofence = {setInsideGeofence}
                         />
                     </QrScanner>
-                    {/* monitor and update user's location on map, check if location falls within checkpoint's geofence */}
                 </>)   
             }
             
