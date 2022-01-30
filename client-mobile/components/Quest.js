@@ -24,7 +24,7 @@ const Quest = (props) => {
     let [insideGeofence, setInsideGeofence] = useState(false)
     
     let questName = props.questName
-    let geofenceSize = 15 //metres
+    let geofenceSize = 10 //metres
 
     // if (checkPoint){
     //     console.log('checkPoint data returned',checkPoint)
