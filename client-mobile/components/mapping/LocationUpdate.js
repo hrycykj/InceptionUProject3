@@ -19,6 +19,7 @@ const LocationUpdate = (props) => {
             )
         }
         _getLocationAsync()
+        return () => {Location.LocationSubscription()}
     }, [])
 
     return (

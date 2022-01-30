@@ -24,7 +24,7 @@ const Quest = (props) => {
     let [insideGeofence, setInsideGeofence] = useState(false)
     
     let questName = props.questName
-    let geofenceSize = 40 //metres
+    let geofenceSize = 15 //metres
 
     // if (checkPoint){
     //     console.log('checkPoint data returned',checkPoint)
@@ -33,7 +33,8 @@ const Quest = (props) => {
     useEffect(() => {
         (()=>{
                 setCheckPoint(null)
-                setCheckPointComplete (null)         
+                setCheckPointComplete (null)
+                setInsideGeofence(false)     
         })()
     }, [currentCheckPoint]);
 
@@ -62,11 +63,29 @@ const Quest = (props) => {
                         setCheckPoint = {setCheckPoint}
                         location = {location}
                     >
-                        <CheckPointMap
-                            myLocation= {{latitude: location.coords.latitude, longitude: location.coords.longitude}} 
-                            checkPointLocation= {coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
+
+                        <View
+                            style = {
+                                (!insideGeofence)
+                                    ? {
+                                        borderLeftWidth: 10,
+                                        borderRightWidth: 10,
+                                        borderColor: '#ff0000'
+                                    }
+                                    : {
+                                        borderLeftWidth: 10,
+                                        borderRightWidth: 10,
+                                        borderColor: '#00ff00'   
+                                    }
+                                }
                         >
-                        </CheckPointMap>
+                            <CheckPointMap
+                                 
+                                myLocation= {{latitude: location.coords.latitude, longitude: location.coords.longitude}} 
+                                checkPointLocation= {coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
+                            >
+                            </CheckPointMap>
+                        </View>
                         <LocationUpdate
                             location = {location}
                             setLocation = {setLocation}
