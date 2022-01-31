@@ -35,16 +35,19 @@ const QuestContextProvider = (props) => {
     getCurrentQuest();
   }, []);
 
-  const selectQuest = (questId) => {
-    fetch(`${HOST_SERVER}/api/quest/${questId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setQuset(data);
-        storeCurrentQuest(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const selectQuest = (quest) => {
+    setQuset(quest);
+    storeCurrentQuest(quest);
+
+    // fetch(`${HOST_SERVER}/api/quest/${questId}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setQuset(data);
+    //     storeCurrentQuest(data);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   };
   const theValues = { quest, selectQuest };
   return (
