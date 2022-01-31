@@ -11,14 +11,20 @@ const FetchQuest = (props) => {
 
     useEffect(() => {
         (async () => {
+            let componentMounted = true
             let fetchedData = await fetch (`${HOST_SERVER}/api/quest/`+questName)
             fetchedData.json().then ((data)=>{
-                setQuest(data)
-                setCoords(data.checkPoints)
-                setMessage('')
+                if (componentMounted) {
+                    setCoords(data.checkPoints)
+                    setQuest(data)
+                    setMessage('')
+                }
             })
             // console.log('fetched Quest data:', await quest)
         })();
+        return () => {
+            componentMounted = false
+        }
     }, []);
 
     return (

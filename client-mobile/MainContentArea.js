@@ -14,16 +14,9 @@ export default function MainContentArea() {
 
   return (
   <>
-       {/* {!user && <HomeScreen />} */}
-      {/* <Quest
-        questName = "Downtown Tour Calgary"
-        checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
-      /> */}
-      {/* <QrScanner /> */}
-      {/* <Login /> */}
-     <PaperProvider theme={theme}>
-        <Navigation />
-      </PaperProvider>
+    <PaperProvider theme={theme}>
+      <Navigation />
+    </PaperProvider>
 </>
   );
 }
