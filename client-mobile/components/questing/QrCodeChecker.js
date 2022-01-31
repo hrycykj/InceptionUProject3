@@ -30,6 +30,7 @@ const QrCodeChecker = (props) => {
                 setCheckPointComplete (false)
                 setMessage ("You've either scanned the wrong QR code or are too far away from the checkpoint")
                 console.log ('location co-ordinates are too far away')
+                alert(`You've either scanned the wrong QR code or are too far away from the checkpoint`)
             })()
         }
         })()

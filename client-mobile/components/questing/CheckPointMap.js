@@ -16,6 +16,7 @@ const CheckPointMap = (props) => {
                 <CheckpointMarker
                     latitude= {coords1.latitude}
                     longitude= {coords1.longitude}
+                    title={"Me!"}
                 >
                     <Image source={require('../../assets/Pin_Trans.png')}
                         style={{
@@ -27,6 +28,7 @@ const CheckPointMap = (props) => {
                 <CheckpointMarker
                     latitude= {coords2.latitude}
                     longitude= {coords2.longitude}
+                    title={"Checkpoint"}
                 >
                     <Image source={require('../../assets/Pin_Trans.png')}
                         style={{
