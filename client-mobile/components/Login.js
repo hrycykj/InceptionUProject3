@@ -80,7 +80,14 @@ const styles = StyleSheet.create({
     width: "100%",
     resizeMode: "cover",
   },
-  btn: {},
+  btn: {
+    width: 280, 
+    borderRadius: 12, 
+    padding: 15,
+    margin: 8,
+    alignItems: "center",
+    backgroundColor: "orange",
+  },
 });
 
 const theme = {
