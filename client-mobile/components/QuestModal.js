@@ -54,7 +54,7 @@ const QuestModal = ({ quest, hideModal }) => {
             }}
             style={{...defaultTheme}, { marginRight: 8 }}
           >
-            START
+            BEGIN
           </Button>
           <Button
             onPress={() => {
