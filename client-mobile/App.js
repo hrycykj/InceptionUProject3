@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 // import { SafeAreaView,  } from "react-native";
 // import { HOST_SERVER } from "./util/hostServer";
 import MainContentArea from "./MainContentArea";
@@ -7,20 +7,20 @@ import MainContentArea from "./MainContentArea";
 import AuthProvider from "./firebase/AuthProvider";
 import FirebaseProvider from "./firebase/FirebaseProvider";
 import { QuestContextProvider } from "./context/QuestContext";
+import { NotificationContextProvider } from "./context/NotificationContext";
 
 export default function App() {
-
   // const Auth = useContext();
   // console.log(Auth)
   return (
-   
     <FirebaseProvider>
-        <AuthProvider>
-          <QuestContextProvider>
+      <AuthProvider>
+        <QuestContextProvider>
+          <NotificationContextProvider>
             <MainContentArea />
-          </QuestContextProvider>
-        </AuthProvider>
+          </NotificationContextProvider>
+        </QuestContextProvider>
+      </AuthProvider>
     </FirebaseProvider>
-  
   );
 }
