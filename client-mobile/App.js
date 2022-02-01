@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-// import { SafeAreaView,  } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 // import { HOST_SERVER } from "./util/hostServer";
 import MainContentArea from "./MainContentArea";
 // import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
@@ -17,10 +17,18 @@ export default function App() {
     <FirebaseProvider>
         <AuthProvider>
           <QuestContextProvider>
-            <MainContentArea />
+            <SafeAreaView style={styles.container}>
+              <MainContentArea />
+            </SafeAreaView>
           </QuestContextProvider>
         </AuthProvider>
     </FirebaseProvider>
   
   );
 }
+
+const styles = StyleSheet.create ({
+  container: {
+    flex: 1,
+  }
+})

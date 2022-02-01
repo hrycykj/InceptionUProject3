@@ -3,7 +3,7 @@ import { ScrollView } from "react-native";
 import QuestCard from "./QuestCard";
 import { HOST_SERVER } from "../util/hostServer";
 import { QuestContext } from "../context/QuestContext";
-import { Modal, Portal, Text, Button, Provider, Surface } from "react-native-paper";
+import { Modal, Portal, Text, View, Button, Provider, Surface, useTheme } from "react-native-paper";
 import QuestModal from "./QuestModal";
 
 const QuestList = () => {
@@ -18,6 +18,9 @@ const QuestList = () => {
     setModalQuest(quest);
     showModal();
   };
+  
+  const { colors } = useTheme()
+
   useEffect(() => {
     fetch(`${HOST_SERVER}/api/quest`)
       .then((quest) => quest.json())
@@ -27,30 +30,41 @@ const QuestList = () => {
   }, []);
 
   return (
-    <ScrollView>
-      <Text>{`Current playing quest is: ${currentQuest?.title}`}</Text>
-      <Portal>
-          <Modal
-            visible={visible}
-            onDismiss={hideModal}
-            contentContainerStyle={containerStyle}
+    <>
+      <Text style={{
+            backgroundColor: colors.primary,
+            padding: 5,
+            textAlign: 'center',}}
           >
-            <QuestModal quest={modalQuest} hideModal={hideModal}/>
-          </Modal>
-      </Portal>
+            {currentQuest&&`Current quest: ${currentQuest?.title}`}
+          </Text>
+      <ScrollView style={{
+          backgroundColor: colors.primary,
+        }}
+      >  
+        <Portal>
+            <Modal
+              visible={visible}
+              onDismiss={hideModal}
+              contentContainerStyle={containerStyle}
+            >
+              <QuestModal quest={modalQuest} hideModal={hideModal}/>
+            </Modal>
+        </Portal>
 
-      {quests?.map((quest) => {
-        return (
-          <QuestCard
-            key={quest.id}
-            quest={quest}
-            handleCardPressed={handleCardPressed}
-          >
-            Quest List
-          </QuestCard>
-        );
-      })}
-    </ScrollView>
+        {quests?.map((quest) => {
+          return (
+            <QuestCard
+              key={quest.id}
+              quest={quest}
+              handleCardPressed={handleCardPressed}
+            >
+              Quest List
+            </QuestCard>
+          );
+        })}
+      </ScrollView>
+    </>
   );
 };
 

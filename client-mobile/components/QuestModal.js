@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { Button, Card, Paragraph, List } from "react-native-paper";
+import { Button, Card, Paragraph, List, useTheme } from "react-native-paper";
 import { QuestContext } from "../context/QuestContext";
 import { HOST_SERVER } from "../util/hostServer";
 
@@ -13,6 +13,8 @@ const QuestModal = ({ quest, hideModal }) => {
     hideModal()
   }
 
+  let defaultTheme = useTheme()
+
   useEffect(() => {
     fetch(`${HOST_SERVER}/api/quest/${quest.id}`)
       .then((quest) => quest.json())
@@ -23,13 +25,13 @@ const QuestModal = ({ quest, hideModal }) => {
 
   return (
     <ScrollView>
-      <Card elevation={0} style={styles.card}>
+      <Card elevation={0} style={{...defaultTheme}, styles.card}>
         <Card.Cover source={{ uri: quest.thumbnail_url }} />
         <Card.Title title={quest.title} subtitle={quest.location} />
         <Card.Content>
           <Paragraph>{quest.description}</Paragraph>
           <List.Section>
-            <List.Subheader style={{ marginTop: 8, paddingVertical: 0 }}>
+            <List.Subheader style={{...defaultTheme}, { marginTop: 8, paddingVertical: 0 }}>
               Check Points
             </List.Subheader>
             {questDetail?.checkPoints.map((cp) => {
@@ -45,12 +47,12 @@ const QuestModal = ({ quest, hideModal }) => {
             })}
           </List.Section>
         </Card.Content>
-        <Card.Actions style={styles.button}>
+        <Card.Actions style={{...defaultTheme}, styles.button}>
           <Button
             onPress={() => {
               startQuest();
             }}
-            style={{ marginRight: 8 }}
+            style={{...defaultTheme}, { marginRight: 8 }}
           >
             START
           </Button>

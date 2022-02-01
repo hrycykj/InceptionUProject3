@@ -1,15 +1,14 @@
 import * as React from "react";
 import { BottomNavigation, Text, Surface } from "react-native-paper";
 import QuestList from "./QuestList";
-import { StyleSheet } from "react-native";
-import QrScanner from "./questing/QrScanner";
+// import { StyleSheet } from "react-native";
 import Quest from "./Quest";
 import UserInfo from "./UserInfo";
 import { AuthContext } from "../firebase/AuthProvider";
 
 const QuestRoute = () => {
   return (
-    <Surface style={styles.container}>
+    <Surface>
       <QuestList />
     </Surface>
   );
@@ -20,16 +19,12 @@ const MapRoute = () => {
   const user = authContext.user;
   return (
     <>
-      {/* <QrScanner /> */}
-      {/* <View> */}
-      {/* <Login /> */}
       {user && (
         <Quest
           questName="Downtown Tour Calgary"
           // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
         />
       )}
-      {/* </View> */}
     </>
   );
 };
@@ -65,13 +60,13 @@ const Navigation = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 8,
-    paddingTop: 16,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     padding: 8,
+//     paddingTop: 16,
+//   },
+// });
 
 export default Navigation;

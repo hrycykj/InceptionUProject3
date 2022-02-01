@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-import { SafeAreaView, View, Text } from "react-native";
+// import { SafeAreaView, View, Text } from "react-native";
 import { AuthContext } from "./firebase/AuthProvider";
 import Navigation from "./components/Navigation";
-import UserInfo from "./components/UserInfo";
-import Login from "./components/Login";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 
 
@@ -24,7 +22,10 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "orange",
-    accent: "teal",
+    primary: "#3fddc1", // "orange"
+    accent: "#d56c06", // "teal"
+    background: "#1d1d1f",
+    // surface: "#1d1d1f",
+    notification: "#3fddc1"
   },
 };
