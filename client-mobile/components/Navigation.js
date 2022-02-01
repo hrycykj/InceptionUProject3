@@ -2,7 +2,7 @@ import * as React from "react";
 import { BottomNavigation, Text, Surface, useTheme } from "react-native-paper";
 import QuestList from "./QuestList";
 // import { StyleSheet } from "react-native";
-import Quest from "./Quest";
+import Quest from "./map-components/Quest"
 import UserInfo from "./UserInfo";
 
 import { AuthContext } from "../firebase/AuthProvider";

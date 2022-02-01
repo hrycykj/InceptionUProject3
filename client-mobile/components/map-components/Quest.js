@@ -2,18 +2,18 @@ import { useEffect, useState, useContext } from 'react'
 import { View, } from 'react-native'
 import { useTheme } from 'react-native-paper'
 
-import FetchQuest from './questing/FetchQuest'
-import QuestSplash from './questing/QuestSplash'
+import FetchQuest from './FetchQuest'
+import QuestSplash from './QuestSplash'
 import MyLocation from './mapping/MyLocation'
-import QrScanner from './questing/QrScanner'
-import CheckPointMap from './questing/CheckPointMap'
+import QrScanner from './QrScanner'
+import CheckPointMap from './CheckPointMap'
 import LocationUpdate from './mapping/LocationUpdate'
-import CheckPointIsNear from './questing/CheckPointIsNear'
-import QrCodeChecker from './questing/QrCodeChecker'
-import CheckPointCongratsSplash from './questing/CheckPointCongratsSplash'
-import QuestCompletionSplash from './questing/QuestCompletionSplash'
+import CheckPointIsNear from './CheckPointIsNear'
+import QrCodeChecker from './QrCodeChecker'
+import CheckPointCongratsSplash from './CheckPointCongratsSplash'
+import QuestCompletionSplash from './QuestCompletionSplash'
 
-import { QuestContext } from "../context/QuestContext"
+import { QuestContext } from "../../context/QuestContext"
 
 const Quest = (props) => {
     let [location, setLocation] = useState(null)

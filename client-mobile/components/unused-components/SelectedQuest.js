@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import {HOST_SERVER} from '../util/hostServer'
+import {HOST_SERVER} from '../../util/hostServer'
 import { useEffect, useState } from 'react'
 import MappingTest from './MappingTest'
 

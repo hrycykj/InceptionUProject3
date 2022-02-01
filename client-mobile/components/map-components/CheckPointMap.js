@@ -1,7 +1,7 @@
 import { Image } from 'react-native'
 import { useTheme } from 'react-native-paper'
-import CentreMapview from '../mapping/CentreMapview'
-import CheckpointMarker from '../mapping/CheckpointMarker'
+import CentreMapview from './mapping/CentreMapview'
+import CheckpointMarker from './mapping/CheckpointMarker'
 
 const CheckPointMap = (props) => {
     let coords1 = props.myLocation
