@@ -8,6 +8,7 @@ const QuestContext = React.createContext();
 const QuestContextProvider = (props) => {
   const children = props.children;
   const [quest, setQuset] = useState();
+  const [insideGeofence, setInsideGeofence] = useState(false)
 
   const storeCurrentQuest = async (data) => {
     try {
@@ -49,7 +50,7 @@ const QuestContextProvider = (props) => {
     //     console.error(err);
     //   });
   };
-  const theValues = { quest, selectQuest };
+  const theValues = { quest, selectQuest, insideGeofence, setInsideGeofence };
   return (
     <QuestContext.Provider value={theValues}>{children}</QuestContext.Provider>
   );

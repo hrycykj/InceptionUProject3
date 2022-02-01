@@ -1,10 +1,12 @@
 import * as React from "react";
-import { BottomNavigation, Text, Surface } from "react-native-paper";
+import { BottomNavigation, Text, Surface, useTheme } from "react-native-paper";
 import QuestList from "./QuestList";
 // import { StyleSheet } from "react-native";
 import Quest from "./Quest";
 import UserInfo from "./UserInfo";
+
 import { AuthContext } from "../firebase/AuthProvider";
+import { QuestContext } from "../context/QuestContext"
 
 const QuestRoute = () => {
   return (
@@ -38,12 +40,18 @@ const ProfileRoute = () => {
 const Navigation = () => {
   const authContext = React.useContext(AuthContext);
   const user = authContext.user;
+
+  const questContext = React.useContext(QuestContext);
+  const insideGeofence = questContext.insideGeofence;
+
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "quest", title: "Quest", icon: "map-marker-distance" },
     { key: "map", title: "Map", icon: "map-search" },
     { key: "profile", title: "Profile", icon: "account-circle" },
   ]);
+
+  const { colors } = useTheme()
 
   const renderScene = BottomNavigation.SceneMap({
     quest: QuestRoute,
@@ -56,6 +64,7 @@ const Navigation = () => {
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
+      barStyle={!insideGeofence ? {backgroundColor: colors.primary} : {backgroundColor: colors.accent}}
     />
   );
 };

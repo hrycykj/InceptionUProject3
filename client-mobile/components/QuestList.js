@@ -3,7 +3,7 @@ import { ScrollView } from "react-native";
 import QuestCard from "./QuestCard";
 import { HOST_SERVER } from "../util/hostServer";
 import { QuestContext } from "../context/QuestContext";
-import { Modal, Portal, Text, View, Button, Provider, Surface, useTheme } from "react-native-paper";
+import { Modal, Portal, Text, Subheading, Button, Provider, Surface, useTheme } from "react-native-paper";
 import QuestModal from "./QuestModal";
 
 const QuestList = () => {
@@ -31,13 +31,13 @@ const QuestList = () => {
 
   return (
     <>
-      <Text style={{
+      <Subheading style={{  //Make Current Quest bar touchable - navigates to Map view
             backgroundColor: colors.primary,
             padding: 5,
             textAlign: 'center',}}
           >
             {currentQuest&&`Current quest: ${currentQuest?.title}`}
-          </Text>
+          </Subheading>
       <ScrollView style={{
           backgroundColor: colors.primary,
         }}

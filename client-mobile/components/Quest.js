@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { View, Button, Text, Dimensions} from 'react-native'
 import { useTheme } from 'react-native-paper'
 
@@ -13,6 +13,8 @@ import QrCodeChecker from './questing/QrCodeChecker'
 import CheckPointCongratsSplash from './questing/CheckPointCongratsSplash'
 import QuestCompletionSplash from './questing/QuestCompletionSplash'
 
+import { QuestContext } from "../context/QuestContext"
+
 const Quest = (props) => {
     let [location, setLocation] = useState(null)
     let [errorMsg, setErrorMsg] = useState(null)
@@ -22,7 +24,10 @@ const Quest = (props) => {
     let [checkPoint, setCheckPoint] = useState(null)
     let [checkPointComplete, setCheckPointComplete] = useState(null)
     let [questComplete, setQuestComplete] = useState(null)
-    let [insideGeofence, setInsideGeofence] = useState(false)
+    
+    const questContext = useContext(QuestContext);
+    const insideGeofence = questContext.insideGeofence;
+    const setInsideGeofence = questContext.setInsideGeofence
     
     let questName = props.questName
     let { colors }=useTheme()
