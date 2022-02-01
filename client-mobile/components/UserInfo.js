@@ -18,6 +18,9 @@ import { HOST_SERVER } from "../util/hostServer";
 // import Navigation from "./Navigation";
 import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
+import UserData from "./UserData";
+import { FirebaseContext } from "../firebase/FirebaseProvider";
+import Navigation from "./Navigation";
 
 
 const w = Dimensions.get("window").width;
@@ -28,6 +31,7 @@ const UserInfo = (props) => {
   const points = props.points;
   const [userData, setUserData] = useState();
   const authContext = React.useContext(AuthContext);
+  const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
 
  
@@ -71,12 +75,23 @@ const UserInfo = (props) => {
 
               <Text style={styles.subtitle}>{points} points</Text>
 
+              {/* <View>
+              <UserData />
+                </View> */}
+
               <TouchableOpacity
                 style={styles.button}
-                // onPress={onPress}
+               onPress={authContext.SignOutUser}
+              >
+                <Text>Log out</Text>
+              </TouchableOpacity>
+
+              {/* <TouchableOpacity
+                style={styles.button}
+                onPress={Navigation.QuestRoute}
               >
                 <Text>Let's get started</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           )}
         </View>
@@ -111,9 +126,10 @@ const styles = StyleSheet.create({
   button: {
     fontWeight: "bold",
     alignItems: "center",
-    backgroundColor: "#D56C06",
+    backgroundColor: "orange",
     borderRadius: 50,
     padding: 15,
+    margin: 15,
   },
 });
 
