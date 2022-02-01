@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { View, Button, Text, Dimensions } from 'react-native'
+import { View, Button, Text, Dimensions} from 'react-native'
+import { useTheme } from 'react-native-paper'
 
 import FetchQuest from './questing/FetchQuest'
 import QuestSplash from './questing/QuestSplash'
@@ -24,6 +25,7 @@ const Quest = (props) => {
     let [insideGeofence, setInsideGeofence] = useState(false)
     
     let questName = props.questName
+    let { colors }=useTheme()
     let geofenceSize = 10 //metres
 
     // if (checkPoint){
@@ -70,12 +72,12 @@ const Quest = (props) => {
                                     ? {
                                         borderLeftWidth: 10,
                                         borderRightWidth: 10,
-                                        borderColor: '#ff0000'
+                                        borderColor: colors.primary
                                     }
                                     : {
                                         borderLeftWidth: 10,
                                         borderRightWidth: 10,
-                                        borderColor: '#00ff00'   
+                                        borderColor: colors.accent  
                                     }
                                 }
                         >
