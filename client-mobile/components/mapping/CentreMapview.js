@@ -13,12 +13,17 @@ const CentreMapview = (props) => {
     let deltaLong = Math.abs(coords1.longitude-coords2.longitude)*1.2
     let deltaLat = Math.abs(coords1.latitude-coords2.latitude)*1.2
 
+    console.log(deltaLong, deltaLat)
+    if (deltaLat<0.0025) {deltaLat=0.0025} else {deltaLat=deltaLat}
+    if (deltaLong<.001) {deltaLong=0.001} else {deltaLong=deltaLong}
+    console.log(deltaLong, deltaLat)
+
     return (
       <CurrentMapview
-      latitude= {lat} 
-      longitude= {long}
-      latitudeDelta= {deltaLat}
-      longitudeDelta= {deltaLong}
+        latitude= {lat} 
+        longitude= {long}
+        latitudeDelta= {deltaLat}
+        longitudeDelta= {deltaLong}
       >
         {props.children}
       </CurrentMapview>

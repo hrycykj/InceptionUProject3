@@ -1,11 +1,12 @@
 import { Image } from 'react-native'
-
+import { useTheme } from 'react-native-paper'
 import CentreMapview from '../mapping/CentreMapview'
 import CheckpointMarker from '../mapping/CheckpointMarker'
 
 const CheckPointMap = (props) => {
     let coords1 = props.myLocation
     let coords2 = props.checkPointLocation
+    let { colors } = useTheme()
 
     return (
         <>
@@ -20,8 +21,8 @@ const CheckPointMap = (props) => {
                 >
                     <Image source={require('../../assets/Pin_Trans.png')}
                         style={{
-                        height: 45, width: 35,
-                        // tintColor: '#fff'
+                        height: 55, width: 45,
+                        tintColor: colors.background
                         }}
                     />
                 </CheckpointMarker>
@@ -32,8 +33,8 @@ const CheckPointMap = (props) => {
                 >
                     <Image source={require('../../assets/Pin_Trans.png')}
                         style={{
-                        height: 45, width: 35,
-                        tintColor: '#ff0000'
+                        height: 55, width: 45,
+                        tintColor: colors.accent
                         }}
                     />
                 </CheckpointMarker>

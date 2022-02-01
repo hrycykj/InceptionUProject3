@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import * as Location from "expo-location";
-import { Text, View} from 'react-native';
+import { Text, useTheme} from 'react-native-paper';
 
 const MyLocation = (props) => {
   let location = props.location;
   let setLocation = props.setLocation;
   let errorMsg = props.errorMsg;
   let setErrorMsg = props.setErrorMsg;
+
+  let defaultTheme = useTheme()
 
   useEffect(() => {
     (async () => {
@@ -34,17 +36,17 @@ const MyLocation = (props) => {
   }
 
   return (
-    <View>
+    <>
       {location ? (
-        <View>
+        <>
           <Text>Latitude: {location.coords.latitude}</Text>
           <Text>Longitude: {location.coords.longitude}</Text>
           <Text>Accuracy: {location.coords.accuracy}</Text>
-        </View>
+        </>
       ) : (
         <Text>{text}</Text>
       )}
-    </View>
+    </>
   );
 };
 

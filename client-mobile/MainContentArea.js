@@ -54,7 +54,7 @@ const theme = {
     ...DefaultTheme.colors,
     primary: "#3fddc1",
     accent: "#d56c06",
-    background: "#1d1d1f",
+    background: "#808080",
     // surface: "#1d1d1f",
     text: "#1d1d1f",
     // disabled: "#",

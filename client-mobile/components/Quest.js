@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { View, Button, Text, Dimensions} from 'react-native'
+import { View, } from 'react-native'
 import { useTheme } from 'react-native-paper'
 
 import FetchQuest from './questing/FetchQuest'
@@ -62,7 +62,6 @@ const Quest = (props) => {
                 errorMsg = {errorMsg}
                 setErrorMsg = {setErrorMsg}
             />
-            {/* {(location) && <Text>{errorMsg}</Text>} */}
             {(location&&coords&&!checkPointComplete&&!questComplete) && 
                 (<>
                     <QrScanner

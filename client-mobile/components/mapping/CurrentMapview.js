@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { useTheme } from "react-native-paper"
 
 import MapView from 'react-native-maps'
 
@@ -7,6 +8,7 @@ const screenMapHeight = Dimensions.get('window').height
 
 const CurrentMapview = (props) => {
     console.log('made it into the CurrentMapview component')
+    let defaultTheme = useTheme()
 
     let latitude = props.latitude
     let longitude = props.longitude
@@ -17,7 +19,9 @@ const CurrentMapview = (props) => {
 
     return (
         <MapView
-            style={styles.map}
+            style={
+                {...defaultTheme},
+                styles.map}
             region={{
                 latitude: latitude,
                 longitude: longitude,

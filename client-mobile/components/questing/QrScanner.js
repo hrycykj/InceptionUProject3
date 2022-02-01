@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  Image,
-  Dimensions,
-} from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
+import { Text, Button, useTheme, DefaultTheme } from 'react-native-paper'
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { HOST_SERVER } from '../../util/hostServer'
 
@@ -36,7 +30,9 @@ export default function QrScanner(props) {
   let setCheckPoint = props.setCheckPoint
   let location = location
 
-    console.log('inside the QrScanner component', scanning)
+  let defaultTheme = useTheme()
+
+  console.log('inside the QrScanner component', scanning)
 
   useEffect(() => {
     (async () => {
@@ -57,7 +53,7 @@ export default function QrScanner(props) {
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>Requesting camera permissions</Text>;
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
@@ -65,40 +61,40 @@ export default function QrScanner(props) {
 
   return (
     <>
-    <View style={styles.container}>
+    <View style={{...defaultTheme}, styles.container}>
       {props.children}
       {!scanning && (
         <View
-          style={{
-            position: 'absolute',//use absolute position to show button on top of the map
-            top: '0%', //for center align
-            alignSelf: 'center', //for align to right
-            padding: 0,
-            borderRadius: 10,
-            width: '20%',
-            borderWidth: 1,
-            backgroundColor: '#fff',
-          }}
+          style={
+            {...defaultTheme}, 
+            {
+              position: 'absolute',//use absolute position to show button on top of the map
+              top: '0%', //for center align
+              alignSelf: 'center', //for align to right
+            }
+          }
         >
           <Button
+            mode="contained"
             onPress={onScan}
             title="Scan Code"
             accessibilityLabel="Scan QR code"
-            color= "#841584"
-          />
+            color= {defaultTheme.colors.accent}
+          >
+            Scan Code
+          </Button>
         </View>
       )}
-    {/* </View>      */}
 
       {scanning && (
         <>
           <BarCodeScanner
             onBarCodeScanned={handleBarCodeScanned}
-            style={styles.scanner}
+            style={{...defaultTheme}, styles.scanner}
           >
             <Image
               source={require("../../assets/camera_frame.png")}
-              style={styles.frame}
+              style={{...defaultTheme}, styles.frame}
             />
           </BarCodeScanner>
         </>
