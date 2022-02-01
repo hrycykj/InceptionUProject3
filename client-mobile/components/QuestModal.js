@@ -12,11 +12,11 @@ const QuestModal = ({ quest }) => {
   const selectQuest = questContext.selectQuest;
   const showSnackBar = notificationContext.showSnackBar;
   const hideModal = notificationContext.hideModal;
-  
+
   const startQuest = () =>{
     selectQuest(questDetail)
     hideModal()
-    showSnackBar('Starting Quest', 'Close')
+    showSnackBar('Starting Quest', 'Undo',()=>{console.log('hello word')})
   }
 
   useEffect(() => {

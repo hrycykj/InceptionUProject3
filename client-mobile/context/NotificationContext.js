@@ -21,9 +21,7 @@ const NotificationContextProvider = (props) => {
   const showSnackBar = (message, label, action) => {
     setSnackBarMessage(message);
     setSnackBarLabel(label);
-    setSnackBarAction(() => () => {
-      action;
-    });
+    setSnackBarAction(()=>()=>{action()});
     setVisibleSnackBar(true);
   };
 
