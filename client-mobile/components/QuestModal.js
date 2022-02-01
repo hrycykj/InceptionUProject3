@@ -3,14 +3,20 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Button, Card, Paragraph, List } from "react-native-paper";
 import { QuestContext } from "../context/QuestContext";
 import { HOST_SERVER } from "../util/hostServer";
+import { NotificationContext } from '../context/NotificationContext'
 
-const QuestModal = ({ quest, hideModal }) => {
+const QuestModal = ({ quest }) => {
   const [questDetail, setQuestDetail] = useState();
   const questContext = useContext(QuestContext);
+  const notificationContext = useContext(NotificationContext)
   const selectQuest = questContext.selectQuest;
+  const showSnackBar = notificationContext.showSnackBar;
+  const hideModal = notificationContext.hideModal;
+  
   const startQuest = () =>{
     selectQuest(questDetail)
     hideModal()
+    showSnackBar('Starting Quest', 'Close')
   }
 
   useEffect(() => {

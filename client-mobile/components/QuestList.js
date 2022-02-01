@@ -5,18 +5,24 @@ import { HOST_SERVER } from "../util/hostServer";
 import { QuestContext } from "../context/QuestContext";
 import { Modal, Portal, Text, Button, Provider, Surface } from "react-native-paper";
 import QuestModal from "./QuestModal";
+import { NotificationContext } from '../context/NotificationContext'
 
 const QuestList = () => {
   const [quests, setQuests] = useState([]);
   const [modalQuest, setModalQuest] = useState();
   const questContext = useContext(QuestContext);
+  const notificationContext = useContext(NotificationContext)
   const currentQuest = questContext.quest;
-  const [visible, setVisible] = React.useState(false);
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const showModal = notificationContext.showModal;
+
+  // const [visible, setVisible] = React.useState(false);
+  // const showModal = () => setVisible(true);
+  // const hideModal = () => setVisible(false);
   const handleCardPressed = (quest) => {
     setModalQuest(quest);
-    showModal();
+    showModal(()=>{
+      return <QuestModal quest={quest}/>
+    });
   };
   useEffect(() => {
     fetch(`${HOST_SERVER}/api/quest`)
@@ -29,15 +35,6 @@ const QuestList = () => {
   return (
     <ScrollView>
       <Text>{`Current playing quest is: ${currentQuest?.title}`}</Text>
-      <Portal>
-          <Modal
-            visible={visible}
-            onDismiss={hideModal}
-            contentContainerStyle={containerStyle}
-          >
-            <QuestModal quest={modalQuest} hideModal={hideModal}/>
-          </Modal>
-      </Portal>
 
       {quests?.map((quest) => {
         return (
