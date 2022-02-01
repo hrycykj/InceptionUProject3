@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TextInput, Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { TextInput, Button, StyleSheet, Text, View, TouchableOpacity, StatusBar } from "react-native";
 
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,6 +18,7 @@ export default function Login() {
 
   return (
     <SafeAreaView>
+      <StatusBar/>
       <View style={styles.containerMain}>
         <Text style={{ fontSize: 40 }}>Log In / Sign In</Text>
         <View style={{ marginTop: 10, padding: 5 }}>

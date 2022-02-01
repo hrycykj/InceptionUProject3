@@ -18,6 +18,8 @@ import { HOST_SERVER } from "../util/hostServer";
 // import Navigation from "./Navigation";
 import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
+import UserData from "./UserData";
+import { FirebaseContext } from "../firebase/FirebaseProvider";
 
 
 const w = Dimensions.get("window").width;
@@ -28,6 +30,7 @@ const UserInfo = (props) => {
   const points = props.points;
   const [userData, setUserData] = useState();
   const authContext = React.useContext(AuthContext);
+  const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
 
  
@@ -70,6 +73,10 @@ const UserInfo = (props) => {
               </Text>
 
               <Text style={styles.subtitle}>{points} points</Text>
+
+              {/* <View>
+              <UserData />
+                </View> */}
 
               <TouchableOpacity
                 style={styles.button}
