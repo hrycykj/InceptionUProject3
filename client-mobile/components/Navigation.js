@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BottomNavigation, Text, Surface } from "react-native-paper";
 import QuestList from "./QuestList";
-import { StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import QrScanner from "./questing/QrScanner";
 import Quest from "./Quest";
 import UserInfo from "./UserInfo";
@@ -40,7 +40,8 @@ const ProfileRoute = () => {
   const user = authContext.user;
   return (
   <View>
-    <UserData />
+    <StatusBar />
+    <UserInfo />
   </View>)
 };
 

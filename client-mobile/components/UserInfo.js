@@ -20,6 +20,7 @@ import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
 import UserData from "./UserData";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
+import Navigation from "./Navigation";
 
 
 const w = Dimensions.get("window").width;
@@ -80,10 +81,17 @@ const UserInfo = (props) => {
 
               <TouchableOpacity
                 style={styles.button}
-                // onPress={onPress}
+               onPress={authContext.SignOutUser}
+              >
+                <Text>Log out</Text>
+              </TouchableOpacity>
+
+              {/* <TouchableOpacity
+                style={styles.button}
+                onPress={Navigation.QuestRoute}
               >
                 <Text>Let's get started</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           )}
         </View>
@@ -118,9 +126,10 @@ const styles = StyleSheet.create({
   button: {
     fontWeight: "bold",
     alignItems: "center",
-    backgroundColor: "#D56C06",
+    backgroundColor: "orange",
     borderRadius: 50,
     padding: 15,
+    margin: 15,
   },
 });
 

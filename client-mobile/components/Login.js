@@ -14,7 +14,7 @@ export default function Login() {
   const SignOutUser = authContext.SignOutUser;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const user = AuthContext.user;
+  const user = authContext.user;
 
   return (
     <SafeAreaView>
@@ -52,12 +52,14 @@ export default function Login() {
             <Text>Sign In</Text>
           </TouchableOpacity>
 
+          {user && (
+
           <TouchableOpacity
             style={styles.btn}
             onPress={() => SignOutUser(email, password)}
           >
             <Text>Sign Out</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>)}
 
           {/* {user ? { SignOutUser } : <PaperProvider theme={theme}>
         <Navigation />

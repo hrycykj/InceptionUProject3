@@ -42,7 +42,7 @@ const UserData = () => {
       return (
         <>
         <StatusBar />
-          <Button title= "Get Data" onPress={() => getUsersData()}></Button>
+          <Button title= "Get User Data" onPress={() => getUsersData()}></Button>
           
           {users.map((user) => {
             return (
