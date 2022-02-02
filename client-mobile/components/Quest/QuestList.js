@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ScrollView } from "react-native";
 import QuestCard from "./QuestCard";
-import { HOST_SERVER } from "../util/hostServer";
-import { QuestContext } from "../context/QuestContext";
+import { HOST_SERVER } from "../../util/hostServer";
+import { QuestContext } from "../../context/QuestContext";
 import { Modal, Portal, Text, Button, Provider, Surface } from "react-native-paper";
 import QuestModal from "./QuestModal";
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationContext } from '../../context/NotificationContext'
 
 const QuestList = () => {
   const [quests, setQuests] = useState([]);

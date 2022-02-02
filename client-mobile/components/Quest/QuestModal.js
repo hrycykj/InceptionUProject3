@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Card, Paragraph, List } from "react-native-paper";
-import { QuestContext } from "../context/QuestContext";
-import { HOST_SERVER } from "../util/hostServer";
-import { NotificationContext } from '../context/NotificationContext'
+import { QuestContext } from "../../context/QuestContext";
+import { HOST_SERVER } from "../../util/hostServer";
+import { NotificationContext } from '../../context/NotificationContext'
 
 const QuestModal = ({ quest }) => {
   const [questDetail, setQuestDetail] = useState();
@@ -16,7 +16,7 @@ const QuestModal = ({ quest }) => {
   const startQuest = () =>{
     selectQuest(questDetail)
     hideModal()
-    showSnackBar('Starting Quest', 'Undo',()=>{console.log('hello word')})
+    showSnackBar('Starting Quest', 'Undo',()=>{console.log('Undo')})
   }
 
   useEffect(() => {

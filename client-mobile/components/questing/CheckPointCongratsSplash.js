@@ -1,5 +1,7 @@
-import { View, Text, Image, Button } from 'react-native'
-import { useEffect, useState } from 'react'
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { useEffect, useState, useContext } from 'react'
+import { Button, Card, Paragraph, List } from "react-native-paper";
+import { NotificationContext } from '../../context/NotificationContext'
 
 const CheckPointCongratsSplash = (props) => {
     let quest = props.quest
@@ -9,6 +11,8 @@ const CheckPointCongratsSplash = (props) => {
     let setCheckPointComplete = props.setCheckPointComplete
     let setQuestComplete = props.setQuestComplete
     let [buttonClick, setButtonClick] = useState (null)
+    const notificationContext = useContext(NotificationContext)
+    const hideModal = notificationContext.hideModal;
 
     useEffect(() => {
         if (((quest.checkPoints.length-1)==currentCheckPoint)&&buttonClick) {
@@ -27,35 +31,61 @@ const CheckPointCongratsSplash = (props) => {
         }
     }, [buttonClick]);
 
-    return(
-        <View>
-            <Text>{`Congratulations, you've found the ${checkPoint.title}.  ${checkPoint.description}.`}</Text>
-            <Image 
-                style={{width:'50%', height:'50%'}}
-                source={{uri:checkPoint.objectToFind.url}}
-            />
-            <View
-                style={{
-                    // position: 'absolute',//use absolute position to show button on top of the map
-                    // top: '0%', //for center align
-                    alignSelf: 'center', //for align to right
-                    margin: 10,
-                    padding: 0,
-                    borderRadius: 10,
-                    width: '30%',
-                    borderWidth: 1,
-                    backgroundColor: '#fff',
+    // return(
+    //     <View>
+    //         <Text>{`Congratulations, you've found the ${checkPoint.title}.  ${checkPoint.description}.`}</Text>
+    //         <Image 
+    //             style={{width:'50%', height:'50%'}}
+    //             source={{uri:checkPoint.objectToFind.url}}
+    //         />
+           
+    //             <Button
+    //                 onPress={() => {setButtonClick(true)}}
+    //                 accessibilityLabel="Fetch Next Checkpoint"
+    //             >
+    //                 Next Check Point
+    //             </Button>
+    //     </View>
+    // )
+    return (
+        <ScrollView>
+          <Card elevation={0} style={styles.card}>
+            <Card.Cover source={{ uri: checkPoint.objectToFind.url }} />
+            <Card.Title title={checkPoint.title}  />
+            <Card.Content>
+                <Paragraph>{`Congratulations, you've found the ${checkPoint.title}.`}</Paragraph>
+              <Paragraph>{checkPoint.description}</Paragraph>
+              
+            </Card.Content>
+            <Card.Actions style={styles.button}>
+              <Button
+                onPress={() => {
+                    setButtonClick(true)
+                    hideModal()
                 }}
-            >
-                <Button
-                    onPress={() => {setButtonClick(true)}}
-                    title="Fetch Next Checkpoint"
-                    accessibilityLabel="Fetch Next Checkpoint"
-                    color= "#841584"
-                />
-            </View>
-        </View>
-    )
-}
+                style={{ marginRight: 8 }}
+              >
+                Next Check Point
+              </Button>
+
+            </Card.Actions>
+          </Card>
+        </ScrollView>
+      );
+    };
+    
+    const styles = StyleSheet.create({
+      button: {
+        alignSelf: "flex-end",
+        paddingHorizontal: 16,
+      },
+      card: {
+        marginBottom: 16,
+        marginHorizontal: 8,
+        paddingBottom: 8,
+      },
+    });
+
+    
 
 export default CheckPointCongratsSplash

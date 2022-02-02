@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  createUserWithEmailAndPassword
 } from "firebase/auth";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
 
@@ -10,7 +11,7 @@ export const AuthContext = React.createContext();
 
 function AuthProvider(props) {
   const children = props.children;
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(true);
   const fbContext = useContext(FirebaseContext);
   const auth = fbContext.auth;
 

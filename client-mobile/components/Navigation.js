@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BottomNavigation, Text, Surface } from "react-native-paper";
-import QuestList from "./QuestList";
+import QuestList from "./Quest/QuestList";
 import { StatusBar, StyleSheet, View } from "react-native";
 import QrScanner from "./questing/QrScanner";
 import Quest from "./Quest";
