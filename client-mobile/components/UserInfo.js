@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import { Text, Title, Subheading, TouchableRipple, useTheme } from "react-native-paper";
 import {
-  Text,
   View,
   Image,
   Dimensions,
   StyleSheet,
   ImageBackground,
   SafeAreaView,
-  StatusBar,
   TouchableOpacity,
-  Button,
 } from "react-native";
 
 import { HOST_SERVER } from "../util/hostServer";
@@ -30,11 +27,14 @@ const UserInfo = (props) => {
   const authContext = React.useContext(AuthContext);
   const user = authContext.user;
 
+  let defaultTheme = useTheme()
  
   const userDisplayName = user?.displayName;
   const userEmail = user?.email;
 
-
+  const onPress = () => {
+    console.log("Let's get started button pressed")
+  }
 
   /*
   useEffect(() => {
@@ -49,8 +49,8 @@ const UserInfo = (props) => {
 */
 
   return (
-    <SafeAreaView>
-      <View style={styles.main_area}>
+    // <SafeAreaView>
+      <View style={{...defaultTheme},styles.main_area}>
         {/* {!isSignedIn && (
           <ImageBackground
             style={styles.img}
@@ -61,27 +61,33 @@ const UserInfo = (props) => {
           <Login />
         )}
 
-        <View>
+        <>
           {/* {user && <Text>Already Logged in</Text>} */}
           {user && (
-            <View>
-              <Text style={styles.title}>
+            <>
+              <Title>
                 Hello {userDisplayName || userEmail}
-              </Text>
+              </Title>
 
-              <Text style={styles.subtitle}>{points} points</Text>
+              <Subheading>{points} points</Subheading>
 
-              <TouchableOpacity
-                style={styles.button}
+              <TouchableRipple 
+                rippleColor="rgba(0, 0, 0, .32)"
+                onPress={onPress}
+              >
+                <Text>Let's Get Started</Text>
+              </TouchableRipple>
+              {/* <TouchableOpacity
+                style={{...defaultTheme},styles.button}
                 // onPress={onPress}
               >
                 <Text>Let's get started</Text>
-              </TouchableOpacity>
-            </View>
+              </TouchableOpacity> */}
+            </>
           )}
-        </View>
+        </>
       </View>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 
@@ -92,29 +98,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
   },
-  img: {
-    height: "80%",
-    width: "100%",
-    // resizeMode: "contain",
-  },
-  welcome: {},
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "purple",
-  },
-  subtitle: {
-    fontSize: 18,
-    padding: 10,
-    justifyContent: "center",
-  },
-  button: {
-    fontWeight: "bold",
-    alignItems: "center",
-    backgroundColor: "#D56C06",
-    borderRadius: 50,
-    padding: 15,
-  },
+  // img: {
+  //   height: "80%",
+  //   width: "100%",
+  //   // resizeMode: "contain",
+  // },
+  // welcome: {},
+  // title: {
+  //   fontSize: 30,
+  //   fontWeight: "bold",
+  //   // color: "purple",
+  // },
+  // subtitle: {
+  //   fontSize: 18,
+  //   padding: 10,
+  //   justifyContent: "center",
+  // },
+  // button: {
+  //   fontWeight: "bold",
+  //   alignItems: "center",
+  //   backgroundColor: "#D56C06",
+  //   borderRadius: 50,
+  //   padding: 15,
+  // },
 });
 
 export default UserInfo;

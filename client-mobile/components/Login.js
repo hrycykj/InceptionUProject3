@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
-import { TextInput, Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import { Text, TextInput, Headline, Button, TouchableRipple, useTheme } from "react-native-paper";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../firebase/AuthProvider";
 
@@ -16,27 +17,52 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const user = AuthContext.user;
 
+  const defaultTheme = useTheme()
+
   return (
-    <SafeAreaView>
-      <View style={styles.containerMain}>
-        <Text style={{ fontSize: 40 }}>Log In / Sign In</Text>
-        <View style={{ marginTop: 10, padding: 5 }}>
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={(e) => setEmail(e)}
-          />
+    // <SafeAreaView>
+      <>
+        <View style={{...defaultTheme},{flex: 1, alignItems: "center", justifyContent: "center"}}>
+          <Headline>Log In / Sign In</Headline>
+            <TextInput
+              style={{width: 200, height: 50}}
+              mode="outlined"
+              placeholder="Email"
+              value={email}
+              onChangeText={(e) => setEmail(e)}
+            />
+            <TextInput
+              style={{width: 200, height: 50}}
+              mode="outlined"
+              placeholder="Password"
+              value={password}
+              secureTextEntry={true}
+              onChangeText={(e) => setPassword(e)}
+            />
+            <Button
+                style={{marginTop: 5, marginBottom: 5}}
+                mode="contained"
+                onPress={()=>{RegisterUser(email, password)}}
+                title="Register New Account"
+                accessibilityLabel="Register New Account"
+                color= {defaultTheme.colors.accent}
+            >
+              Register
+            </Button> 
+            <Button
+                style={{marginTop: 5, marginBottom: 5}}
+                mode="contained"
+                onPress={()=>{SignInUser(email, password)}}
+                title="Sign In User"
+                accessibilityLabel="Sign In User"
+                color= {defaultTheme.colors.accent}
+            >
+              Sign In
+            </Button> 
         </View>
+
         
-        <View style={{ marginTop: 10, padding: 5 }}>
-          <TextInput
-            placeholder="Password"
-            value={password}
-            secureTextEntry={true}
-            onChangeText={(e) => setPassword(e)}
-          />
-        </View>
-        <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
+        {/* <View style={{ marginTop: 10, padding: 5, borderRadius: 10 }}>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => RegisterUser(email, password)}
@@ -56,45 +82,45 @@ export default function Login() {
             onPress={() => SignOutUser(email, password)}
           >
             <Text>Sign Out</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* {user ? { SignOutUser } : <PaperProvider theme={theme}>
         <Navigation />
       </PaperProvider>} */}
-        </View>
-      </View>
-    </SafeAreaView>
+        {/* </View> */}
+      </>
+    // </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  containerMain: {
-    flex: 1,
-    // backgroundColor: 'grey',
+// const styles = StyleSheet.create({
+//   containerMain: {
+//     flex: 1,
+//     // backgroundColor: 'grey',
 
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  img: {
-    flex: 1,
-    width: "100%",
-    resizeMode: "cover",
-  },
-  btn: {
-    width: 280, 
-    borderRadius: 12, 
-    padding: 15,
-    margin: 8,
-    alignItems: "center",
-    backgroundColor: "orange",
-  },
-});
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   img: {
+//     flex: 1,
+//     width: "100%",
+//     resizeMode: "cover",
+//   },
+//   btn: {
+//     width: 280, 
+//     borderRadius: 12, 
+//     padding: 15,
+//     margin: 8,
+//     alignItems: "center",
+//     backgroundColor: "orange",
+//   },
+// });
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "orange",
-    accent: "teal",
-  },
-};
+// const theme = {
+//   ...DefaultTheme,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: "orange",
+//     accent: "teal",
+//   },
+// };

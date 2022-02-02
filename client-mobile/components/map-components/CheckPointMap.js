@@ -22,7 +22,7 @@ const CheckPointMap = (props) => {
                     <Image source={require('../../assets/Pin_Trans.png')}
                         style={{
                         height: 55, width: 45,
-                        tintColor: colors.background
+                        tintColor: colors.text
                         }}
                     />
                 </CheckpointMarker>

@@ -54,11 +54,11 @@ const theme = {
     ...DefaultTheme.colors,
     primary: "#3fddc1",
     accent: "#d56c06",
-    background: "#808080",
+    background: "#d5f8f1", //#808080 (light grey), #dd3f41 (offshade marron), #d5f8f1 (light tint of original colour), #7cs09a (mix of grey and original colour), #d9c3cd (?), #80e9d6 (?)
     // surface: "#1d1d1f",
     text: "#1d1d1f",
     // disabled: "#",
-    // placeholder: "#",
+    placeholder: "#808080",
     backdrop: "#d56c06",
     // onSurface: "#"
     notification: "#3fddc1",
