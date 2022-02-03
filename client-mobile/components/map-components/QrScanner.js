@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, Dimensions } from "react-native";
 import { Text, Button, FAB, useTheme } from 'react-native-paper'
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { HOST_SERVER } from "../../util/hostServer";
+import {QuestContext} from "../../context/QuestContext"
 
 //test
 const styles = StyleSheet.create({
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
 export default function QrScanner(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanning, setScanning] = useState(false);
+  const questContext = useContext(QuestContext)
   let checkPoint = props.checkPoint;
   let setCheckPoint = props.setCheckPoint;
   let location = location;
@@ -75,7 +77,7 @@ export default function QrScanner(props) {
     <>
       <View style={{...defaultTheme}, styles.container}>
         {props.children}
-        {!scanning && (
+        {!scanning && questContext.insideGeofence &&(
           <FAB
             style={{...defaultTheme}, styles.fab}
             big
@@ -102,7 +104,7 @@ export default function QrScanner(props) {
                 big
                 icon="close-thick"
                 onPress={hideScanner}
-                title="X"
+                title="Close Scanner"
                 accessibilityLabel="Hide Scanner"
               />
             </BarCodeScanner>
