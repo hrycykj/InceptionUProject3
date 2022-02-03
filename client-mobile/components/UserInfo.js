@@ -17,7 +17,6 @@ import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
 import UserData from "./UserData";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
-import Navigation from "./Navigation";
 
 
 const w = Dimensions.get("window").width;

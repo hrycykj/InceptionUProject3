@@ -38,26 +38,17 @@ const QuestList = () => {
   return (
     <>
       <Subheading style={{  //Make Current Quest bar touchable - navigates to Map view
-            backgroundColor: colors.primary,
+            backgroundColor: colors.background,
             padding: 5,
             textAlign: 'center',}}
           >
             {currentQuest&&`Current quest: ${currentQuest?.title}`}
           </Subheading>
       <ScrollView style={{
-          backgroundColor: colors.primary,
+          backgroundColor: colors.background,
+          marginBottom:32
         }}
       >  
-        {/* <Portal>
-            <Modal
-              visible={visible}
-              onDismiss={hideModal}
-              contentContainerStyle={containerStyle}
-            >
-              <QuestModal quest={modalQuest} hideModal={hideModal}/>
-            </Modal>
-        </Portal> */}
-
         {quests?.map((quest) => {
           return (
             <QuestCard

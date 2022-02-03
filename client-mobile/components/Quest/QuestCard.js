@@ -31,9 +31,7 @@ const QuestCard = ({ quest, handleCardPressed }) => {
               START
             </Button> */}
           </Card.Actions>
-          </>
-
-          
+          </>          
         </TouchableRipple>
       </Card>
     </>

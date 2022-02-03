@@ -15,7 +15,7 @@ const CurrentMapview = (props) => {
     let latitudeDelta = props.latitudeDelta
     let longitudeDelta = props.longitudeDelta
 
-    console.log(latitude, longitude, latitudeDelta, longitudeDelta)
+    // console.log(latitude, longitude, latitudeDelta, longitudeDelta)
 
     return (
         <MapView

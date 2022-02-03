@@ -2,12 +2,13 @@ import * as React from "react";
 import { BottomNavigation, Text, Surface, useTheme } from "react-native-paper";
 import QuestList from "./Quest/QuestList";
 import { StyleSheet, View } from "react-native";
-import QrScanner from "./map-components/QrScanner"
-import Quest from "./map-components/Quest"
+import QrScanner from "./map-components/QrScanner";
+import Quest from "./map-components/Quest";
 import UserInfo from "./UserInfo";
+import QuestMap from './map-components/QuestMap'
 
 import { AuthContext } from "../firebase/AuthProvider";
-import { QuestContext } from "../context/QuestContext"
+import { QuestContext } from "../context/QuestContext";
 import UserData from "./UserData";
 
 const QuestRoute = () => {
@@ -24,10 +25,9 @@ const MapRoute = () => {
   return (
     <>
       {user && (
-        <Quest
-          questName="Downtown Tour Calgary"
-          // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
-        />
+          <QuestMap
+            // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
+          />
       )}
     </>
   );
@@ -37,10 +37,11 @@ const ProfileRoute = () => {
   const authContext = React.useContext(AuthContext);
   const user = authContext.user;
   return (
-  <View>
-    {/* <StatusBar /> */}
-    <UserInfo />
-  </View>)
+    <View>
+      {/* <StatusBar /> */}
+      <UserInfo />
+    </View>
+  );
 };
 
 const Navigation = () => {
@@ -57,7 +58,7 @@ const Navigation = () => {
     { key: "profile", title: "Profile", icon: "account-circle" },
   ]);
 
-  const { colors } = useTheme()
+  const { colors } = useTheme();
 
   const renderScene = BottomNavigation.SceneMap({
     quest: QuestRoute,
@@ -70,7 +71,11 @@ const Navigation = () => {
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
-      barStyle={!insideGeofence ? {backgroundColor: colors.primary} : {backgroundColor: colors.accent}}
+      barStyle={
+        !insideGeofence
+          ? { backgroundColor: colors.primary }
+          : { backgroundColor: colors.accent }
+      }
     />
   );
 };

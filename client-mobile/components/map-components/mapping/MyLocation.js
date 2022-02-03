@@ -34,7 +34,6 @@ const MyLocation = (props) => {
     //   location.coords.accuracy
     // );
   }
-
   return (
     <>
       {location ? (

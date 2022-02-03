@@ -33,25 +33,9 @@ const CheckPointCongratsSplash = (props) => {
         }
     }, [buttonClick]);
 
-    // return(
-    //     <View>
-    //         <Text>{`Congratulations, you've found the ${checkPoint.title}.  ${checkPoint.description}.`}</Text>
-    //         <Image 
-    //             style={{width:'50%', height:'50%'}}
-    //             source={{uri:checkPoint.objectToFind.url}}
-    //         />
-           
-    //             <Button
-    //                 onPress={() => {setButtonClick(true)}}
-    //                 accessibilityLabel="Fetch Next Checkpoint"
-    //             >
-    //                 Next Check Point
-    //             </Button>
-    //     </View>
-    // )
     return (
         <ScrollView>
-          <Card elevation={0} style={{...defaultTheme},styles.card}>
+          <Card elevation={3} style={{...defaultTheme},styles.card}>
             <Card.Cover source={{ uri: checkPoint.objectToFind.url }} />
             <Card.Title title={checkPoint.title}  />
             <Card.Content>
@@ -83,7 +67,7 @@ const CheckPointCongratsSplash = (props) => {
         paddingHorizontal: 16,
       },
       card: {
-        marginBottom: 16,
+        marginVertical: '50%',
         marginHorizontal: 8,
         paddingBottom: 8,
       },
