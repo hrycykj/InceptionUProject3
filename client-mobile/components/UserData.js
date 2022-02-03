@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FirebaseContext } from '../firebase/FirebaseProvider';
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+  TouchableOpacity,
+  Button,
+  FlatList
+} from "react-native";
+
+
+
 
 const UserData = () => {
-    const [users, setUsers]=useState({})
+    const [users, setUsers]=useState([])
     const fbContext = useContext(FirebaseContext);
     const db = fbContext.db;
 
     const getUsersData = async () => {
         try {
+          console.log("AAAAAAAAAAAAAAAAAAA")
           let collectionRef = collection(db, "users");
           let queryRef = query (collectionRef, orderBy("firstName"));
           let querySnap = await getDocs(queryRef);
@@ -26,17 +41,17 @@ const UserData = () => {
     
       return (
         <>
-          <button onPress={() => getUsersData()}>GET DATA</button>
-          <br />
+        <StatusBar />
+          <Button title= "Get User Data" onPress={() => getUsersData()}></Button>
+          
           {users.map((user) => {
             return (
-              <ul key={user.DOC_ID}>
-                <li>First Name: {user.firstName}</li>
-                <li>Last Name: {user.lastName}</li>
-                <li>Location: {user.location}</li>
-                <li>Points: {user.points}</li>
-                <li>docId: {user.DOC_ID}</li>
-              </ul>
+              <Text key={user.DOC_ID}>
+                {user.location}
+                {user.points}
+                {user.DOC_ID}
+                {user.userDisplayName}
+              </Text>
             );
           })}
         </>
@@ -44,3 +59,7 @@ const UserData = () => {
     };
 
 export default UserData;
+
+
+
+

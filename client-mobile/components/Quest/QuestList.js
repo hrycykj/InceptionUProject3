@@ -1,22 +1,28 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ScrollView } from "react-native";
 import QuestCard from "./QuestCard";
-import { HOST_SERVER } from "../util/hostServer";
-import { QuestContext } from "../context/QuestContext";
+import { HOST_SERVER } from "../../util/hostServer";
+import { QuestContext } from "../../context/QuestContext";
 import { Modal, Portal, Text, Subheading, Button, Provider, Surface, useTheme } from "react-native-paper";
 import QuestModal from "./QuestModal";
+import { NotificationContext } from '../../context/NotificationContext'
 
 const QuestList = () => {
   const [quests, setQuests] = useState([]);
   const [modalQuest, setModalQuest] = useState();
   const questContext = useContext(QuestContext);
+  const notificationContext = useContext(NotificationContext)
   const currentQuest = questContext.quest;
-  const [visible, setVisible] = React.useState(false);
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const showModal = notificationContext.showModal;
+
+  // const [visible, setVisible] = React.useState(false);
+  // const showModal = () => setVisible(true);
+  // const hideModal = () => setVisible(false);
   const handleCardPressed = (quest) => {
     setModalQuest(quest);
-    showModal();
+    showModal(()=>{
+      return <QuestModal quest={quest}/>
+    });
   };
   
   const { colors } = useTheme()
@@ -42,7 +48,7 @@ const QuestList = () => {
           backgroundColor: colors.primary,
         }}
       >  
-        <Portal>
+        {/* <Portal>
             <Modal
               visible={visible}
               onDismiss={hideModal}
@@ -50,7 +56,7 @@ const QuestList = () => {
             >
               <QuestModal quest={modalQuest} hideModal={hideModal}/>
             </Modal>
-        </Portal>
+        </Portal> */}
 
         {quests?.map((quest) => {
           return (

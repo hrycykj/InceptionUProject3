@@ -1,12 +1,14 @@
 import * as React from "react";
 import { BottomNavigation, Text, Surface, useTheme } from "react-native-paper";
-import QuestList from "./QuestList";
-// import { StyleSheet } from "react-native";
+import QuestList from "./Quest/QuestList";
+import { StyleSheet, View } from "react-native";
+import QrScanner from "./map-components/QrScanner"
 import Quest from "./map-components/Quest"
 import UserInfo from "./UserInfo";
 
 import { AuthContext } from "../firebase/AuthProvider";
 import { QuestContext } from "../context/QuestContext"
+import UserData from "./UserData";
 
 const QuestRoute = () => {
   return (
@@ -34,7 +36,11 @@ const MapRoute = () => {
 const ProfileRoute = () => {
   const authContext = React.useContext(AuthContext);
   const user = authContext.user;
-  return <UserInfo />
+  return (
+  <View>
+    {/* <StatusBar /> */}
+    <UserInfo />
+  </View>)
 };
 
 const Navigation = () => {

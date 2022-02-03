@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 const QuestCompletionSplash = () => {
 
     return (
-        <View>
+        <View style={{backgroundColor:'white'}}>
             <Text
                 style={{
                     fontSize: 20,

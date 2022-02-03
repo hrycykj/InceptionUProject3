@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Text, Title, Subheading, TouchableRipple, useTheme } from "react-native-paper";
+import { Text, Button, Title, Subheading, TouchableRipple, useTheme } from "react-native-paper";
 import {
   View,
   Image,
@@ -15,6 +15,9 @@ import { HOST_SERVER } from "../util/hostServer";
 // import Navigation from "./Navigation";
 import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
+import UserData from "./UserData";
+import { FirebaseContext } from "../firebase/FirebaseProvider";
+import Navigation from "./Navigation";
 
 
 const w = Dimensions.get("window").width;
@@ -25,7 +28,9 @@ const UserInfo = (props) => {
   const points = props.points;
   const [userData, setUserData] = useState();
   const authContext = React.useContext(AuthContext);
+  const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
+  const SignOutUser=authContext.SignOutUser
 
   let defaultTheme = useTheme()
  
@@ -71,12 +76,24 @@ const UserInfo = (props) => {
 
               <Subheading>{points} points</Subheading>
 
-              <TouchableRipple 
-                rippleColor="rgba(0, 0, 0, .32)"
-                onPress={onPress}
+              <Button
+                style={{marginTop: 5, marginBottom: 5}}
+                mode="contained"
+                onPress={()=>{SignOutUser()}}
+                title="Signout"
+                accessibilityLabel="Sign Out From User Account"
+                color= {defaultTheme.colors.accent}
               >
-                <Text>Let's Get Started</Text>
-              </TouchableRipple>
+                Log out
+              </Button>
+
+              {/* <TouchableRipple 
+                style={{...defaultTheme},styles.button}
+                rippleColor="rgba(0, 0, 0, .32)"
+                onPress={authContext.SignOutUser}
+              >
+                <Text>Log out</Text>
+              </TouchableRipple> */}
               {/* <TouchableOpacity
                 style={{...defaultTheme},styles.button}
                 // onPress={onPress}
@@ -114,13 +131,13 @@ const styles = StyleSheet.create({
   //   padding: 10,
   //   justifyContent: "center",
   // },
-  // button: {
-  //   fontWeight: "bold",
-  //   alignItems: "center",
-  //   backgroundColor: "#D56C06",
-  //   borderRadius: 50,
-  //   padding: 15,
-  // },
+  button: {
+    // fontWeight: "bold",
+    alignItems: "center",
+    // backgroundColor: "#D56C06",
+    borderRadius: 50,
+    padding: 15,
+  },
 });
 
 export default UserInfo;

@@ -8,27 +8,27 @@ import { useTheme } from "react-native-paper";
 import AuthProvider from "./firebase/AuthProvider";
 import FirebaseProvider from "./firebase/FirebaseProvider";
 import { QuestContextProvider } from "./context/QuestContext";
+import { NotificationContextProvider } from "./context/NotificationContext";
 
 
 
 export default function App() {
-
   // const Auth = useContext();
   // console.log(Auth)
   return (
-   
     <FirebaseProvider>
-        <AuthProvider>
-          <QuestContextProvider>
+      <AuthProvider>
+        <QuestContextProvider>
+          <NotificationContextProvider>
             <SafeAreaProvider>
               <SafeAreaView style={styles.container}>
                 <MainContentArea />
               </SafeAreaView>
             </SafeAreaProvider>
-          </QuestContextProvider>
-        </AuthProvider>
+          </NotificationContextProvider>
+        </QuestContextProvider>
+      </AuthProvider>
     </FirebaseProvider>
-  
   );
 }
 
