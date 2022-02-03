@@ -13,7 +13,7 @@ let StatusBarTheme = () => {
   const questContext = useContext(QuestContext);
   const insideGeofence = questContext.insideGeofence;
 
-  console.log ("insets", insets, topInset, theme.colors.primary)
+  // console.log ("insets", insets, topInset, theme.colors.primary)
 
   return (
     <>
@@ -36,7 +36,6 @@ let StatusBarTheme = () => {
 export default function MainContentArea() {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
-  console.log('eeee')
 
   return (
   <>

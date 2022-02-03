@@ -16,7 +16,7 @@ const QuestModal = ({ quest }) => {
   const startQuest = () =>{
     selectQuest(questDetail)
     hideModal()
-    showSnackBar('Starting Quest', 'Undo',()=>{console.log('Undo')})
+    showSnackBar('Starting Quest', 'OK', ()=>{})
   }
 
   let defaultTheme = useTheme()
