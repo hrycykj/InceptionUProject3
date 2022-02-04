@@ -1,4 +1,6 @@
 import * as Location from "expo-location";
+import { useEffect, useState, useContext } from "react";
+import { NotificationContext } from "../../context/NotificationContext";
 
 
 const setMyLocation = async (setLocation, setErrorMsg) => {
@@ -55,8 +57,32 @@ const checkPointIsNear = async (coords, currentCheckPoint, location, geofenceSiz
   }
 };
 
+const handleCheckPointScanned = async (checkPoint, questContext, setCheckPointComplete, notificationContext) =>{
+
+  if(!checkPoint)
+    return
+  const showSnackBar = notificationContext.showSnackBar;
+  const currentCheckPoint = questContext.currentCheckPoint;
+  const insideGeofence = questContext.insideGeofence;
+
+  if (insideGeofence && checkPoint.id === currentCheckPoint.id) {
+    (() => {
+      setCheckPointComplete(true);
+      showSnackBar("congratulations you've found the checkpoint", "OK");
+    })();
+  } else {
+    (() => {
+      setCheckPointComplete(false);
+      showSnackBar(
+        "You've either scanned the wrong QR code or are too far away from the checkpoint", "OK"
+      );
+    })();
+  }
+}
+
 module.exports = {
   setMyLocation,
   updateLocation,
-  checkPointIsNear
+  checkPointIsNear,
+  handleCheckPointScanned
 };

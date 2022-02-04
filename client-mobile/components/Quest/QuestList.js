@@ -3,7 +3,7 @@ import { ScrollView } from "react-native";
 import QuestCard from "./QuestCard";
 import { HOST_SERVER } from "../../util/hostServer";
 import { QuestContext } from "../../context/QuestContext";
-import { Modal, Portal, Text, Subheading, Button, Provider, Surface, useTheme } from "react-native-paper";
+import { Modal, Portal, Text, Subheading, Button, Provider,  useTheme } from "react-native-paper";
 import QuestModal from "./QuestModal";
 import { NotificationContext } from '../../context/NotificationContext'
 
