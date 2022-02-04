@@ -25,7 +25,7 @@ const h = Dimensions.get("window").height;
 const UserInfo = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   // const points = props.points;
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState();
   let [newUser, setNewUser] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
@@ -41,9 +41,28 @@ const UserInfo = (props) => {
   //   console.log("Let's get started button pressed")
   // }
 
+  useEffect(() => {
+    fetch(`${HOST_SERVER}/api/users/` + user?.uid)
+      .then ((fetchedData) => fetchedData.json())
+      .then ((isUserNew) => {
+        if (isUserNew.UID=='empty') {
+          console.log('new user page required')
+          setNewUser(true)
+        }
+        return isUserNew
+      })
+      .then ((data) => {
+        setUserData(data)
+        return data
+      })
+      .then (()=> {
+        console.log('finished user data fetch')
+      })
+  }, [user]);
+
   useEffect ( () => {
     (async () => {
-      if ((!userData)&&user) {
+      if ((userData?.UID=='empty')&&user) {
         console.log('no userData and user logged in for',user.uid, user.email)
         let req = {
           'UID': user.uid,
@@ -57,38 +76,22 @@ const UserInfo = (props) => {
         }
         console.log ("This is a new user, please create a user profile form")
         // add in user info from user profile form and add to req object to write to database
-        const response = await fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+        
+        fetch(`${HOST_SERVER}/api/users/` + user.uid, {
           method: "POST",
           body: JSON.stringify(req),
           headers: {
             "Content-Type": "application/json",
           },
-        });
-        setNewUser(false)
+        })
+        .then ((response)=>{
+          setUserData(req)
+          console.log(response)
+        })
+        .then (()=> setNewUser(false))
       }
     })()
-  }, [newUser, user])
-
-
-  useEffect(() => {
-    (async () => {
-      if (user) {
-          let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + user.uid);
-          // console.log('checking data: ',fetchedData.ok)
-          if (fetchedData) {
-            fetchedData.json().then((data) => { //figure out how to avoid [Unhandled promise rejection: SyntaxError: JSON Parse error: Unexpected EOF] when blank
-              setUserData(data);
-              console.log("fetched userData data:", data);
-            });
-          }
-      }
-      if (!await userData) {
-        console.log("new user page required")
-        setNewUser(true)
-      }
-    })();
-  }, [user]);
-
+  }, [userData])
 
   return (
     // <SafeAreaView>

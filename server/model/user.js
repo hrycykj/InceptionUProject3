@@ -15,7 +15,7 @@ const getUserByUid = async (uid) => {
   let userRef = usersCollectionRef.doc(uid)
   let user = await userRef.get()
   if (!user.exists)
-    return null
+    return {'UID':'empty'}
   else {
     user = user.data()
     return user
