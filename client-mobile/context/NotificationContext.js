@@ -18,7 +18,7 @@ const NotificationContextProvider = (props) => {
   const [snackBarMessage, setSnackBarMessage] = useState("");
   const [snackBarLabel, setSnackBarLabel] = useState("");
   const [snackBarAction, setSnackBarAction] = useState();
-  const showSnackBar = (message, label, action) => {
+  const showSnackBar = (message, label, action = ()=>{}) => {
     setSnackBarMessage(message);
     setSnackBarLabel(label);
     setSnackBarAction(()=>()=>{action()});
@@ -58,6 +58,9 @@ const AppSnackBar = ({ message, label, onPressLabel, visible, setVisible }) => {
     <Snackbar
       visible={visible}
       onDismiss={onDismissSnackBar}
+      wrapperStyle={{
+        marginBottom:48
+      }}
       action={{
         label: label,
         onPress: () => {

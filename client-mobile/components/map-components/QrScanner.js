@@ -40,7 +40,7 @@ export default function QrScanner(props) {
 
   let defaultTheme = useTheme()
 
-  console.log('inside the QrScanner component', scanning)
+  // console.log('inside the QrScanner component', scanning)
 
   useEffect(() => {
     (async () => {
@@ -50,7 +50,7 @@ export default function QrScanner(props) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     fetch(`${data}`)
       .then((res) => res.json())
       .then((data) => {

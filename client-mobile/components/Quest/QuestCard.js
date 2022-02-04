@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Card, Paragraph, TouchableRipple, useTheme } from "react-native-paper";
+import { Button, Card, Paragraph, TouchableRipple, useTheme, Badge } from "react-native-paper";
 import { QuestContext } from "../../context/QuestContext";
 const QuestCard = ({ quest, handleCardPressed }) => {
   const questContext = useContext(QuestContext);

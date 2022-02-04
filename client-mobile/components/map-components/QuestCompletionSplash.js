@@ -1,20 +1,22 @@
-import { View, Text } from 'react-native'
+import { View, Text } from "react-native";
 
-const QuestCompletionSplash = () => {
+const QuestCompletionSplash = (props) => {
+  const quest = props.quest;
+  return (
+    <View style={{ backgroundColor: "white", padding: 16 }}>
+      <Text
+        style={{
+          fontSize: 20,
+          fontWeight: "bold",
+          color: "#ff0000",
+          marginBottom: 16,
+        }}
+      >
+        CONGRATULATIONS - You've completed the quest!
+      </Text>
+      <Text>{quest?.completionStory}</Text>
+    </View>
+  );
+};
 
-    return (
-        <View style={{backgroundColor:'white'}}>
-            <Text
-                style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    color: "#ff0000"
-                }}
-            >
-                CONGRATULATIONS - You've completed the quest!
-            </Text>
-        </View>
-    )
-}
-
-export default QuestCompletionSplash
+export default QuestCompletionSplash;
