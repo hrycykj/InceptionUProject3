@@ -75,6 +75,7 @@ const Quest = (props) => {
       });
     }
   }, [questComplete]);
+  
 console.log('update')
   return (
     <>
