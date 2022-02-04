@@ -23,15 +23,17 @@ const UserData = (props) => {
   const showModal = notificationContext.showModal;
 
   useEffect(() => {
-    if (showUserData) {
+    if (showUserData&&userData) {
       showModal(() => {
         return (
-        <View>
-          <Text>{userData.username}</Text>              
-          <Text>{userData.baseLocation}</Text>
-          <Text>Coins: {userData.coins}</Text>
-          <Text>Current Quest: {userData.currentQuest}</Text>
-        </View>
+          // update & deuglify modal details
+          <View>
+            <Text>{userData.UID}</Text>
+            <Text>{userData.username}</Text>              
+            <Text>{userData.baseLocation}</Text>
+            <Text>Coins: {userData.coins}</Text>
+            <Text>Current Quest: {userData.currentQuest}</Text>
+          </View>
         )
       })
       setShowUserData(false)

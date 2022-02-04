@@ -25,7 +25,7 @@ const h = Dimensions.get("window").height;
 const UserInfo = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   // const points = props.points;
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState(null);
   let [newUser, setNewUser] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
@@ -42,23 +42,50 @@ const UserInfo = (props) => {
   // }
 
   useEffect ( () => {
-    (() => {
-      console.log ("This is a new user, please create a user profile form")
+    (async () => {
+      if ((!userData)&&user) {
+        console.log('no userData and user logged in for',user.uid, user.email)
+        let req = {
+          'UID': user.uid,
+          'userEmail':user.email,
+          'userType': 0, 
+          'userName':'',
+          'currentQuest':'',
+          'completedQuests':[],
+          'coins':[],
+          'baseLocation':''
+        }
+        console.log ("This is a new user, please create a user profile form")
+        // add in user info from user profile form and add to req object to write to database
+        const response = await fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+          method: "POST",
+          body: JSON.stringify(req),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setNewUser(false)
+      }
     })()
-  }, [newUser])
+  }, [newUser, user])
 
 
   useEffect(() => {
     (async () => {
       if (user) {
-        let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + user.uid);
-        fetchedData.json().then((data) => {
-        setUserData(data);
-        console.log("fetched userData data:", data);
-      });
-    } else {
-      setNewUser(true)
-    }
+          let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + user.uid);
+          // console.log('checking data: ',fetchedData.ok)
+          if (fetchedData) {
+            fetchedData.json().then((data) => { //figure out how to avoid [Unhandled promise rejection: SyntaxError: JSON Parse error: Unexpected EOF] when blank
+              setUserData(data);
+              console.log("fetched userData data:", data);
+            });
+          }
+      }
+      if (!await userData) {
+        console.log("new user page required")
+        setNewUser(true)
+      }
     })();
   }, [user]);
 
