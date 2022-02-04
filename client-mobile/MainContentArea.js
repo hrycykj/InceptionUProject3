@@ -59,7 +59,7 @@ const theme = {
     // disabled: "#",
     placeholder: "#808080",
     backdrop: "#d56c06",
-    // onSurface: "#"
+    // onSurface: "#3fddc1",
     notification: "#3fddc1",
 
   },

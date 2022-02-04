@@ -31,17 +31,21 @@ const getUserByUsername = async (username) => {
   return users
   }
   
-// const getQuestByCreator = async (id) => {
-//   const quests = []
-//   let questRef = await questCollectionRef.where('creator', '==', id).get();
-//   questRef.forEach(quest => {
-//     quests.push(quest.data())
-//   })
-//   return quests
-// }
+const createUserByUid = async (uid, userProfile) => {
+  let res = await usersCollectionRef.doc(uid).set(userProfile)
+  console.log (`inside the create user by UID function with ${uid} with results`, res)
+  return
+}
+
+const updateUserByUid = async (uid, userProfileUpdates) => {
+  let res = await usersCollectionRef.doc(uid).update(userProfileUpdates)
+  console.log (`inside the update user by UID function with ${uid} with results`, res)
+}
 
 module.exports = {
   getAllUsers,
   getUserByUid,
   getUserByUsername,
+  createUserByUid,
+  updateUserByUid,
 }

@@ -9,7 +9,7 @@ const {
 /*
   quest = {
     id,
-    creator: user,
+    creator: user (UID),
     title: string,
     description: stirng,
     completionStory: string,

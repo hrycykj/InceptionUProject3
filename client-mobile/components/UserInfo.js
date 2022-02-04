@@ -24,8 +24,9 @@ const h = Dimensions.get("window").height;
 
 const UserInfo = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const points = props.points;
+  // const points = props.points;
   const [userData, setUserData] = useState();
+  let [newUser, setNewUser] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
@@ -33,24 +34,34 @@ const UserInfo = (props) => {
 
   let defaultTheme = useTheme()
  
-  const userDisplayName = user?.displayName;
+  // const userDisplayName = user?.displayName;
   const userEmail = user?.email;
 
-  const onPress = () => {
-    console.log("Let's get started button pressed")
-  }
+  // const onPress = () => {
+  //   console.log("Let's get started button pressed")
+  // }
 
-  /*
+  useEffect ( () => {
+    (() => {
+      console.log ("This is a new user, please create a user profile form")
+    })()
+  }, [newUser])
+
+
   useEffect(() => {
     (async () => {
-      let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + userName);
-      fetchedData.json().then((data) => {
+      if (user) {
+        let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + user.uid);
+        fetchedData.json().then((data) => {
         setUserData(data);
         console.log("fetched userData data:", data);
       });
+    } else {
+      setNewUser(true)
+    }
     })();
-  }, []);
-*/
+  }, [user]);
+
 
   return (
     // <SafeAreaView>
@@ -70,21 +81,29 @@ const UserInfo = (props) => {
           {user && (
             <>
               <Title>
-                Hello {userDisplayName || userEmail}
+                Hello {userData?.username || userEmail}
+                {/* Hello {userEmail} */}
               </Title>
 
-              <Subheading>{points} points</Subheading>
+              {/* <Subheading>{points} points</Subheading> */}
 
               <Button
                 style={{marginTop: 5, marginBottom: 5}}
                 mode="contained"
-                onPress={()=>{SignOutUser()}}
+                onPress={()=>{
+                  SignOutUser()
+                  setUserData(null)
+                  }}
                 title="Signout"
                 accessibilityLabel="Sign Out From User Account"
                 color= {defaultTheme.colors.accent}
               >
                 Log out
               </Button>
+              <UserData 
+                userData = {userData}
+                setUserData = {setUserData}
+              />
 
               {/* <TouchableRipple 
                 style={{...defaultTheme},styles.button}

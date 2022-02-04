@@ -4,6 +4,8 @@ const {
   getAllUsers,
   getUserByUid,
   getUserByUsername,
+  createUserByUid,
+  updateUserByUid,
 } = require('../model/user')
 
 
@@ -42,15 +44,21 @@ router.get('/username/:username', async function (req, res, next) {
   res.send(returnedUser)
 });
 
-/* Log user out  */
-// router.post('logOut/:uid', function(req, res, next) {
-//   res.send('ok - logout');
-// });
+//Create a user profile 
+  router.post('/:uid', async function (req, res, next) {
+    const uid=req.params.uid
+    const userProfile=req.body
+    let createdUid = await createUserByUid(uid, userProfile)
+    res.send(`create profile ${uid} with ${userProfile}`);
+});
 
 /* update a user by uid. */
-// router.put('/:uid', function(req, res, next) {
-//   res.send('ok - update');
-// });
+router.put('/:uid', async function(req, res, next) {
+  const uid=req.params.uid
+  const userProfileUpdate=req.body
+  let updatedUid = await updateUserByUid(uid, userProfileUpdate)
+  res.send(`updated profile ${uid} with ${userProfileUpdate}`);
+});
 
 //test
 // router.get('/test', async function(req, res, next) {
