@@ -1,12 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { View } from "react-native";
 import { useTheme, Text } from "react-native-paper";
-import * as Location from "expo-location";
 import QrScanner from "./QrScanner";
 import CheckPointMap from "./CheckPointMap";
-import QrCodeChecker from "./QrCodeChecker";
 import CheckPointCongratsSplash from "./CheckPointCongratsSplash";
-import QuestCompletionSplash from "./QuestCompletionSplash";
 import { QuestContext } from "../../context/QuestContext";
 import { NotificationContext } from "../../context/NotificationContext";
 import {
@@ -17,29 +14,28 @@ import {
 } from "./questMapUtil";
 
 const QuestMap = (props) => {
+  const questContext = useContext(QuestContext);
+  const notificationContext = useContext(NotificationContext);
+
   let [location, setLocation] = useState(null);
   let [errorMsg, setErrorMsg] = useState(null);
   let [quest, setQuest] = useState(null);
-  let [currentCheckPoint, setCurrentCheckPoint] = useState(
-    props.checkPoint || 0
-  );
+  let [currentCheckPoint, setCurrentCheckPoint] = useState(questContext.checkPointIndex);
   let [coords, setCoords] = useState(null);
   let [checkPoint, setCheckPoint] = useState(null);
   let [checkPointComplete, setCheckPointComplete] = useState(null);
   let [questComplete, setQuestComplete] = useState(null);
 
-  const questContext = useContext(QuestContext);
   const insideGeofence = questContext.insideGeofence;
   const setInsideGeofence = questContext.setInsideGeofence;
 
   let { colors } = useTheme();
   let geofenceSize = 100000; //metres
 
-  const notificationContext = useContext(NotificationContext);
-
   const fetchQuest = () => {
     setQuest(questContext.quest);
     setCoords(questContext.quest.checkPoints);
+    setCurrentCheckPoint(questContext.checkPointIndex)
   };
   useEffect(() => {
     setMyLocation(setLocation, setErrorMsg).catch((error) =>
@@ -53,7 +49,6 @@ const QuestMap = (props) => {
     setCheckPoint(null)
     setCheckPointComplete(false)
     setQuestComplete(false)
-    setCurrentCheckPoint(0)
   }, [questContext.quest]);
 
   useEffect(() => {

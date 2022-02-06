@@ -33,7 +33,7 @@ const updateLocation = async (setLocation) => {
   };
 };
 const checkPointIsNear = async (coords, currentCheckPoint, location, geofenceSize, setInsideGeofence) => {
-  if(!coords)
+  if(!coords || !location)
     return
 
   let geofenceCoords = coords[currentCheckPoint].position;

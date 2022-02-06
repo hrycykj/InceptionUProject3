@@ -11,10 +11,11 @@ import { AuthContext } from "../firebase/AuthProvider";
 import { QuestContext } from "../context/QuestContext";
 import UserData from "./UserData";
 
-const QuestRoute = () => {
+const QuestRoute = (props) => {
+  const { colors } = useTheme();
   return (
-    <Surface>
-      <QuestList />
+    <Surface style={{ backgroundColor: colors.background}}>
+      <QuestList jumpTo={props.jumpTo}/>
     </Surface>
   );
 };
@@ -25,9 +26,7 @@ const MapRoute = () => {
   return (
     <>
       {user && (
-          <QuestMap
-            // checkPoint = {0} // pass through current quest checkpoint if you stopped in the middle
-          />
+          <QuestMap/>
       )}
     </>
   );
