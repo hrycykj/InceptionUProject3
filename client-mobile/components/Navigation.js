@@ -40,7 +40,7 @@ const ProfileRoute = () => {
   return (
     <View>
       {/* <StatusBar /> */}
-      <UserInfo />
+      {/* <UserInfo /> */}
       <UserProfile />
     </View>
   );

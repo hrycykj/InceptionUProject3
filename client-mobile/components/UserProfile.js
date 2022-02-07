@@ -7,7 +7,7 @@ import {
 } from 'react-native-paper';
 
 
-const ProfileScreen = () => {
+const UserProfile = () => {
   return (
     <SafeAreaView style={styles.container}>
 
