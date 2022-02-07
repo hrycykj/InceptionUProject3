@@ -8,8 +8,9 @@ import {
 } from 'react-native-paper';
 
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   let defaultTheme = useTheme()
+  let userData=props.userData
   return (
     <>
       <View style={{...defaultTheme}, styles.userInfoSection}>
@@ -24,21 +25,21 @@ const UserProfile = () => {
             <Title style={{...defaultTheme},[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>Tleitch</Title>
+            }]}>{userData.username}</Title>
             <Caption style={{...defaultTheme},styles.caption}>Player</Caption>
           </View>
         </View>
       </View>
-      <View style={{...defaultTheme},styles.infoBoxWrapper, {borderBottomColor: defaultTheme.colors.placeholder, borderTopColor: defaultTheme.colors.placeholder}}>
+      <View style={{...defaultTheme},styles.infoBoxWrapper}>
           <View style={{...defaultTheme},[styles.infoBox, {
-            borderRightColor: defaultTheme.colors.placeholder,
+            
             borderRightWidth: 1
           }]}>
-            <Title>4</Title>
+            <Title>{userData.completedQuests.length}</Title>
             <Caption>Quests Completed</Caption>
           </View>
           <View style={{...defaultTheme},styles.infoBox}>
-            <Title>400</Title>
+            <Title>{userData.coins[0]}</Title>
             <Caption>Coins</Caption>
           </View>
       </View>
