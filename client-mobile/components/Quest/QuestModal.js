@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Button, Card, Paragraph, List, useTheme } from "react-native-paper";
 import { QuestContext } from "../../context/QuestContext";
 import { HOST_SERVER } from "../../util/hostServer";
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationContext } from '../../context/NotificationContext';
+import { Alert } from "react-native";
 
 const QuestModal = ({ quest }) => {
   const [questDetail, setQuestDetail] = useState();
@@ -18,6 +19,22 @@ const QuestModal = ({ quest }) => {
     hideModal()
     showSnackBar('Starting Quest', 'OK', ()=>{})
   }
+
+  const showComfirmDialog = () => {
+    return Alert.alert(
+      "Confirm Quest Selection",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            startQuest();
+          }},
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
 
   let defaultTheme = useTheme()
 
@@ -56,7 +73,7 @@ const QuestModal = ({ quest }) => {
         <Card.Actions style={{...defaultTheme}, styles.button}>
           <Button
             onPress={() => {
-              startQuest();
+              showComfirmDialog()
             }}
             style={{...defaultTheme}, { marginRight: 8 }}
           >

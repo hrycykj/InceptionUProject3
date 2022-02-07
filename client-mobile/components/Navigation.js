@@ -10,6 +10,7 @@ import QuestMap from './map-components/QuestMap'
 import { AuthContext } from "../firebase/AuthProvider";
 import { QuestContext } from "../context/QuestContext";
 import UserData from "./UserData";
+import UserProfile from "./UserProfile";
 
 const QuestRoute = () => {
   return (
@@ -40,6 +41,7 @@ const ProfileRoute = () => {
     <View>
       {/* <StatusBar /> */}
       <UserInfo />
+      <UserProfile />
     </View>
   );
 };
