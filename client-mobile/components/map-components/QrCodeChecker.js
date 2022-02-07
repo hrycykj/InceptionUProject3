@@ -51,7 +51,7 @@ const QrCodeChecker = (props) => {
     })();
   }, [checkPoint]);
 
-  console.log("User proximity: ", userProximity);
+  // console.log("User proximity: ", userProximity);
 
   return (
     <>

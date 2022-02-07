@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Card, Paragraph, TouchableRipple, useTheme } from "react-native-paper";
+import { Button, Card, Paragraph, TouchableRipple, useTheme, Badge } from "react-native-paper";
 import { QuestContext } from "../../context/QuestContext";
 const QuestCard = ({ quest, handleCardPressed }) => {
   const questContext = useContext(QuestContext);
+  const currentQuest = questContext.quest
   const selectQuest = questContext.selectQuest;
+  const { colors } = useTheme();
 
   let defaultTheme = useTheme()
-
   return (
     <>
       <Card elevation={3} style={{...defaultTheme}, styles.card}>
@@ -17,7 +18,10 @@ const QuestCard = ({ quest, handleCardPressed }) => {
           rippleColor="rgba(0, 0, 0, .32)"
         >
           <>
+            {quest.id === currentQuest.id ?
+            <Card.Title title={quest.title + ' (Active)'} subtitle={quest.location} titleStyle={{color: colors.accent}} /> :
             <Card.Title title={quest.title} subtitle={quest.location} />
+            }
             <Card.Content>
               <Paragraph>{quest.description}</Paragraph>
             </Card.Content>
@@ -43,7 +47,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   card: {
-    marginBottom: 16,
+    marginBottom: 8,
+    marginTop: 8,
     marginHorizontal: 8,
   },
 });

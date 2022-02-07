@@ -15,7 +15,7 @@ const getUserByUid = async (uid) => {
   let userRef = usersCollectionRef.doc(uid)
   let user = await userRef.get()
   if (!user.exists)
-    return {}
+    return {'UID':'empty'}
   else {
     user = user.data()
     return user
@@ -34,12 +34,13 @@ const getUserByUsername = async (username) => {
 const createUserByUid = async (uid, userProfile) => {
   let res = await usersCollectionRef.doc(uid).set(userProfile)
   console.log (`inside the create user by UID function with ${uid} with results`, res)
-  return
+  return res
 }
 
 const updateUserByUid = async (uid, userProfileUpdates) => {
   let res = await usersCollectionRef.doc(uid).update(userProfileUpdates)
   console.log (`inside the update user by UID function with ${uid} with results`, res)
+  return res
 }
 
 module.exports = {

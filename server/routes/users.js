@@ -36,7 +36,7 @@ router.get('/:uid', async function(req, res, next) {
   res.send(user);
 });
 
-//Get a user by username 
+/* Get a user by username */ 
 router.get('/username/:username', async function (req, res, next) {
   const username = req.params.username
   const user = await getUserByUsername(username)
@@ -44,7 +44,7 @@ router.get('/username/:username', async function (req, res, next) {
   res.send(returnedUser)
 });
 
-//Create a user profile 
+/* Create user profile by UID */
   router.post('/:uid', async function (req, res, next) {
     const uid=req.params.uid
     const userProfile=req.body

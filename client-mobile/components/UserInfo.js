@@ -41,27 +41,57 @@ const UserInfo = (props) => {
   //   console.log("Let's get started button pressed")
   // }
 
-  useEffect ( () => {
-    (() => {
-      console.log ("This is a new user, please create a user profile form")
-    })()
-  }, [newUser])
-
-
   useEffect(() => {
-    (async () => {
-      if (user) {
-        let fetchedData = await fetch(`${HOST_SERVER}/api/users/` + user.uid);
-        fetchedData.json().then((data) => {
-        setUserData(data);
-        console.log("fetched userData data:", data);
-      });
-    } else {
-      setNewUser(true)
-    }
-    })();
+    fetch(`${HOST_SERVER}/api/users/` + user?.uid)
+      .then ((fetchedData) => fetchedData.json())
+      .then ((isUserNew) => {
+        if (isUserNew.UID=='empty') {
+          console.log('new user page required')
+          setNewUser(true)
+        }
+        return isUserNew
+      })
+      .then ((data) => {
+        setUserData(data)
+        return data
+      })
+      .then (()=> {
+        console.log('finished user data fetch')
+      })
   }, [user]);
 
+  useEffect ( () => {
+    (async () => {
+      if ((userData?.UID=='empty')&&user) {
+        console.log('no userData and user logged in for',user.uid, user.email)
+        let req = {
+          'UID': user.uid,
+          'userEmail':user.email,
+          'userType': 0, 
+          'userName':'',
+          'currentQuest':'',
+          'completedQuests':[],
+          'coins':[],
+          'baseLocation':''
+        }
+        console.log ("This is a new user, please create a user profile form")
+        // add in user info from user profile form and add to req object to write to database
+        
+        fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+          method: "POST",
+          body: JSON.stringify(req),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then ((response)=>{
+          setUserData(req)
+          console.log(response)
+        })
+        .then (()=> setNewUser(false))
+      }
+    })()
+  }, [userData])
 
   return (
     // <SafeAreaView>

@@ -1,54 +1,42 @@
 import { useEffect, useState, useContext } from "react";
 import { View } from "react-native";
-import { useTheme } from "react-native-paper";
-import * as Location from "expo-location";
-
+import { useTheme, Text } from "react-native-paper";
 import QrScanner from "./QrScanner";
 import CheckPointMap from "./CheckPointMap";
-
-import QrCodeChecker from "./QrCodeChecker";
 import CheckPointCongratsSplash from "./CheckPointCongratsSplash";
-import QuestCompletionSplash from "./QuestCompletionSplash";
-
 import { QuestContext } from "../../context/QuestContext";
 import { NotificationContext } from "../../context/NotificationContext";
 import {
   setMyLocation,
   updateLocation,
   checkPointIsNear,
+  handleCheckPointScanned
 } from "./questMapUtil";
 
 const QuestMap = (props) => {
+  const questContext = useContext(QuestContext);
+  const notificationContext = useContext(NotificationContext);
+
   let [location, setLocation] = useState(null);
   let [errorMsg, setErrorMsg] = useState(null);
   let [quest, setQuest] = useState(null);
-  let [currentCheckPoint, setCurrentCheckPoint] = useState(
-    props.checkPoint || 0
-  );
+  let [currentCheckPoint, setCurrentCheckPoint] = useState(questContext.checkPointIndex);
   let [coords, setCoords] = useState(null);
   let [checkPoint, setCheckPoint] = useState(null);
   let [checkPointComplete, setCheckPointComplete] = useState(null);
   let [questComplete, setQuestComplete] = useState(null);
 
-  const questContext = useContext(QuestContext);
   const insideGeofence = questContext.insideGeofence;
   const setInsideGeofence = questContext.setInsideGeofence;
 
   let { colors } = useTheme();
-  let geofenceSize = 10; //metres
-
-  const notificationContext = useContext(NotificationContext);
-  const showModal = notificationContext.showModal;
+  let geofenceSize = 100000; //metres
 
   const fetchQuest = () => {
     setQuest(questContext.quest);
     setCoords(questContext.quest.checkPoints);
+    setCurrentCheckPoint(questContext.checkPointIndex)
   };
-
-  useEffect(() => {
-    fetchQuest();
-  }, [questContext.quest]);
-
   useEffect(() => {
     setMyLocation(setLocation, setErrorMsg).catch((error) =>
       console.error(error)
@@ -57,46 +45,30 @@ const QuestMap = (props) => {
   }, []);
 
   useEffect(() => {
+    fetchQuest();
+    setCheckPoint(null)
+    setCheckPointComplete(false)
+    setQuestComplete(false)
+  }, [questContext.quest]);
+
+  useEffect(() => {
     (() => {
       setCheckPoint(null);
       setCheckPointComplete(null);
       setInsideGeofence(false);
+      checkPointIsNear(coords, currentCheckPoint, location, geofenceSize, setInsideGeofence)
     })();
   }, [currentCheckPoint]);
+
   useEffect(() => {
-    checkPointIsNear(
-      coords,
-      currentCheckPoint,
-      location,
-      geofenceSize,
-      setInsideGeofence
-    ).catch((error) => console.error(error));
+    checkPointIsNear(coords, currentCheckPoint, location, geofenceSize, setInsideGeofence)
+    .catch((error) => console.error(error));
   }, [location]);
 
-  // useEffect(() => {
-  //   if (checkPointComplete && !questComplete) {
-  //     showModal(() => {
-  //       return (
-  //         <CheckPointCongratsSplash
-  //           quest={quest}
-  //           checkPoint={checkPoint}
-  //           currentCheckPoint={currentCheckPoint}
-  //           setCurrentCheckPoint={setCurrentCheckPoint}
-  //           setCheckPointComplete={setCheckPointComplete}
-  //           setQuestComplete={setQuestComplete}
-  //         />
-  //       );
-  //     }, false);
-  //   }
-  // }, [checkPointComplete]);
+  useEffect(()=>{
+    handleCheckPointScanned(checkPoint, questContext, setCheckPointComplete, notificationContext)
+  },[checkPoint])
 
-  useEffect(() => {
-    if (questComplete) {
-      showModal(() => {
-        return <QuestCompletionSplash />;
-      });
-    }
-  }, [questComplete]);
   return (
     <>
       {location && coords && !checkPointComplete && !questComplete && (
@@ -132,25 +104,19 @@ const QuestMap = (props) => {
           </QrScanner>
         </>
       )}
+      {!location && <Text>Loading location</Text>}
+      {!coords && <Text>Please start a quest</Text>}
 
-      {checkPoint &&
-        location && ( // confirm Qr code returns coordinates of checkpoint and location is within checkpoint geofence
-          <QrCodeChecker
-            location={location}
-            checkPoint={checkPoint}
-            setCheckPoint={setCheckPoint}
-            setCheckPointComplete={setCheckPointComplete}
-          >
-            <CheckPointCongratsSplash
-              quest={quest}
-              checkPoint={checkPoint}
-              currentCheckPoint={currentCheckPoint}
-              setCurrentCheckPoint={setCurrentCheckPoint}
-              setCheckPointComplete={setCheckPointComplete}
-              setQuestComplete={setQuestComplete}
-            />
-          </QrCodeChecker>
-        )}
+      {checkPoint?.id === questContext?.currentCheckPoint.id && (
+        <CheckPointCongratsSplash
+          quest={quest}
+          checkPoint={checkPoint}
+          currentCheckPoint={currentCheckPoint}
+          setCurrentCheckPoint={setCurrentCheckPoint}
+          setCheckPointComplete={setCheckPointComplete}
+          setQuestComplete={setQuestComplete}
+        />
+      )}
     </>
   );
 };
