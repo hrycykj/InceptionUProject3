@@ -4,39 +4,41 @@ import {
   Avatar,
   Title,
   Caption,
+  useTheme,
 } from 'react-native-paper';
 
 
 const UserProfile = () => {
+  let defaultTheme = useTheme()
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{...defaultTheme}, styles.container}>
 
-      <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 15}}>
+      <View style={{...defaultTheme}, styles.userInfoSection}>
+        <View style={{...defaultTheme},{flexDirection: 'row', marginTop: 15}}>
           <Avatar.Image 
             source={{
               uri: "https://i.ibb.co/swm9rww/Rabbit.png",
             }}
             size={80}
           />
-          <View style={{marginLeft: 20}}>
-            <Title style={[styles.title, {
+          <View style={{...defaultTheme},{marginLeft: 20}}>
+            <Title style={{...defaultTheme},[styles.title, {
               marginTop:15,
               marginBottom: 5,
             }]}>Tleitch</Title>
-            <Caption style={styles.caption}>Player</Caption>
+            <Caption style={{...defaultTheme},styles.caption}>Player</Caption>
           </View>
         </View>
       </View>
-      <View style={styles.infoBoxWrapper}>
-          <View style={[styles.infoBox, {
+      <View style={{...defaultTheme},styles.infoBoxWrapper}>
+          <View style={{...defaultTheme},[styles.infoBox, {
             borderRightColor: '#dddddd',
             borderRightWidth: 1
           }]}>
             <Title>4</Title>
             <Caption>Quests Completed</Caption>
           </View>
-          <View style={styles.infoBox}>
+          <View style={{...defaultTheme},styles.infoBox}>
             <Title>400</Title>
             <Caption>Coins</Caption>
           </View>
