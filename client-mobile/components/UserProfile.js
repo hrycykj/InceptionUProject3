@@ -11,8 +11,7 @@ import {
 const UserProfile = () => {
   let defaultTheme = useTheme()
   return (
-    <SafeAreaView style={{...defaultTheme}, styles.container}>
-
+    <>
       <View style={{...defaultTheme}, styles.userInfoSection}>
         <View style={{...defaultTheme},{flexDirection: 'row', marginTop: 15}}>
           <Avatar.Image 
@@ -30,9 +29,9 @@ const UserProfile = () => {
           </View>
         </View>
       </View>
-      <View style={{...defaultTheme},styles.infoBoxWrapper}>
+      <View style={{...defaultTheme},styles.infoBoxWrapper, {borderBottomColor: defaultTheme.colors.placeholder, borderTopColor: defaultTheme.colors.placeholder}}>
           <View style={{...defaultTheme},[styles.infoBox, {
-            borderRightColor: '#dddddd',
+            borderRightColor: defaultTheme.colors.placeholder,
             borderRightWidth: 1
           }]}>
             <Title>4</Title>
@@ -43,7 +42,7 @@ const UserProfile = () => {
             <Caption>Coins</Caption>
           </View>
       </View>
-      </SafeAreaView>
+      </>
   );};
 
   export default UserProfile;
@@ -70,9 +69,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   infoBoxWrapper: {
-    borderBottomColor: '#dddddd',
     borderBottomWidth: 1,
-    borderTopColor: '#dddddd',
     borderTopWidth: 1,
     flexDirection: 'row',
     height: 100,
