@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, Alert } from "react-native";
 import { Button, Card, Paragraph, List, useTheme } from "react-native-paper";
 import { QuestContext } from "../../context/QuestContext";
 import { HOST_SERVER } from "../../util/hostServer";
 import { NotificationContext } from '../../context/NotificationContext';
-import { Alert } from "react-native";
 
 const QuestModal = (props) => {
   const quest = props.quest
@@ -29,8 +28,9 @@ const QuestModal = (props) => {
   }
 
   const showComfirmDialog = () => {
-    return Alert.alert(
+    Alert.alert(
       "Confirm Quest Selection",
+      "Test",
       [
         {
           text: "Yes",
@@ -39,6 +39,9 @@ const QuestModal = (props) => {
           }},
         {
           text: "No",
+          onPress: () => {
+            console.log ("no pressed")
+          }
         },
       ]
     );

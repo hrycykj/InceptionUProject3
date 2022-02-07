@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import { NotificationContext } from "../context/NotificationContext";
+import UserProfile from './UserProfile'
 
 
 const UserData = (props) => {
@@ -28,6 +29,7 @@ const UserData = (props) => {
         return (
           // update & deuglify modal details
           <View>
+            <UserProfile userData={userData} />
             <Text>{userData.UID}</Text>
             <Text>{userData.username}</Text>              
             <Text>{userData.baseLocation}</Text>
