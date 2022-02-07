@@ -33,7 +33,7 @@ const QuestMap = (props) => {
   const setInsideGeofence = questContext.setInsideGeofence;
 
   let { colors } = useTheme();
-  let geofenceSize = 100000; //metres
+  let geofenceSize = 10; //metres
 
   const notificationContext = useContext(NotificationContext);
 
