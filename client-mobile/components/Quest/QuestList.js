@@ -1,17 +1,25 @@
 import React, { useEffect, useState, useContext } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import QuestCard from "./QuestCard";
 import { HOST_SERVER } from "../../util/hostServer";
 import { QuestContext } from "../../context/QuestContext";
-import { Modal, Portal, Text, Subheading, Button, Provider,  useTheme } from "react-native-paper";
+import {
+  Modal,
+  Portal,
+  Text,
+  Subheading,
+  Button,
+  Provider,
+  useTheme,
+} from "react-native-paper";
 import QuestModal from "./QuestModal";
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationContext } from "../../context/NotificationContext";
 
-const QuestList = () => {
+const QuestList = (props) => {
   const [quests, setQuests] = useState([]);
   const [modalQuest, setModalQuest] = useState();
   const questContext = useContext(QuestContext);
-  const notificationContext = useContext(NotificationContext)
+  const notificationContext = useContext(NotificationContext);
   const currentQuest = questContext.quest;
   const showModal = notificationContext.showModal;
 
@@ -20,52 +28,44 @@ const QuestList = () => {
   // const hideModal = () => setVisible(false);
   const handleCardPressed = (quest) => {
     setModalQuest(quest);
-    showModal(()=>{
-      return <QuestModal quest={quest}/>
+    showModal(() => {
+      return <QuestModal quest={quest} jumpTo={props.jumpTo}/>;
     });
   };
-  
-  const { colors } = useTheme()
+
+  const { colors } = useTheme();
 
   useEffect(() => {
     fetch(`${HOST_SERVER}/api/quest`)
       .then((quest) => quest.json())
       .then((data) => {
         setQuests(data);
-      });
+      }).catch(err=>console.error(err));
   }, []);
 
   return (
-    <>
-      <Subheading style={{  //Make Current Quest bar touchable - navigates to Map view
-            backgroundColor: colors.background,
-            padding: 5,
-            textAlign: 'center',}}
-          >
-            {currentQuest&&`Current quest: ${currentQuest?.title}`}
-          </Subheading>
-      <ScrollView style={{
-          backgroundColor: colors.background,
-          marginBottom:32
-        }}
-      >  
+      <ScrollView >
+        <QuestCard
+          key={currentQuest.id}
+          quest={currentQuest}
+          handleCardPressed={handleCardPressed}
+        />
+
         {quests?.map((quest) => {
           return (
-            <QuestCard
-              key={quest.id}
-              quest={quest}
-              handleCardPressed={handleCardPressed}
-            >
-              Quest List
-            </QuestCard>
+            currentQuest.id !== quest.id && (
+              <QuestCard
+                key={quest.id}
+                quest={quest}
+                handleCardPressed={handleCardPressed}
+              />
+            )
           );
         })}
       </ScrollView>
-    </>
   );
 };
 
-const containerStyle = {paddingTop: 16};
-
+const containerStyle = { paddingTop: 16 };
 
 export default QuestList;
