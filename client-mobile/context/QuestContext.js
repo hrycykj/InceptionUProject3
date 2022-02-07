@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { HOST_SERVER } from "../util/hostServer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import {View,Text} from "react-native";
+ 
 const CURRENT_QUEST_KEY = "current_quest_key";
 const CURRENT_CHECKPOINT_INDEX_KEY = "current_checkpoint_index_key"
 const CURRENT_CHECKPOINT_KEY = "current_checkpoint_key"
@@ -28,7 +29,8 @@ const QuestContextProvider = (props) => {
     try {
       let currentQuest = await AsyncStorage.getItem(CURRENT_QUEST_KEY);
       if (!quest) {
-        currentQuest = JSON.parse(currentQuest)
+        console.log('We got the local quest info!', JSON.parse(currentQuest))
+        currentQuest = JSON.parse(currentQuest) || "Downtown Tour Calgary"
         setQuset(currentQuest);
       }
     } catch (e) {
@@ -55,9 +57,10 @@ const QuestContextProvider = (props) => {
         setCurrentCheckPoint(cp);
       }
       if (!checkPointIndex) {
-        cpIndex = JSON.parse(cpIndex)
+        cpIndex = JSON.parse(cpIndex) || 0
         setCheckPointIndex(cpIndex);
       }
+
     } catch (e) {
       console.error(e);
     }
@@ -82,9 +85,13 @@ const QuestContextProvider = (props) => {
     storeCurrentCheckPoint(quest.checkPoints[0], 0)
   };
   const theValues = { quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
-  return (
-    <QuestContext.Provider value={theValues}>{children}</QuestContext.Provider>
-  );
+  if (!quest) {
+    return <View><Text>Loading...</Text></View>;
+  } else {
+    return (
+      <QuestContext.Provider value={theValues}>{children}</QuestContext.Provider>
+    );
+  }
 };
 
 module.exports = { QuestContext, QuestContextProvider };

@@ -29,9 +29,8 @@ const UserProfile = () => {
           </View>
         </View>
       </View>
-      <View style={{...defaultTheme},styles.infoBoxWrapper, {borderBottomColor: defaultTheme.colors.placeholder, borderTopColor: defaultTheme.colors.placeholder}}>
+      <View style={{...defaultTheme},styles.infoBoxWrapper}>
           <View style={{...defaultTheme},[styles.infoBox, {
-            borderRightColor: defaultTheme.colors.placeholder,
             borderRightWidth: 1
           }]}>
             <Title>4</Title>
