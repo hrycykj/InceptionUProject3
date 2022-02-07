@@ -13,6 +13,7 @@ import { AuthContext } from "../firebase/AuthProvider";
 import { QuestContext } from "../context/QuestContext";
 import UserData from "./UserData";
 import UserProfile from "./UserProfile";
+import RedirectToSignInSplash from "./RedirectToSignInSplash";
 
 
 
