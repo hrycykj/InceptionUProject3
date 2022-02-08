@@ -17,7 +17,7 @@ import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
 import UserData from "./UserData";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
@@ -93,6 +93,14 @@ const UserInfo = (props) => {
     })()
   }, [userData])
 
+
+  function clearAllData() {
+    AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+        .then(() => alert('success'));
+}
+
+
   return (
     // <SafeAreaView>
       <View style={{...defaultTheme},styles.main_area}>
@@ -123,6 +131,7 @@ const UserInfo = (props) => {
                 onPress={()=>{
                   SignOutUser()
                   setUserData(null)
+                  // clearAllData()
                   }}
                 title="Signout"
                 accessibilityLabel="Sign Out From User Account"
