@@ -3,8 +3,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { BottomNavigation, Text, Surface, useTheme } from "react-native-paper";
 import QuestList from "./Quest/QuestList";
 import { StyleSheet, View } from "react-native";
-import QrScanner from "./map-components/QrScanner";
-import Quest from "./map-components/Quest";
 import UserInfo from "./UserInfo";
 import QuestMap from './map-components/QuestMap'
 import { NotificationContext } from "../context/NotificationContext";

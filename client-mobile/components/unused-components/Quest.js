@@ -2,16 +2,15 @@ import { useEffect, useState, useContext } from "react";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper"
 
-import FetchQuest from './FetchQuest'
-import QuestSplash from './QuestSplash'
-import MyLocation from './mapping/MyLocation'
-import QrScanner from './QrScanner'
-import CheckPointMap from './CheckPointMap'
-import LocationUpdate from './mapping/LocationUpdate'
+import QuestSplash from '../map-components/QuestSplash'
+import MyLocation from './MyLocation'
+import QrScanner from '../map-components/QrScanner'
+import CheckPointMap from '../map-components/CheckPointMap'
+import LocationUpdate from './LocationUpdate'
 import CheckPointIsNear from './CheckPointIsNear'
-import QrCodeChecker from './QrCodeChecker'
-import CheckPointCongratsSplash from './CheckPointCongratsSplash'
-import QuestCompletionSplash from './QuestCompletionSplash'
+import QrCodeChecker from '../map-components/QrCodeChecker'
+import CheckPointCongratsSplash from '../map-components/CheckPointCongratsSplash'
+import QuestCompletionSplash from '../map-components/QuestCompletionSplash'
 
 import { QuestContext } from "../../context/QuestContext"
 import { NotificationContext } from "../../context/NotificationContext";
