@@ -30,7 +30,7 @@ const QuestModal = (props) => {
   const showComfirmDialog = () => {
     Alert.alert(
       "Confirm Quest Selection",
-      "Test",
+      "Starting a new quest will cause lost progress on any current quests",
       [
         {
           text: "Yes",

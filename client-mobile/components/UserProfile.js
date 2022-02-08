@@ -26,7 +26,7 @@ const UserProfile = (props) => {
               marginTop:15,
               marginBottom: 5,
             }]}>{userData.username}</Title>
-            <Caption style={{...defaultTheme},styles.caption}>Player</Caption>
+            <Caption style={{...defaultTheme},styles.caption}>{userData.baseLocation}</Caption>
           </View>
         </View>
       </View>
@@ -43,6 +43,10 @@ const UserProfile = (props) => {
             <Caption>Coins</Caption>
           </View>
       </View>
+      <View>
+        
+      </View>
+
       </>
   );};
 
