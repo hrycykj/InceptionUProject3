@@ -50,11 +50,15 @@ const QuestModal = (props) => {
   let defaultTheme = useTheme()
 
   useEffect(() => {
-    fetch(`${HOST_SERVER}/api/quest/${quest.id}`)
-      .then((quest) => quest.json())
-      .then((data) => {
-        setQuestDetail(data);
-      });
+      let componentMounted = true
+        fetch(`${HOST_SERVER}/api/quest/${quest.id}`)
+        .then((quest) => quest.json())
+        .then((data) => {
+          if (componentMounted) {setQuestDetail(data)}
+        });
+      return () => {
+        componentMounted = false
+      } 
   }, []);
 
   return (
