@@ -106,7 +106,10 @@ const UserData = (props) => {
           </View>
         }
         {(showEditProfile) &&
-          <Editprofile />
+          <Editprofile 
+            userData={userData}
+            setUserData={setUserData}
+          />
         }
       </View>
       {/* <Button title= "Get User Data" onPress={() => getUsersData()}></Button> */}

@@ -26,8 +26,8 @@ const h = Dimensions.get("window").height;
 const UserInfo = (props) => {
   // const [isSignedIn, setIsSignedIn] = useState(false);
   // const points = props.points;
-  const [userData, setUserData] = useState();
-  let [newUser, setNewUser] = useState(false)
+  const [userData, setUserData] = useState(null);
+  let [newUser, setNewUser] = useState(null)
   let [showUserData, setShowUserData] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)

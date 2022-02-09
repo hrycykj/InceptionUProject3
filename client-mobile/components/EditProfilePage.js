@@ -1,10 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import { useTheme } from 'react-native-paper'
+import { HOST_SERVER } from "../util/hostServer";
+import { AuthContext } from "../firebase/AuthProvider";
 
 
-const Editprofile = () => {
+const Editprofile = (props) => {
+    let userData=props.userData
+    let setUserData=props.setUserData
+    let [userName, setUserName] = useState(userData?.username)
+    let [userEmail, setUserEmail] = useState(userData?.userEmail)
+    let [userLocation, setUserLocation] = useState(userData?.baseLocation)
+    let [updateUserData, setUpdateUserData] = useState(false)
     let defaultTheme=useTheme()
+
+    const authContext = React.useContext(AuthContext);
+    const user = authContext.user;
+
+    let onChangeUserData = () =>{
+      let dataupdate = {
+        ...userData,
+        username: userName,
+        userEmail: userEmail,
+        baseLocation: userLocation}
+      setUserData(dataupdate)
+      setUpdateUserData (true)
+      // console.log(userData)
+    }
+
+    useEffect ( () => {
+      (async () => {
+        if (setUpdateUserData) {
+          fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+            method: "PUT",
+            body: JSON.stringify(userData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then (()=> setUpdateUserData(false))
+        }
+      })()
+    }, [updateUserData])
 
     return (
         <View>
@@ -14,7 +51,9 @@ const Editprofile = () => {
         <View style={{...defaultTheme},styles.action}>
           <TextInput
             placeholder="Username"
-            autoCorrect={false}            
+            autoCorrect={false}
+            value={userName}
+            onChangeText={text => setUserName(text)}
           />
         </View>
         <View style={{...defaultTheme},styles.action}>
@@ -22,15 +61,19 @@ const Editprofile = () => {
             placeholder="Email"
             keyboardType="email-address"
             autoCorrect={false}
+            value={userEmail}
+            onChangeText={text => setUserEmail(text)}
           />
         </View>
         <View style={{...defaultTheme},styles.action}>
           <TextInput
             placeholder="Location"
             autoCorrect={false}
+            value={userLocation}
+            onChangeText={text => setUserLocation(text)}
           />
         </View>
-        <TouchableOpacity style={{...defaultTheme},styles.commandButton} onPress={() => {}}>
+        <TouchableOpacity style={{...defaultTheme},styles.commandButton} onPress={onChangeUserData}>
           <Text style={{...defaultTheme},styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
         </View>

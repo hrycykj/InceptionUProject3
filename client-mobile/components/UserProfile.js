@@ -47,11 +47,12 @@ const UserProfile = (props) => {
             
             borderRightWidth: 1
           }]}>
-            <Title>{userData?.completedQuests.length}</Title>
+            <Title>{userData?.completedQuests?.length}</Title>
             <Caption>Quests Completed</Caption>
           </View>
           <View style={{...defaultTheme},styles.infoBox}>
-            <Title>{userData?.coins[0]}</Title>
+            {console.log('user data at the coins error',userData?.coins)}
+            <Title>{userData?.coins?.[0]}</Title>
             <Caption>Coins</Caption>
           </View>
       </View>
