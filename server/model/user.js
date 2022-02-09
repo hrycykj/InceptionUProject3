@@ -43,10 +43,18 @@ const updateUserByUid = async (uid, userProfileUpdates) => {
   return res
 }
 
+const updateCompletedQuest = async (uid, userCompletedQuest) => {
+  let res = await usersCollectionRef.doc(uid).update({regions: completedQuests.arrayUnion(userCompletedQuest)})
+  console.log (`inside the update user by UID function with ${uid} with results`, res)
+  return res
+}
+
+
 module.exports = {
   getAllUsers,
   getUserByUid,
   getUserByUsername,
   createUserByUid,
   updateUserByUid,
+  updateCompletedQuest,
 }
