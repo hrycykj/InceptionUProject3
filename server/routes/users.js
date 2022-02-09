@@ -64,11 +64,12 @@ router.put('/:uid', async function(req, res, next) {
 });
 
 /* update Quest complete by uid. */
-router.put('completedQuest/:uid', async function(req, res, next) {
+router.put('/completedQuest/:uid', async function(req, res, next) {
+  console.log('made it into the completedQuest endpoint', req.body)
   const uid=req.params.uid
-  const userQuestCompleted=req.body
+  const userQuestCompleted=req.body.completedQuest
   let updatedUid = await updateCompletedQuest(uid, userQuestCompleted)
-  res.send(`updated profile ${uid} with ${userProfileUpdate}`);
+  res.send(`updated profile ${uid} with ${updatedUid}`);
 });
 
 
