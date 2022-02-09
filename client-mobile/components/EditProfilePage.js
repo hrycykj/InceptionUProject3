@@ -1,8 +1,11 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import { useTheme } from 'react-native-paper'
 
 
 const Editprofile = () => {
+    let defaultTheme=useTheme()
+
     return (
         <View>
             <Text style={{...defaultTheme},{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>

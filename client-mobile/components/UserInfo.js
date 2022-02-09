@@ -18,15 +18,17 @@ import { AuthContext } from "../firebase/AuthProvider";
 import UserData from "./UserData";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import UserProfile from "./UserProfile";
 
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
 
 const UserInfo = (props) => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  // const [isSignedIn, setIsSignedIn] = useState(false);
   // const points = props.points;
   const [userData, setUserData] = useState();
   let [newUser, setNewUser] = useState(false)
+  let [showUserData, setShowUserData] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
@@ -104,27 +106,25 @@ const UserInfo = (props) => {
   return (
     // <SafeAreaView>
       <View style={{...defaultTheme},styles.main_area}>
-        {/* {!isSignedIn && (
-          <ImageBackground
-            style={styles.img}
-            source={require("../assets/ipad.jpg")}
-          />
-        )} */}
         {!user && (
           <Login />
         )}
-
         <>
-          {/* {user && <Text>Already Logged in</Text>} */}
           {user && (
             <>
-              <Title>
-                Hello {userData?.username || userEmail}
-                {/* Hello {userEmail} */}
-              </Title>
-
-              {/* <Subheading>{points} points</Subheading> */}
-
+              <UserProfile 
+                userData={userData}
+                showUserData={showUserData}
+                setShowUserData={setShowUserData}
+              />
+              {showUserData &&
+                <UserData 
+                  userData = {userData}
+                  setUserData = {setUserData}
+                  showUserData={showUserData}
+                  setShowUserData={setShowUserData}
+                />
+              }
               <Button
                 style={{marginTop: 5, marginBottom: 5}}
                 mode="contained"
@@ -139,10 +139,6 @@ const UserInfo = (props) => {
               >
                 Log out
               </Button>
-              <UserData 
-                userData = {userData}
-                setUserData = {setUserData}
-              />
 
               {/* <TouchableRipple 
                 style={{...defaultTheme},styles.button}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   Avatar,
   Title,
@@ -11,22 +11,34 @@ import {
 const UserProfile = (props) => {
   let defaultTheme = useTheme()
   let userData=props.userData
+  let showUserData=props.showUserData
+  let setShowUserData=props.setShowUserData
+
+  let onPress = () => {
+    setShowUserData(!showUserData)
+  }
   return (
     <>
       <View style={{...defaultTheme}, styles.userInfoSection}>
         <View style={{...defaultTheme},{flexDirection: 'row', marginTop: 15}}>
-          <Avatar.Image 
-            source={{
-              uri: "https://i.ibb.co/swm9rww/Rabbit.png",
-            }}
-            size={80}
-          />
+          <TouchableOpacity
+                style={{...defaultTheme}}
+                onPress={onPress}
+              >
+            <Avatar.Image 
+              source={
+                require('../assets/Logo_trans.png')
+                // {uri: "https://i.ibb.co/swm9rww/Rabbit.png",}
+              }
+              size={80}
+            />
+          </TouchableOpacity>
           <View style={{...defaultTheme},{marginLeft: 20}}>
             <Title style={{...defaultTheme},[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>{userData.username}</Title>
-            <Caption style={{...defaultTheme},styles.caption}>{userData.baseLocation}</Caption>
+            }]}>{userData?.username}</Title>
+            <Caption style={{...defaultTheme},styles.caption}>{userData?.baseLocation}</Caption>
           </View>
         </View>
       </View>
@@ -35,11 +47,11 @@ const UserProfile = (props) => {
             
             borderRightWidth: 1
           }]}>
-            <Title>{userData.completedQuests.length}</Title>
+            <Title>{userData?.completedQuests.length}</Title>
             <Caption>Quests Completed</Caption>
           </View>
           <View style={{...defaultTheme},styles.infoBox}>
-            <Title>{userData.coins[0]}</Title>
+            <Title>{userData?.coins[0]}</Title>
             <Caption>Coins</Caption>
           </View>
       </View>
