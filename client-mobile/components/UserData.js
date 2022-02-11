@@ -13,13 +13,14 @@ import { Text, FAB, List, useTheme } from 'react-native-paper'
 
 import { NotificationContext } from "../context/NotificationContext";
 import UserProfile from './UserProfile'
-import Editprofile from './EditProfilePage';
+import EditProfile from './EditProfile';
 import { colors } from 'react-native-elements';
 
 
 const UserData = (props) => {
   // let [showUserData, setShowUserData] = useState(false)
-  let [showEditProfile, setShowEditProfile] = useState(false)
+  let showEditProfile=props.showEditProfile
+  let setShowEditProfile=props.setShowEditProfile
   let userData=props.userData
   let setUserData=props.setUserData
   let showUserData=props.showUserData
@@ -90,13 +91,13 @@ const UserData = (props) => {
         />
         {(!showEditProfile) &&
           <View style={{...defaultTheme}, styles.container}>
-            <Text>{userData.UID}</Text>
-            <Text>{userData.username}</Text>              
-            <Text>{userData.baseLocation}</Text>
-            <Text>Coins: {userData.coins}</Text>
-            <Text>Current Quest: {userData.currentQuest}</Text>
+            <Text>{userData?.UID}</Text>
+            <Text>{userData?.username}</Text>              
+            <Text>{userData?.baseLocation}</Text>
+            <Text>Coins: {userData?.coins}</Text>
+            <Text>Current Quest: {userData?.currentQuest}</Text>
             <Text>Completed Quests:</Text>
-            {userData.completedQuests.map((quest) => {
+            {userData?.completedQuests?.map((quest) => {
               return (
                   <Text key={quest}>
                     {quest}
@@ -106,7 +107,7 @@ const UserData = (props) => {
           </View>
         }
         {(showEditProfile) &&
-          <Editprofile 
+          <EditProfile 
             userData={userData}
             setUserData={setUserData}
           />
