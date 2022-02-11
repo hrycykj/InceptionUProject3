@@ -71,33 +71,39 @@ const UserInfo = (props) => {
         setShowEditProfile(true)
         setShowUserData(true)
         console.log('no userData and user logged in for',user.uid, user.email)
-          let req = {
-            'UID': user.uid,
-            'userEmail':user.email,
-            'userType': 0, 
-            'username':'',
-            'currentQuest':'',
-            'completedQuests':[],
-            'coins':[],
-            'baseLocation':''
+        let req = {
+          'UID': user.uid,
+          'userEmail':user.email,
+          'userType': 0, 
+          'username':'',
+          'currentQuest':'',
+          'completedQuests':[],
+          'coins':[],
+          'baseLocation':''
+        }
+        console.log ("This is a new user, please create a user profile form")
+        // add in user info from user profile form and add to req object to write to database
+        
+        fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+          method: "POST",
+          body: JSON.stringify(req),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then ((response)=>{
+          setUserData(req)
+          console.log(response)
+        })
+        .then (()=> setNewUser(false))
+        .then (()=> {
+          if (userData?.userType) {
+            setShowUserData(false)
+            setShowEditProfile(false)
           }
-          console.log ("This is a new user, please create a user profile form")
-          // add in user info from user profile form and add to req object to write to database
-          
-          fetch(`${HOST_SERVER}/api/users/` + user.uid, {
-            method: "POST",
-            body: JSON.stringify(req),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then ((response)=>{
-            setUserData(req)
-            console.log(response)
-          })
-          .then (()=> setNewUser(false))
-
+        })
       }
+      
     })()
   }, [userData])
 

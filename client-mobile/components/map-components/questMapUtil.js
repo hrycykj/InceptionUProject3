@@ -16,6 +16,12 @@ const setMyLocation = async (setLocation, setErrorMsg) => {
 
 const updateLocation = async (setLocation) => {
   _getLocationAsync = async () => {
+    let { status } = await Location.getForegroundPermissionsAsync()
+    if (status != "granted") {
+      console.log('location permissions not granted yet',status)
+      return
+    }
+
     let locations = await Location.watchPositionAsync(
       {
         accuracy: Location.Accuracy.Highest,
