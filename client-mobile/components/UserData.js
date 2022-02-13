@@ -20,7 +20,7 @@ import {
 
 import { NotificationContext } from "../context/NotificationContext";
 import UserProfile from "./UserProfile";
-import Editprofile from "./EditProfilePage";
+import EditProfile from "./EditProfile";
 import { colors } from "react-native-elements";
 import { AuthContext } from "../firebase/AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -100,17 +100,7 @@ const UserData = (props) => {
   return (
     <>
       <View>
-        <FAB
-          style={{...defaultTheme}, styles.fab}
-          small
-          icon="account-edit"
-          onPress={() => {
-            console.log('pressed', showEditProfile)
-            setShowEditProfile(!showEditProfile)
-          }}
-          title="Edit Profile"
-          accessibilityLabel="Edit User Profile"
-        />
+    
         {(!showEditProfile) &&
           <View style={{...defaultTheme}, styles.container}>
             <Text>{userData?.UID}</Text>

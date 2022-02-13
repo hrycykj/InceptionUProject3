@@ -10,9 +10,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-
+import Login from "./Login";
 import { HOST_SERVER } from "../util/hostServer";
-
+import UserData from "./UserData";
 import { AuthContext } from "../firebase/AuthProvider";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
 import UserProfile from "./UserProfile";
