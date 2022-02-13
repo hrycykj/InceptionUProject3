@@ -5,10 +5,10 @@ import { HOST_SERVER } from "../util/hostServer";
 import { AuthContext } from "../firebase/AuthProvider";
 
 
-const Editprofile = (props) => {
+const EditProfile = (props) => {
     let userData=props.userData
     let setUserData=props.setUserData
-    let [userName, setUserName] = useState(userData?.username)
+    let [username, setUsername] = useState(userData?.username)
     let [userEmail, setUserEmail] = useState(userData?.userEmail)
     let [userLocation, setUserLocation] = useState(userData?.baseLocation)
     let [updateUserData, setUpdateUserData] = useState(false)
@@ -20,7 +20,7 @@ const Editprofile = (props) => {
     let onChangeUserData = () =>{
       let dataupdate = {
         ...userData,
-        username: userName,
+        username: username,
         userEmail: userEmail,
         baseLocation: userLocation}
       setUserData(dataupdate)
@@ -52,8 +52,8 @@ const Editprofile = (props) => {
           <TextInput
             placeholder="Username"
             autoCorrect={false}
-            value={userName}
-            onChangeText={text => setUserName(text)}
+            value={username}
+            onChangeText={text => setUsername(text)}
           />
         </View>
         <View style={{...defaultTheme},styles.action}>
@@ -79,7 +79,7 @@ const Editprofile = (props) => {
         </View>
     )
 }
-export default Editprofile;
+export default EditProfile;
 
 const styles = StyleSheet.create({
     container: {

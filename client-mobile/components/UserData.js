@@ -100,22 +100,40 @@ const UserData = (props) => {
   return (
     <>
       <View>
-        {!showEditProfile && (
-          <View style={({ ...defaultTheme }, styles.container)}>
-            <Text>{userData.UID}</Text>
-            <Text>{userData.username}</Text>
-            <Text>{userData.baseLocation}</Text>
-            <Text>Coins: {userData.coins}</Text>
-            <Text>Current Quest: {userData.currentQuest}</Text>
+        <FAB
+          style={{...defaultTheme}, styles.fab}
+          small
+          icon="account-edit"
+          onPress={() => {
+            console.log('pressed', showEditProfile)
+            setShowEditProfile(!showEditProfile)
+          }}
+          title="Edit Profile"
+          accessibilityLabel="Edit User Profile"
+        />
+        {(!showEditProfile) &&
+          <View style={{...defaultTheme}, styles.container}>
+            <Text>{userData?.UID}</Text>
+            <Text>{userData?.username}</Text>              
+            <Text>{userData?.baseLocation}</Text>
+            <Text>Coins: {userData?.coins}</Text>
+            <Text>Current Quest: {userData?.currentQuest}</Text>
             <Text>Completed Quests:</Text>
-            {userData.completedQuests.map((quest) => {
-              return <Text key={quest}>{quest}</Text>;
-            })}
+            {userData?.completedQuests?.map((quest) => {
+              return (
+                  <Text key={quest}>
+                    {quest}
+                  </Text>
+                )
+              })}
           </View>
-        )}
-        {showEditProfile && (
-          <Editprofile userData={userData} setUserData={setUserData} />
-        )}
+        }
+        {(showEditProfile) &&
+          <EditProfile 
+            userData={userData}
+            setUserData={setUserData}
+          />
+        }
       </View>
       <>
       <Provider>

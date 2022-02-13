@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, Button, Title, Subheading, TouchableRipple, useTheme } from "react-native-paper";
 import {
   View,
@@ -12,12 +13,10 @@ import {
 
 import { HOST_SERVER } from "../util/hostServer";
 
-// import Navigation from "./Navigation";
-import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
-import UserData from "./UserData";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
 import UserProfile from "./UserProfile";
+import EditProfile from "./EditProfile";
 
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
@@ -28,6 +27,7 @@ const UserInfo = (props) => {
   const [userData, setUserData] = useState(null);
   let [newUser, setNewUser] = useState(null)
   let [showUserData, setShowUserData] = useState(false)
+  let [showEditProfile, setShowEditProfile] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
@@ -61,12 +61,15 @@ const UserInfo = (props) => {
   useEffect ( () => {
     (async () => {
       if ((userData?.UID=='empty')&&user) {
+        setUserData({'userEmail':user.email})
+        setShowEditProfile(true)
+        setShowUserData(true)
         console.log('no userData and user logged in for',user.uid, user.email)
         let req = {
           'UID': user.uid,
           'userEmail':user.email,
           'userType': 0, 
-          'userName':'',
+          'username':'',
           'currentQuest':'',
           'completedQuests':[],
           'coins':[],
@@ -87,7 +90,14 @@ const UserInfo = (props) => {
           console.log(response)
         })
         .then (()=> setNewUser(false))
+        .then (()=> {
+          if (userData?.userType) {
+            setShowUserData(false)
+            setShowEditProfile(false)
+          }
+        })
       }
+      
     })()
   }, [userData])
 
@@ -112,6 +122,8 @@ const UserInfo = (props) => {
                   setUserData = {setUserData}
                   showUserData={showUserData}
                   setShowUserData={setShowUserData}
+                  showEditProfile={showEditProfile}
+                  setShowEditProfile={setShowEditProfile}
                 />
               }
               {/* <Button
