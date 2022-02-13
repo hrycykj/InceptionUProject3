@@ -6,6 +6,7 @@ const {
   getUserByUsername,
   createUserByUid,
   updateUserByUid,
+  updateCompletedQuest,
 } = require('../model/user')
 
 
@@ -22,6 +23,8 @@ let user = {
   baseLocation: string,
 }
 */
+
+
 
 //Get all users
 router.get('/', async function (req, res, next) {
@@ -59,6 +62,18 @@ router.put('/:uid', async function(req, res, next) {
   let updatedUid = await updateUserByUid(uid, userProfileUpdate)
   res.send(`updated profile ${uid} with ${userProfileUpdate}`);
 });
+
+/* update Quest complete by uid. */
+router.put('/completedQuest/:uid', async function(req, res, next) {
+  console.log('made it into the completedQuest endpoint', req.body)
+  const uid=req.params.uid
+  const userQuestCompleted=req.body.completedQuest //note that we've assumed that the req is passed through in the format {"completedQuest": "Dinosaur Dig"}
+  let updatedUid = await updateCompletedQuest(uid, userQuestCompleted)
+  res.send(`updated profile ${uid} with ${updatedUid}`);
+});
+
+
+
 
 //test
 // router.get('/test', async function(req, res, next) {

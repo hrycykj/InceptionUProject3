@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, Button, Title, Subheading, TouchableRipple, useTheme } from "react-native-paper";
 import {
   View,
@@ -9,38 +10,35 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-
-import { HOST_SERVER } from "../util/hostServer";
-
-// import Navigation from "./Navigation";
 import Login from "./Login";
-import { AuthContext } from "../firebase/AuthProvider";
+import { HOST_SERVER } from "../util/hostServer";
 import UserData from "./UserData";
+import { AuthContext } from "../firebase/AuthProvider";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
-
+import UserProfile from "./UserProfile";
+import EditProfile from "./EditProfile";
 
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
 
 const UserInfo = (props) => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  // const [isSignedIn, setIsSignedIn] = useState(false);
   // const points = props.points;
-  const [userData, setUserData] = useState();
-  let [newUser, setNewUser] = useState(false)
+  const [userData, setUserData] = useState(null);
+  let [newUser, setNewUser] = useState(null)
+  let [showUserData, setShowUserData] = useState(false)
+  let [showEditProfile, setShowEditProfile] = useState(false)
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
-  const SignOutUser=authContext.SignOutUser
+  // const SignOutUser=authContext.SignOutUser
 
   let defaultTheme = useTheme()
  
   // const userDisplayName = user?.displayName;
   const userEmail = user?.email;
 
-  // const onPress = () => {
-  //   console.log("Let's get started button pressed")
-  // }
-
+ 
   useEffect(() => {
     fetch(`${HOST_SERVER}/api/users/` + user?.uid)
       .then ((fetchedData) => fetchedData.json())
@@ -63,12 +61,15 @@ const UserInfo = (props) => {
   useEffect ( () => {
     (async () => {
       if ((userData?.UID=='empty')&&user) {
+        setUserData({'userEmail':user.email})
+        setShowEditProfile(true)
+        setShowUserData(true)
         console.log('no userData and user logged in for',user.uid, user.email)
         let req = {
           'UID': user.uid,
           'userEmail':user.email,
           'userType': 0, 
-          'userName':'',
+          'username':'',
           'currentQuest':'',
           'completedQuests':[],
           'coins':[],
@@ -89,51 +90,56 @@ const UserInfo = (props) => {
           console.log(response)
         })
         .then (()=> setNewUser(false))
+        .then (()=> {
+          if (userData?.userType) {
+            setShowUserData(false)
+            setShowEditProfile(false)
+          }
+        })
       }
+      
     })()
   }, [userData])
+
 
   return (
     // <SafeAreaView>
       <View style={{...defaultTheme},styles.main_area}>
-        {/* {!isSignedIn && (
-          <ImageBackground
-            style={styles.img}
-            source={require("../assets/ipad.jpg")}
-          />
-        )} */}
         {!user && (
           <Login />
         )}
-
         <>
-          {/* {user && <Text>Already Logged in</Text>} */}
           {user && (
             <>
-              <Title>
-                Hello {userData?.username || userEmail}
-                {/* Hello {userEmail} */}
-              </Title>
-
-              {/* <Subheading>{points} points</Subheading> */}
-
-              <Button
+              <UserProfile 
+                userData={userData}
+                showUserData={showUserData}
+                setShowUserData={setShowUserData}
+              />
+              {showUserData &&
+                <UserData 
+                  userData = {userData}
+                  setUserData = {setUserData}
+                  showUserData={showUserData}
+                  setShowUserData={setShowUserData}
+                  showEditProfile={showEditProfile}
+                  setShowEditProfile={setShowEditProfile}
+                />
+              }
+              {/* <Button
                 style={{marginTop: 5, marginBottom: 5}}
                 mode="contained"
                 onPress={()=>{
                   SignOutUser()
                   setUserData(null)
+                  // clearAllData()
                   }}
                 title="Signout"
                 accessibilityLabel="Sign Out From User Account"
                 color= {defaultTheme.colors.accent}
               >
                 Log out
-              </Button>
-              <UserData 
-                userData = {userData}
-                setUserData = {setUserData}
-              />
+              </Button> */}
 
               {/* <TouchableRipple 
                 style={{...defaultTheme},styles.button}

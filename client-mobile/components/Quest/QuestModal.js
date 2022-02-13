@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, Alert } from "react-native";
 import { Button, Card, Paragraph, List, useTheme } from "react-native-paper";
 import { QuestContext } from "../../context/QuestContext";
 import { HOST_SERVER } from "../../util/hostServer";
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationContext } from '../../context/NotificationContext';
 
 const QuestModal = (props) => {
   const quest = props.quest
@@ -20,20 +20,45 @@ const QuestModal = (props) => {
   const startQuest = () => {
     selectQuest(questDetail)
     hideModal()
-    showSnackBar('Starting Quest', 'OK', () => { })
+    showSnackBar('Starting Quest', 'OK', () => { props.jumpTo("map") })
   }
   const continueQuest = () => {
     hideModal()
     props.jumpTo('map')
   }
+
+  const showComfirmDialog = () => {
+    Alert.alert(
+      "Confirm Quest Selection",
+      "Starting a new quest will cause lost progress on any current quests",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            startQuest();
+          }},
+        {
+          text: "No",
+          onPress: () => {
+            console.log ("no pressed")
+          }
+        },
+      ]
+    );
+  };
+
   let defaultTheme = useTheme()
 
   useEffect(() => {
-    fetch(`${HOST_SERVER}/api/quest/${quest.id}`)
-      .then((quest) => quest.json())
-      .then((data) => {
-        setQuestDetail(data);
-      });
+      let componentMounted = true
+        fetch(`${HOST_SERVER}/api/quest/${quest.id}`)
+        .then((quest) => quest.json())
+        .then((data) => {
+          if (componentMounted) {setQuestDetail(data)}
+        });
+      return () => {
+        componentMounted = false
+      } 
   }, []);
 
   return (
@@ -76,11 +101,7 @@ const QuestModal = (props) => {
         <Card.Actions style={{ ...defaultTheme }, styles.button}>
           <Button
             onPress={() => {
-              if (quest.id === currentQuest.id) {
-                continueQuest()
-              } else {
-                startQuest();
-              }
+              showComfirmDialog()
             }}
             style={{ ...defaultTheme }, { marginRight: 8 }}
           >

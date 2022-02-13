@@ -1,6 +1,7 @@
 const db = require('../db.js')
 const USERS_COLLECTION = 'users'
 const usersCollectionRef = db.collection(USERS_COLLECTION)
+const { FieldValue } = require('firebase-admin/firestore');
 
 const getAllUsers = async () => {
   const userRef = await usersCollectionRef.get();
@@ -43,10 +44,19 @@ const updateUserByUid = async (uid, userProfileUpdates) => {
   return res
 }
 
+const updateCompletedQuest = async (uid, userCompletedQuest) => {
+  console.log('inside the updateCompletedQuest database call',userCompletedQuest)
+  let res = await usersCollectionRef.doc(uid).update({completedQuests: FieldValue.arrayUnion(userCompletedQuest)})
+  console.log (`inside the update completed quest by UID function with ${uid} with results`, res)
+  return res
+}
+
+
 module.exports = {
   getAllUsers,
   getUserByUid,
   getUserByUsername,
   createUserByUid,
   updateUserByUid,
+  updateCompletedQuest,
 }

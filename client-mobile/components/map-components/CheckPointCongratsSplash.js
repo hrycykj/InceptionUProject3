@@ -1,11 +1,20 @@
 import { View, Image, ScrollView, StyleSheet } from "react-native";
 import { useEffect, useState, useContext } from "react";
-import { Text, Card, Paragraph, Lists, Button, useTheme, ProgressBar } from "react-native-paper";
+import {
+  Text,
+  Card,
+  Paragraph,
+  Lists,
+  Button,
+  useTheme,
+  ProgressBar,
+} from "react-native-paper";
 import { NotificationContext } from "../../context/NotificationContext";
 import { QuestContext } from "../../context/QuestContext";
 import QuestCompletionSplash from "./QuestCompletionSplash";
+import { AuthContext } from "../../firebase/AuthProvider";
 
-
+import { HOST_SERVER } from "../../util/hostServer";
 
 const CheckPointCongratsSplash = (props) => {
   let quest = props.quest;
@@ -14,9 +23,13 @@ const CheckPointCongratsSplash = (props) => {
   let setCurrentCheckPoint = props.setCurrentCheckPoint;
   let setCheckPointComplete = props.setCheckPointComplete;
   let setQuestComplete = props.setQuestComplete;
+  let questComplete = props.questComplete;
   let [buttonClick, setButtonClick] = useState(null);
   const notificationContext = useContext(NotificationContext);
   const questContext = useContext(QuestContext);
+
+  const authContext = useContext(AuthContext);
+  const user = authContext.user;
 
   let defaultTheme = useTheme();
   const { colors } = useTheme();
@@ -37,10 +50,34 @@ const CheckPointCongratsSplash = (props) => {
     }
   };
 
+  useEffect(() => {
+    console.log(
+      "MADE IT INTO USEEFFECT!!",
+      quest.id,
+      questComplete,
+      user.uid,
+      HOST_SERVER
+    );
+    // if (questComplete) {
+    fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
+      method: "PUT",
+      body: JSON.stringify(quest.id),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        // setQuestComplete(req);
+        console.log(response);
+      })
+      .catch((ex) => console.log(`fetch failed: ${ex.message}`));
+    // .then(() => setQuestComplete(null));
+    // }
+  }, [questComplete]);
+
   return (
     <ScrollView>
       <Card elevation={3} style={({ ...defaultTheme }, styles.card)}>
-
         <Card.Cover source={{ uri: checkPoint.objectToFind.url }} />
 
         <Card.Title title={checkPoint.title} />
@@ -61,8 +98,10 @@ const CheckPointCongratsSplash = (props) => {
               : "Next Check Point"}
           </Button>
         </Card.Actions>
-      <ProgressBar progress={(currentCheckPoint+1)/quest.checkPoints.length} color={colors.accent} />
-
+        <ProgressBar
+          progress={(currentCheckPoint + 1) / quest.checkPoints.length}
+          color={colors.accent}
+        />
       </Card>
     </ScrollView>
   );
