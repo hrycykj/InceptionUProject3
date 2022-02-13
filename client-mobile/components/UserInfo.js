@@ -17,7 +17,6 @@ import Login from "./Login";
 import { AuthContext } from "../firebase/AuthProvider";
 import UserData from "./UserData";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserProfile from "./UserProfile";
 
 const w = Dimensions.get("window").width;
@@ -32,17 +31,14 @@ const UserInfo = (props) => {
   const authContext = React.useContext(AuthContext);
   const firebaseContext = React.useContext(FirebaseContext)
   const user = authContext.user;
-  const SignOutUser=authContext.SignOutUser
+  // const SignOutUser=authContext.SignOutUser
 
   let defaultTheme = useTheme()
  
   // const userDisplayName = user?.displayName;
   const userEmail = user?.email;
 
-  // const onPress = () => {
-  //   console.log("Let's get started button pressed")
-  // }
-
+ 
   useEffect(() => {
     fetch(`${HOST_SERVER}/api/users/` + user?.uid)
       .then ((fetchedData) => fetchedData.json())
@@ -96,13 +92,6 @@ const UserInfo = (props) => {
   }, [userData])
 
 
-  function clearAllData() {
-    AsyncStorage.getAllKeys()
-        .then(keys => AsyncStorage.multiRemove(keys))
-        .then(() => alert('success'));
-}
-
-
   return (
     // <SafeAreaView>
       <View style={{...defaultTheme},styles.main_area}>
@@ -125,7 +114,7 @@ const UserInfo = (props) => {
                   setShowUserData={setShowUserData}
                 />
               }
-              <Button
+              {/* <Button
                 style={{marginTop: 5, marginBottom: 5}}
                 mode="contained"
                 onPress={()=>{
@@ -138,7 +127,7 @@ const UserInfo = (props) => {
                 color= {defaultTheme.colors.accent}
               >
                 Log out
-              </Button>
+              </Button> */}
 
               {/* <TouchableRipple 
                 style={{...defaultTheme},styles.button}

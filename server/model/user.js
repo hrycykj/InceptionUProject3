@@ -47,7 +47,7 @@ const updateUserByUid = async (uid, userProfileUpdates) => {
 const updateCompletedQuest = async (uid, userCompletedQuest) => {
   console.log('inside the updateCompletedQuest database call',userCompletedQuest)
   let res = await usersCollectionRef.doc(uid).update({completedQuests: FieldValue.arrayUnion(userCompletedQuest)})
-  console.log (`inside the update user by UID function with ${uid} with results`, res)
+  console.log (`inside the update completed quest by UID function with ${uid} with results`, res)
   return res
 }
 

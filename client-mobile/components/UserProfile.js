@@ -30,7 +30,7 @@ const UserProfile = (props) => {
                 require('../assets/Logo_trans.png')
                 // {uri: "https://i.ibb.co/swm9rww/Rabbit.png",}
               }
-              size={80}
+              size={100}
             />
           </TouchableOpacity>
           <View style={{...defaultTheme},{marginLeft: 20}}>
@@ -51,7 +51,7 @@ const UserProfile = (props) => {
             <Caption>Quests Completed</Caption>
           </View>
           <View style={{...defaultTheme},styles.infoBox}>
-            {console.log('user data at the coins error',userData?.coins)}
+            {/* {console.log('user data at the coins error',userData?.coins)} */}
             <Title>{userData?.coins?.[0]}</Title>
             <Caption>Coins</Caption>
           </View>

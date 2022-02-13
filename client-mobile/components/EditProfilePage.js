@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import { useTheme } from 'react-native-paper'
+import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import { useTheme, Text, } from 'react-native-paper'
 import { HOST_SERVER } from "../util/hostServer";
 import { AuthContext } from "../firebase/AuthProvider";
 
@@ -30,7 +30,7 @@ const Editprofile = (props) => {
 
     useEffect ( () => {
       (async () => {
-        if (setUpdateUserData) {
+        if (updateUserData) {
           fetch(`${HOST_SERVER}/api/users/` + user.uid, {
             method: "PUT",
             body: JSON.stringify(userData),
@@ -45,7 +45,7 @@ const Editprofile = (props) => {
 
     return (
         <View>
-            <Text style={{...defaultTheme},{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
+            <Text style={{...defaultTheme},{marginTop: 10, fontSize: 30, fontWeight: 'bold'}}>
             Edit Profile
             </Text>
         <View style={{...defaultTheme},styles.action}>
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
 commandButton: {
     padding: 15,
     borderRadius: 10,
+
     alignItems: 'center',
     marginTop: 10,
     },
