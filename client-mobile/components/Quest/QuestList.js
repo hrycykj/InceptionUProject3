@@ -11,9 +11,12 @@ import {
   Button,
   Provider,
   useTheme,
+  Searchbar,
 } from "react-native-paper";
 import QuestModal from "./QuestModal";
 import { NotificationContext } from "../../context/NotificationContext";
+
+
 
 const QuestList = (props) => {
   const [quests, setQuests] = useState([]);
@@ -45,6 +48,9 @@ const QuestList = (props) => {
 
   return (
       <ScrollView >
+        <Searchbar 
+          placeholder="Search Quests"          
+        />
         <QuestCard
           key={currentQuest.id}
           quest={currentQuest}
