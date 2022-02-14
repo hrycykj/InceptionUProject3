@@ -18,7 +18,7 @@ const QuestCard = ({ quest, handleCardPressed }) => {
           rippleColor="rgba(0, 0, 0, .32)"
         >
           <>
-            {quest.id === currentQuest.id ?
+            {quest.id === currentQuest?.id ?
             <Card.Title title={quest.title + ' (Active)'} subtitle={quest.location} titleStyle={{color: colors.accent}} /> :
             <Card.Title title={quest.title} subtitle={quest.location} />
             }

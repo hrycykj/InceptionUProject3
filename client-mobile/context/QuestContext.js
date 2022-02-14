@@ -11,9 +11,9 @@ const QuestContext = React.createContext();
 
 const QuestContextProvider = (props) => {
   const children = props.children;
-  const [quest, setQuset] = useState();
-  const [checkPointIndex, setCheckPointIndex] = useState()
-  const [currentCheckPoint, setCurrentCheckPoint] = useState()
+  const [quest, setQuset] = useState();  // current quest info including checkpoint info
+  const [checkPointIndex, setCheckPointIndex] = useState() // quest checkpoint array index
+  const [currentCheckPoint, setCurrentCheckPoint] = useState() // checkpoint coordinates at quest.checkPoints[checkPointIndex]
   const [insideGeofence, setInsideGeofence] = useState(false)
 
   const storeCurrentQuest = async (data) => {
@@ -29,8 +29,8 @@ const QuestContextProvider = (props) => {
     try {
       let currentQuest = await AsyncStorage.getItem(CURRENT_QUEST_KEY);
       if (!quest) {
-        console.log('We got the local quest info!', JSON.parse(currentQuest))
-        currentQuest = JSON.parse(currentQuest) || "Downtown Tour Calgary"
+        currentQuest = JSON.parse(currentQuest) || {"id": "null"}
+        console.log('currentQuest from asyncstorage:',currentQuest)
         setQuset(currentQuest);
       }
     } catch (e) {
@@ -53,7 +53,8 @@ const QuestContextProvider = (props) => {
       let cpIndex = await AsyncStorage.getItem(CURRENT_CHECKPOINT_INDEX_KEY);
 
       if (!currentCheckPoint) {
-        cp = JSON.parse(cp)
+        cp = JSON.parse(cp) || {"id":"51.0447_114.0719","position":{"latitude":51.0447,"longitude":114.0719}}
+        console.log('current checkpoint:',cp)
         setCurrentCheckPoint(cp);
       }
       if (!checkPointIndex) {

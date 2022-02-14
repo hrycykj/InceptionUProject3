@@ -45,11 +45,13 @@ const QuestList = (props) => {
 
   return (
       <ScrollView >
-        <QuestCard
-          key={currentQuest.id}
-          quest={currentQuest}
-          handleCardPressed={handleCardPressed}
-        />
+        {currentQuest?.title &&  // make sure there is data to pull from asyncStorage before displaying the current quest
+          <QuestCard
+            key={currentQuest.id}
+            quest={currentQuest}
+            handleCardPressed={handleCardPressed}
+          />
+        }
 
         {quests?.map((quest) => {
           return (
