@@ -4,7 +4,7 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Text, TextInput, Headline, Button, TouchableRipple, useTheme } from "react-native-paper";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AuthContext } from "../firebase/AuthProvider";
+import { AuthContext } from "../../firebase/AuthProvider";
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FirebaseContext } from "../firebase/FirebaseProvider";
+import { FirebaseContext } from "../../firebase/FirebaseProvider";
 import {
   View,
   StyleSheet,
@@ -18,11 +18,11 @@ import {
   useTheme,
 } from "react-native-paper";
 
-import { NotificationContext } from "../context/NotificationContext";
+import { NotificationContext } from "../../context/NotificationContext";
 import UserProfile from "./UserProfile";
 import EditProfile from "./EditProfile";
 import { colors } from "react-native-elements";
-import { AuthContext } from "../firebase/AuthProvider";
+import { AuthContext } from "../../firebase/AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserData = (props) => {

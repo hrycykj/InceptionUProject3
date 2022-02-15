@@ -1,6 +1,6 @@
 import { Text, View, Button, StyleSheet } from "react-native";
 import React, { useState, useContext } from "react";
-import Login from "./Login";
+import Login from "../profile-components/Login"
 import { useTheme } from "react-native-paper";
 
 const RedirectToSignInSplash = (props) => {

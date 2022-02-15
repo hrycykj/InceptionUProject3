@@ -3,15 +3,15 @@ import React, { useEffect, useState, useContext } from "react";
 import { BottomNavigation, Text, Surface, useTheme } from "react-native-paper";
 import QuestList from "./Quest/QuestList";
 import { StyleSheet, View } from "react-native";
-import UserInfo from "./UserInfo";
+import UserInfo from "./profile-components/UserInfo"
 import QuestMap from './map-components/QuestMap'
 import { NotificationContext } from "../context/NotificationContext";
 
 import { AuthContext } from "../firebase/AuthProvider";
 import { QuestContext } from "../context/QuestContext";
-import UserData from "./UserData";
-import UserProfile from "./UserProfile";
-import RedirectToSignInSplash from "./RedirectToSignInSplash";
+// import UserData from "./UserData";
+// import UserProfile from "./UserProfile";
+import RedirectToSignInSplash from "./map-components/RedirectToSignInSplash"
 
 
 
