@@ -37,10 +37,11 @@ const CheckPointCongratsSplash = (props) => {
   const handleNextButtonClicked = () => {
     if (quest.checkPoints.length - 1 == currentCheckPoint) {
       setQuestComplete(true);
+      questContext.completeQuest(quest.id)
 
-      notificationContext.showModal(() => {
-        return <QuestCompletionSplash quest={quest} />;
-      });
+      // notificationContext.showModal(() => {
+      //   return <QuestCompletionSplash quest={quest} />;
+      // });
     } else {
       let revisedCheckPoint = currentCheckPoint + 1;
       setCurrentCheckPoint(revisedCheckPoint);
@@ -61,7 +62,7 @@ const CheckPointCongratsSplash = (props) => {
     // if (questComplete) {
     fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
       method: "PUT",
-      body: JSON.stringify(quest.id),
+      body: JSON.stringify({"completedQuest": quest.id}),
       headers: {
         "Content-Type": "application/json",
       },

@@ -31,7 +31,6 @@ const MapRoute = (props) => {
   const notificationContext = useContext(NotificationContext);
   const showModal = notificationContext.showModal;
 
-  console.log("HANNAH")
   
   return (
     <>

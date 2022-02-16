@@ -145,9 +145,7 @@ const QuestMap = (props) => {
           questComplete = {questComplete}
         />
       )}
-      <Button onPress ={()=>setQuestComplete(!questComplete)}
-      title="complete the quest">
-      complete the quest</Button>
+
     </>
   );
 };

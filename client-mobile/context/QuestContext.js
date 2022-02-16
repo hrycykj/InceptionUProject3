@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HOST_SERVER } from "../util/hostServer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {View,Text} from "react-native";
+import { AuthContext } from "../firebase/AuthProvider";
  
 const CURRENT_QUEST_KEY = "current_quest_key";
 const CURRENT_CHECKPOINT_INDEX_KEY = "current_checkpoint_index_key"
@@ -15,6 +16,8 @@ const QuestContextProvider = (props) => {
   const [checkPointIndex, setCheckPointIndex] = useState()
   const [currentCheckPoint, setCurrentCheckPoint] = useState()
   const [insideGeofence, setInsideGeofence] = useState(false)
+  const [completedQuests, setCompletedQuests] = useState ([])
+  const authContext = useContext(AuthContext)
 
   const storeCurrentQuest = async (data) => {
     try {
@@ -84,7 +87,29 @@ const QuestContextProvider = (props) => {
     storeCurrentQuest(quest);
     storeCurrentCheckPoint(quest.checkPoints[0], 0)
   };
-  const theValues = { quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
+
+  const completeQuest = (questId) => {
+    if (!completedQuests.includes(questId))
+    {
+    const newCompletedQuests = [...completedQuests, questId]
+    setCompletedQuests (newCompletedQuests)
+    }
+  };
+
+  useEffect(() => {
+    if (authContext.user) {
+      fetch(`${HOST_SERVER}/api/users/` + authContext.user?.uid)
+      .then ((fetchedData) => fetchedData.json())
+      .then ((userData) => {
+        let userCompletedQuests = userData.completedQuests
+        setCompletedQuests(userCompletedQuests)
+        console.log (`MOOOOOOOOOOOOOOOOOO`,userData)
+      })
+    }
+      
+  }, [authContext]);
+  
+  const theValues = { completeQuest, completedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint};
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {
