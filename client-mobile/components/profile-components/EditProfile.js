@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import { useTheme, Text, } from 'react-native-paper'
-import { HOST_SERVER } from "../util/hostServer";
-import { AuthContext } from "../firebase/AuthProvider";
+import { HOST_SERVER } from "../../util/hostServer";
+import { AuthContext } from "../../firebase/AuthProvider";
 
 
 const EditProfile = (props) => {

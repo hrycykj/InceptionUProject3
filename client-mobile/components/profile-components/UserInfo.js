@@ -11,10 +11,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Login from "./Login";
-import { HOST_SERVER } from "../util/hostServer";
+import { HOST_SERVER } from "../../util/hostServer";
 import UserData from "./UserData";
-import { AuthContext } from "../firebase/AuthProvider";
-import { FirebaseContext } from "../firebase/FirebaseProvider";
+import { AuthContext } from "../../firebase/AuthProvider";
+import { FirebaseContext } from "../../firebase/FirebaseProvider";
+import { QuestContext } from "../../context/QuestContext"
 import UserProfile from "./UserProfile";
 import EditProfile from "./EditProfile";
 
@@ -24,7 +25,10 @@ const h = Dimensions.get("window").height;
 const UserInfo = (props) => {
   // const [isSignedIn, setIsSignedIn] = useState(false);
   // const points = props.points;
-  const [userData, setUserData] = useState(null);
+  const questContext = useContext(QuestContext);
+
+  const userData = questContext.userData
+  const setUserData = questContext.setUserData
   let [newUser, setNewUser] = useState(null)
   let [showUserData, setShowUserData] = useState(false)
   let [showEditProfile, setShowEditProfile] = useState(false)

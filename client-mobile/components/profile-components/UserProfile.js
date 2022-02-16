@@ -27,7 +27,7 @@ const UserProfile = (props) => {
               >
             <Avatar.Image 
               source={
-                require('../assets/Logo_trans.png')
+                require('../../assets/Logo_trans.png')
                 // {uri: "https://i.ibb.co/swm9rww/Rabbit.png",}
               }
               size={100}

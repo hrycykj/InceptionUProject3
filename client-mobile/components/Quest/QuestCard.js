@@ -8,9 +8,28 @@ const QuestCard = ({ quest, handleCardPressed }) => {
   const currentQuest = questContext.quest
   const selectQuest = questContext.selectQuest;
   const completedQuest = questContext.questComplete
+  const userCompletedQuests = questContext.userData?.completedQuests||['']
+  
   const { colors } = useTheme();
 
   let defaultTheme = useTheme()
+
+  const checkForCardFormatting = () => {
+    if (quest.id === currentQuest?.id) {
+      return (
+        <Card.Title title={quest.title + ' (Active)'} subtitle={quest.location} titleStyle={{color: colors.accent}} />
+      )
+    } else if (userCompletedQuests.includes(quest.id)) {
+      return (
+        <Card.Title title={quest.title + ' (Completed)'} subtitle={quest.location} titleStyle={{color: colors.placeholder}} />
+      )
+    } else {
+      return (
+        <Card.Title title={quest.title} subtitle={quest.location} />
+      )
+    }
+  }
+
   return (
     <>
       <Card elevation={3} style={{...defaultTheme}, styles.card}>
@@ -20,10 +39,11 @@ const QuestCard = ({ quest, handleCardPressed }) => {
           rippleColor="rgba(0, 0, 0, .32)"
         >
           <>
-            {quest.id === currentQuest.id ?
+            {checkForCardFormatting()}
+            {/* {quest.id === currentQuest?.id ?
             <Card.Title title={quest.title + ' (Active)'} subtitle={quest.location} titleStyle={{color: colors.accent}} /> :
             <Card.Title title={quest.title} subtitle={quest.location} />
-            }
+            } */}
             <Card.Content>
               <Paragraph>{quest.description}</Paragraph>
             </Card.Content>
