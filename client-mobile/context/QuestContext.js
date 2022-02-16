@@ -105,8 +105,7 @@ const QuestContextProvider = (props) => {
         setCompletedQuests(userCompletedQuests)
         console.log (`MOOOOOOOOOOOOOOOOOO`,userData)
       })
-    }
-      
+    }    
   }, [authContext]);
   
   const theValues = { completeQuest, completedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint};
