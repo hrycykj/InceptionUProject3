@@ -12,6 +12,7 @@ const QuestContext = React.createContext();
 const QuestContextProvider = (props) => {
   const children = props.children;
   const [userData, setUserData] = useState(null);
+  const [showCompletedQuests, setShowCompletedQuests] = useState(false)
   const [quest, setQuset] = useState();  // current quest info including checkpoint info
   const [checkPointIndex, setCheckPointIndex] = useState() // quest checkpoint array index
   const [currentCheckPoint, setCurrentCheckPoint] = useState() // checkpoint coordinates at quest.checkPoints[checkPointIndex]
@@ -86,7 +87,7 @@ const QuestContextProvider = (props) => {
     storeCurrentQuest(quest);
     storeCurrentCheckPoint(quest.checkPoints[0], 0)
   };
-  const theValues = { userData, setUserData, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
+  const theValues = { userData, setUserData, showCompletedQuests, setShowCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {

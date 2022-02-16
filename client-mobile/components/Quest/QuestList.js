@@ -19,8 +19,10 @@ const QuestList = (props) => {
   const [quests, setQuests] = useState([]);
   const [modalQuest, setModalQuest] = useState();
   const questContext = useContext(QuestContext);
-  const notificationContext = useContext(NotificationContext);
   const currentQuest = questContext.quest;
+  const userCompletedQuests = questContext.userData?.completedQuests||['']
+  const showCompletedQuests = questContext.showCompletedQuests
+  const notificationContext = useContext(NotificationContext);
   const showModal = notificationContext.showModal;
 
   // const [visible, setVisible] = React.useState(false);
@@ -55,13 +57,20 @@ const QuestList = (props) => {
 
         {quests?.map((quest) => {
           return (
-            currentQuest.id !== quest.id && (
-              <QuestCard
-                key={quest.id}
-                quest={quest}
-                handleCardPressed={handleCardPressed}
-              />
-            )
+            currentQuest.id !== quest.id &&
+              (userCompletedQuests.includes(quest.id) 
+                ? (showCompletedQuests) &&
+                  <QuestCard
+                    key={quest.id}
+                    quest={quest}
+                    handleCardPressed={handleCardPressed}
+                  />
+                : <QuestCard
+                    key={quest.id}
+                    quest={quest}
+                    handleCardPressed={handleCardPressed}
+                  /> 
+              )
           );
         })}
       </ScrollView>
