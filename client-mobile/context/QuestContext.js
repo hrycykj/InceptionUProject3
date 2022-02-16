@@ -105,13 +105,14 @@ const QuestContextProvider = (props) => {
       .then ((fetchedData) => fetchedData.json())
       .then ((userData) => {
         let userCompletedQuests = userData.completedQuests
+        setUserData(userData)
         setCompletedQuests(userCompletedQuests)
         console.log (`MOOOOOOOOOOOOOOOOOO`,userData)
       })
     }    
   }, [authContext]);
   
-  const theValues = { completeQuest, completedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint};
+  const theValues = { userData, setUserData, showCompletedQuests, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint};
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {

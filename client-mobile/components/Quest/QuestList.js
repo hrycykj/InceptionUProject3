@@ -20,7 +20,7 @@ const QuestList = (props) => {
   const [modalQuest, setModalQuest] = useState();
   const questContext = useContext(QuestContext);
   const currentQuest = questContext.quest;
-  const userCompletedQuests = questContext.userData?.completedQuests||['']
+  const userCompletedQuests = questContext.completedQuests || ['']
   const showCompletedQuests = questContext.showCompletedQuests
   const notificationContext = useContext(NotificationContext);
   const showModal = notificationContext.showModal;

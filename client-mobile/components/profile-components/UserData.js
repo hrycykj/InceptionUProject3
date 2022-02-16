@@ -19,10 +19,11 @@ import {
 } from "react-native-paper";
 
 import { NotificationContext } from "../../context/NotificationContext";
+import { AuthContext } from "../../firebase/AuthProvider";
+import { QuestContext } from "../../context/QuestContext"
 import UserProfile from "./UserProfile";
 import EditProfile from "./EditProfile";
 import { colors } from "react-native-elements";
-import { AuthContext } from "../../firebase/AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserData = (props) => {
@@ -40,6 +41,9 @@ const UserData = (props) => {
   const authContext = useContext(AuthContext);
   const SignOutUser=authContext.SignOutUser
   const user = authContext.user;
+
+  const questContext = useContext(QuestContext)
+  const setCompletedQuests = questContext.setCompletedQuests
   
 
   const [state, setState] = React.useState({ open: false });
@@ -148,6 +152,7 @@ const UserData = (props) => {
                   console.log("Pressed logout");
                   SignOutUser()
                   setUserData(null)
+                  setCompletedQuests([])
                   // clearAllData()
                 },
               },
