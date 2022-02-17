@@ -13,12 +13,12 @@ import {
 import { ScrollView, View } from "react-native";
 import { NotificationContext } from "../../context/NotificationContext";
 import { useContext, useState } from "react";
-
+import {QuestContext} from "../../context/QuestContext";
 
 const QuestFilter = (props) => {
     // const [quests, setQuests] = useState([]);
     // const [modalQuest, setModalQuest] = useState();
-    // const questContext = useContext(QuestContext);
+    const questContext = useContext(QuestContext);
     const notificationContext = useContext(NotificationContext);
     // const currentQuest = questContext.quest;
     const showModal = notificationContext.showModal;
@@ -28,7 +28,8 @@ const QuestFilter = (props) => {
     const defaultTheme = useTheme();
     const [completedChecked, setCompletedChecked] = useState(false);
     const [locationChecked, setLocationChecked] = useState(false);
-    const [showCompletedQuests, setShowCompletedQuests] = useState(true);
+    const showCompletedQuests = questContext.showCompletedQuests;
+    const setShowCompletedQuests = questContext.setShowCompletedQuests;
     const [filterLocation, setFilterLocation] = useState(false)
 
     const { colors } = useTheme();
@@ -50,7 +51,7 @@ const QuestFilter = (props) => {
         <>
             <View style={{ ...defaultTheme }, { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.background }}>
                 <View>
-                    <Text>Hide Completed</Text>
+                    <Text>Show Completed</Text>
                     <RadioButton
                         value="first"
                         status={completedChecked === true ? 'checked' : 'unchecked'}

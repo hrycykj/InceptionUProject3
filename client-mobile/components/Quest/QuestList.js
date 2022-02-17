@@ -29,6 +29,7 @@ const QuestList = (props) => {
   const notificationContext = useContext(NotificationContext);
   const showModal = notificationContext.showModal;
   const [checked, setChecked] = React.useState('first');
+  const [filteredQuests, setFilteredQuests] = useState(quests);
   const defaultTheme = useTheme();
 
   // const [visible, setVisible] = React.useState(false);
