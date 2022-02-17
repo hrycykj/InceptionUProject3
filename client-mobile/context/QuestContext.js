@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { HOST_SERVER } from "../util/hostServer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {View,Text} from "react-native";
+import { View, Text } from "react-native";
 import { AuthContext } from "../firebase/AuthProvider";
- 
+
 const CURRENT_QUEST_KEY = "current_quest_key";
 const CURRENT_CHECKPOINT_INDEX_KEY = "current_checkpoint_index_key"
 const CURRENT_CHECKPOINT_KEY = "current_checkpoint_key"
@@ -18,7 +18,9 @@ const QuestContextProvider = (props) => {
   const [checkPointIndex, setCheckPointIndex] = useState() // quest checkpoint array index
   const [currentCheckPoint, setCurrentCheckPoint] = useState() // checkpoint coordinates at quest.checkPoints[checkPointIndex]
   const [insideGeofence, setInsideGeofence] = useState(false)
-  const [completedQuests, setCompletedQuests] = useState ([])
+  const [completedQuests, setCompletedQuests] = useState([])
+  const [completedChecked, setCompletedChecked] = useState(false);
+  const [locationChecked, setLocationChecked] = useState(false);
   const authContext = useContext(AuthContext)
 
   const storeCurrentQuest = async (data) => {
@@ -34,15 +36,15 @@ const QuestContextProvider = (props) => {
     try {
       let currentQuest = await AsyncStorage.getItem(CURRENT_QUEST_KEY);
       if (!quest) {
-        currentQuest = JSON.parse(currentQuest) || {"id": "null"}
-        console.log('currentQuest from asyncstorage:',currentQuest)
+        currentQuest = JSON.parse(currentQuest) || { "id": "null" }
+        console.log('currentQuest from asyncstorage:', currentQuest)
         setQuset(currentQuest);
       }
     } catch (e) {
       console.error(e);
     }
   };
-  const storeCurrentCheckPoint = async (cpData, cpIndexData) =>{
+  const storeCurrentCheckPoint = async (cpData, cpIndexData) => {
     try {
       const cp = JSON.stringify(cpData);
       const cpIndex = JSON.stringify(cpIndexData);
@@ -52,14 +54,14 @@ const QuestContextProvider = (props) => {
       // saving error
     }
   }
-  const getCurrentCheckPoint = async () =>{
+  const getCurrentCheckPoint = async () => {
     try {
       let cp = await AsyncStorage.getItem(CURRENT_CHECKPOINT_KEY);
       let cpIndex = await AsyncStorage.getItem(CURRENT_CHECKPOINT_INDEX_KEY);
 
       if (!currentCheckPoint) {
-        cp = JSON.parse(cp) || {"id":"51.0447_114.0719","position":{"latitude":51.0447,"longitude":114.0719}}
-        console.log('current checkpoint:',cp)
+        cp = JSON.parse(cp) || { "id": "51.0447_114.0719", "position": { "latitude": 51.0447, "longitude": 114.0719 } }
+        console.log('current checkpoint:', cp)
         setCurrentCheckPoint(cp);
       }
       if (!checkPointIndex) {
@@ -71,7 +73,7 @@ const QuestContextProvider = (props) => {
       console.error(e);
     }
   }
-  const setNextCheckPoint = async () =>{
+  const setNextCheckPoint = async () => {
     let nextIndex = checkPointIndex + 1
     storeCurrentCheckPoint(quest.checkPoints[nextIndex], nextIndex)
     setCheckPointIndex(nextIndex)
@@ -92,27 +94,26 @@ const QuestContextProvider = (props) => {
   };
 
   const completeQuest = (questId) => {
-    if (!completedQuests.includes(questId))
-    {
-    const newCompletedQuests = [...completedQuests, questId]
-    setCompletedQuests (newCompletedQuests)
+    if (!completedQuests.includes(questId)) {
+      const newCompletedQuests = [...completedQuests, questId]
+      setCompletedQuests(newCompletedQuests)
     }
   };
 
   useEffect(() => {
     if (authContext.user) {
       fetch(`${HOST_SERVER}/api/users/` + authContext.user?.uid)
-      .then ((fetchedData) => fetchedData.json())
-      .then ((userData) => {
-        let userCompletedQuests = userData.completedQuests
-        setUserData(userData)
-        setCompletedQuests(userCompletedQuests)
-        console.log (`MOOOOOOOOOOOOOOOOOO`,userData)
-      })
-    }    
+        .then((fetchedData) => fetchedData.json())
+        .then((userData) => {
+          let userCompletedQuests = userData.completedQuests
+          setUserData(userData)
+          setCompletedQuests(userCompletedQuests)
+          console.log(`MOOOOOOOOOOOOOOOOOO`, userData)
+        })
+    }
   }, [authContext]);
-  
-  const theValues = { userData, setUserData, showCompletedQuests, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint};
+
+  const theValues = { userData, setUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {

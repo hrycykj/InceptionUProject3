@@ -26,8 +26,10 @@ const QuestFilter = (props) => {
     // const checked = props.checked
     // const setChecked = props.setChecked
     const defaultTheme = useTheme();
-    const [completedChecked, setCompletedChecked] = useState(false);
-    const [locationChecked, setLocationChecked] = useState(false);
+    const completedChecked = questContext.completedChecked;
+    const setCompletedChecked = questContext.setCompletedChecked;
+    const locationChecked = questContext.locationChecked; 
+    const setLocationChecked = questContext.setLocationChecked;
     const showCompletedQuests = questContext.showCompletedQuests;
     const setShowCompletedQuests = questContext.setShowCompletedQuests;
     const [filterLocation, setFilterLocation] = useState(false)
@@ -44,7 +46,7 @@ const QuestFilter = (props) => {
         console.log('Location Checked off', filterLocation)
     }
 
-
+    
 
     return (
 
