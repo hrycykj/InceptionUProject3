@@ -52,7 +52,7 @@ const UserProfile = (props) => {
           </View>
           <View style={{...defaultTheme},styles.infoBox}>
             {/* {console.log('user data at the coins error',userData?.coins)} */}
-            <Title>{userData?.coins?.[0]}</Title>
+            <Title>{userData?.coins}</Title>
             <Caption>Coins</Caption>
           </View>
       </View>
