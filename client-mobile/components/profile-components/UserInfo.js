@@ -106,6 +106,29 @@ const UserInfo = (props) => {
   }, [userData])
 
 
+  useEffect(() => {
+    console.log(
+      "THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
+    // if (questComplete) {
+    fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
+      method: "PUT",
+      body: JSON.stringify({"coins": 10}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        // setQuestComplete(req);
+        console.log(response);
+      })
+      .catch((ex) => console.log(`fetch failed: ${ex.message}`));
+    // .then(() => setQuestComplete(null));
+    // }
+  }, [questComplete]);
+
+
+
+
   return (
     // <SafeAreaView>
       <View style={{...defaultTheme},styles.main_area}>
