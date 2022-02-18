@@ -11,9 +11,13 @@ import {
   Button,
   Provider,
   useTheme,
+  Searchbar,
+  defaultTheme,
+  RadioButton,
 } from "react-native-paper";
 import QuestModal from "./QuestModal";
 import { NotificationContext } from "../../context/NotificationContext";
+import QuestFilter from "./QuestFilter";
 
 const QuestList = (props) => {
   const [quests, setQuests] = useState([]);
@@ -24,6 +28,9 @@ const QuestList = (props) => {
   const showCompletedQuests = questContext.showCompletedQuests
   const notificationContext = useContext(NotificationContext);
   const showModal = notificationContext.showModal;
+  const [checked, setChecked] = React.useState('first');
+  const [filteredQuests, setFilteredQuests] = useState(quests);
+  const defaultTheme = useTheme();
 
   // const [visible, setVisible] = React.useState(false);
   // const showModal = () => setVisible(true);
@@ -31,9 +38,22 @@ const QuestList = (props) => {
   const handleCardPressed = (quest) => {
     setModalQuest(quest);
     showModal(() => {
-      return <QuestModal quest={quest} jumpTo={props.jumpTo}/>;
+      return <QuestModal quest={quest} jumpTo={props.jumpTo} />;
     });
   };
+
+  const handleFilterPressed = () => {
+    console.log("Filter has been activated")
+   
+    showModal(() => {
+      
+    return (
+      <QuestFilter 
+        checked = {checked}
+        setChecked = {setChecked}
+      />     
+       )})
+}
 
   const { colors } = useTheme();
 
@@ -42,38 +62,46 @@ const QuestList = (props) => {
       .then((quest) => quest.json())
       .then((data) => {
         setQuests(data);
-      }).catch(err=>console.error(err));
+      }).catch(err => console.error(err));
   }, []);
 
   return (
-      <ScrollView >
-        {currentQuest?.title &&  // make sure there is data to pull from asyncStorage before displaying the current quest
-          <QuestCard
-            key={currentQuest.id}
-            quest={currentQuest}
-            handleCardPressed={handleCardPressed}
-          />
-        }
+    <ScrollView >
+      <Searchbar />
 
-        {quests?.map((quest) => {
-          return (
-            currentQuest.id !== quest.id &&
-              (userCompletedQuests.includes(quest.id) 
-                ? (showCompletedQuests) &&
-                  <QuestCard
-                    key={quest.id}
-                    quest={quest}
-                    handleCardPressed={handleCardPressed}
-                  />
-                : <QuestCard
-                    key={quest.id}
-                    quest={quest}
-                    handleCardPressed={handleCardPressed}
-                  /> 
-              )
-          );
-        })}
-      </ScrollView>
+      <View style={{ ...defaultTheme }}>
+
+        <Button icon="filter" mode="contained" onPress={() => handleFilterPressed()}>
+          Filters
+        </Button>
+      </View>
+      {currentQuest?.title &&  // make sure there is data to pull from asyncStorage before displaying the current quest
+        <QuestCard
+          key={currentQuest.id}
+          quest={currentQuest}
+          handleCardPressed={handleCardPressed}
+        />
+      }
+
+      {quests?.map((quest) => {
+        return (
+          currentQuest.id !== quest.id &&
+          (userCompletedQuests.includes(quest.id)
+            ? (showCompletedQuests) &&
+            <QuestCard
+              key={quest.id}
+              quest={quest}
+              handleCardPressed={handleCardPressed}
+            />
+            : <QuestCard
+              key={quest.id}
+              quest={quest}
+              handleCardPressed={handleCardPressed}
+            />
+          )
+        );
+      })}
+    </ScrollView>
   );
 };
 
