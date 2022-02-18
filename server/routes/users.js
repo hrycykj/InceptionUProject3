@@ -65,7 +65,7 @@ router.put('/:uid', async function(req, res, next) {
 });
 
 /* update Quest complete by uid. */
-router.post('/completedQuest/:uid', async function(req, res, next) {
+router.put('/completedQuest/:uid', async function(req, res, next) {
   console.log('made it into the completedQuest endpoint', req.body)
   const uid=req.params.uid
   const userQuestCompleted=req.body.completedQuest //note that we've assumed that the req is passed through in the format {"completedQuest": "Dinosaur Dig"}

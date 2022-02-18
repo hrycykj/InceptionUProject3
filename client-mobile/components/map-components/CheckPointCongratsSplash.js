@@ -25,7 +25,7 @@ const CheckPointCongratsSplash = (props) => {
   let setQuestComplete = props.setQuestComplete;
   let questComplete = props.questComplete;
   let [buttonClick, setButtonClick] = useState(null);
-  let coins = props.coins;
+ 
   const notificationContext = useContext(NotificationContext);
   const questContext = useContext(QuestContext);
 
@@ -54,12 +54,12 @@ const CheckPointCongratsSplash = (props) => {
     }
   };
 
-  const addCheckpointCoins = (coin) => {
-    coin = {...coins += 10}
+  const addCheckpointCoins = (coins) => {
+   
   }
 
-  const addQuestCompleteCoins = (coin) => {
-    coin = {...coins += 15}
+  const addQuestCompleteCoins = (coins) => {
+   
   }
 
 
@@ -74,10 +74,11 @@ const CheckPointCongratsSplash = (props) => {
         },
       })
         .then((response) => {
+          addQuestCompleteCoins (10)
           console.log(response);
         })
         .catch((ex) => console.log(`fetch failed: ${ex.message}`));
-     }, [handleNextButtonClicked()]);
+     }, [questComplete]);
 
 
 
