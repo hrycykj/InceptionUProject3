@@ -19,6 +19,8 @@ import QuestModal from "./QuestModal";
 import { NotificationContext } from "../../context/NotificationContext";
 import QuestFilter from "./QuestFilter";
 
+
+
 const QuestList = (props) => {
   const [quests, setQuests] = useState([]);
   const [modalQuest, setModalQuest] = useState();
@@ -76,11 +78,16 @@ const QuestList = (props) => {
         </Button>
       </View>
       {currentQuest?.title &&  // make sure there is data to pull from asyncStorage before displaying the current quest
+      <ScrollView >
+        <Searchbar 
+          placeholder="Search Quests"          
+        />
         <QuestCard
           key={currentQuest.id}
           quest={currentQuest}
           handleCardPressed={handleCardPressed}
         />
+        </ScrollView>
       }
 
       {quests?.map((quest) => {
