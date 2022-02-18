@@ -23,8 +23,8 @@ const QuestFilter = (props) => {
     // const currentQuest = questContext.quest;
     const showModal = notificationContext.showModal;
     const [checked, setChecked] = useState('first');
-    // const checked = props.checked
-    // const setChecked = props.setChecked
+    const filterFlag = props.filterFlag
+    const setFilterFlag = props.setFilterFlag
     const defaultTheme = useTheme();
     const completedChecked = questContext.completedChecked;
     const setCompletedChecked = questContext.setCompletedChecked;
@@ -42,6 +42,7 @@ const QuestFilter = (props) => {
     }
     const onPressLocation = () => {
         locationChecked ? setFilterLocation(true) : setFilterLocation(false) //this time its normal
+        !locationChecked ? setFilterFlag(true) : console.log("something random") //this ones not normal
         setLocationChecked(!locationChecked)
         console.log('Location Checked off', filterLocation)
     }
