@@ -30,6 +30,7 @@ export default function Login() {
               placeholder="Email"
               value={email}
               onChangeText={(e) => setEmail(e)}
+              // keyboardType = "email-address"
             />
             <TextInput
               style={{width: 200, height: 50}}
