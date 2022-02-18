@@ -24,9 +24,7 @@ const h = Dimensions.get("window").height;
 
 const UserInfo = (props) => {
   // const [isSignedIn, setIsSignedIn] = useState(false);
-  // const points = props.points;
   const questContext = useContext(QuestContext);
-
   const userData = questContext.userData
   const setUserData = questContext.setUserData
   let [newUser, setNewUser] = useState(null)
@@ -106,25 +104,7 @@ const UserInfo = (props) => {
   }, [userData])
 
 
-  useEffect(() => {
-    console.log(
-      "THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
-    // if (questComplete) {
-    fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
-      method: "PUT",
-      body: JSON.stringify({"coins": 10}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        // setQuestComplete(req);
-        console.log(response);
-      })
-      .catch((ex) => console.log(`fetch failed: ${ex.message}`));
-    // .then(() => setQuestComplete(null));
-    // }
-  }, [questComplete]);
+
 
 
 
