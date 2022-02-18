@@ -28,8 +28,13 @@ const QuestList = (props) => {
   const showCompletedQuests = questContext.showCompletedQuests
   const notificationContext = useContext(NotificationContext);
   const showModal = notificationContext.showModal;
-  const [checked, setChecked] = React.useState('first');
-  const [filteredQuests, setFilteredQuests] = useState(quests);
+  // const [checked, setChecked] = React.useState('first');
+  const [filteredQuests, setFilteredQuests] = useState();
+  const [filterFlag, setFilterFlag] = useState(false);
+  const userData = questContext.userData
+  
+  
+  
   const defaultTheme = useTheme();
 
   // const [visible, setVisible] = React.useState(false);
@@ -42,15 +47,37 @@ const QuestList = (props) => {
     });
   };
 
+  useEffect(() => {
+    const goFilterTheData = (userlocation, questlist, setFilteredQuests) => {
+      let list = []
+      questlist.forEach((quest) => {
+        if (quest.location === userlocation) {list.push(quest)}
+      })
+      console.log("The Filter list", list)
+      setFilteredQuests(list)
+    }
+    if (filterFlag){
+      goFilterTheData(userData.baseLocation, filteredQuests, setFilteredQuests)
+      setFilterFlag(false)
+    }
+    // else {setFilteredQuests(quests)} 
+
+  },[filterFlag]) 
+
+
+
+
+
   const handleFilterPressed = () => {
     console.log("Filter has been activated")
    
+
     showModal(() => {
-      
+
     return (
       <QuestFilter 
-        checked = {checked}
-        setChecked = {setChecked}
+        filterFlag = {filterFlag}
+        setFilterFlag = {setFilterFlag}
       />     
        )})
 }
@@ -62,6 +89,7 @@ const QuestList = (props) => {
       .then((quest) => quest.json())
       .then((data) => {
         setQuests(data);
+        setFilteredQuests(data);
       }).catch(err => console.error(err));
   }, []);
 
@@ -83,7 +111,7 @@ const QuestList = (props) => {
         />
       }
 
-      {quests?.map((quest) => {
+      {filteredQuests?.map((quest) => {
         return (
           currentQuest.id !== quest.id &&
           (userCompletedQuests.includes(quest.id)
