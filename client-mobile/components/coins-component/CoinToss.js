@@ -9,22 +9,22 @@ export default class App extends React.Component {
     // this.animation.play(30, 120);
   }
 
-  resetAnimation = () => {
-    this.animation.reset();
-    this.animation.play();
-  };
+  // resetAnimation = () => {
+  //   this.animation.reset();
+  //   this.animation.play();
+  // };
 
   render() {
     return (
-      <View style={styles.create}>
+      <View style={styles.animationContainer}>
         <LottieView
           ref={animation => {
             this.animation = animation;
           }}
           style={{
             width: 400,
-            height: 400,
-            backgroundColor: '#eee',
+            height: 600,
+            
           }}
           source={require('../../assets/coin-toss.json')}
           // OR find more Lottie files @ https://lottiefiles.com/featured
@@ -40,12 +40,9 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   animationContainer: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
+    zIndex: 100,
+    position: 'absolute',
+    
   },
-  buttonContainer: {
-    paddingTop: 20,
-  },
+
 });
