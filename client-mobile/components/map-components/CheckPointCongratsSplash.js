@@ -13,7 +13,7 @@ import { NotificationContext } from "../../context/NotificationContext";
 import { QuestContext } from "../../context/QuestContext";
 import QuestCompletionSplash from "./QuestCompletionSplash";
 import { AuthContext } from "../../firebase/AuthProvider";
-
+import CoinToss from "../coins-component/CoinToss"
 import { HOST_SERVER } from "../../util/hostServer";
 
 const CheckPointCongratsSplash = (props) => {
@@ -127,6 +127,7 @@ const CheckPointCongratsSplash = (props) => {
               : "Next Check Point"}
           </Button>
         </Card.Actions>
+        <CoinToss />
         <ProgressBar
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}

@@ -24,7 +24,9 @@
     "url": "https://github.com/hrycykj/InceptionUProject3/issues"
   },
   "homepage": "https://github.com/hrycykj/InceptionUProject3#readme",
-  "dependencies": {},
+  "dependencies": {
+    "lottie-react-native": "^5.0.1"
+  },
   "devDependencies": {
     "nodemon": "^2.0.15"
   }
