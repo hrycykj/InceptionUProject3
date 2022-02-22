@@ -67,17 +67,19 @@ const UserInfo = (props) => {
         setShowEditProfile(true)
         setShowUserData(true)
         console.log('no userData and user logged in for',user.uid, user.email)
+        let completed = ['Rabbit Hole User Registration']
         let req = {
           'UID': user.uid,
           'userEmail':user.email,
           'userType': 0, 
           'username':'',
           'currentQuest':'',
-          'completedQuests':[],
+          'completedQuests': completed,
           'coins':0,
           'baseLocation':''
         }
-        console.log ("This is a new user, please create a user profile form")
+        console.log ("This is a new user, please create a user profile form",req)
+        console.log ('completed Quests:',req)
         // add in user info from user profile form and add to req object to write to database
         
         fetch(`${HOST_SERVER}/api/users/` + user.uid, {
