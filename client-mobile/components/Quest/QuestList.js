@@ -97,7 +97,7 @@ const QuestList = (props) => {
 
   return (
     <ScrollView >
-      <Searchbar />
+      <Searchbar placeholder="Search Quests"/>
 
       <View style={{ ...defaultTheme }}>
 
@@ -107,9 +107,7 @@ const QuestList = (props) => {
       </View>
       {currentQuest?.title &&  // make sure there is data to pull from asyncStorage before displaying the current quest
       <ScrollView >
-        <Searchbar 
-          placeholder="Search Quests"          
-        />
+      
         <QuestCard
           key={currentQuest.id}
           quest={currentQuest}
