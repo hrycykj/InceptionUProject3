@@ -39,7 +39,6 @@ const CheckPointCongratsSplash = (props) => {
     if (quest.checkPoints.length - 1 == currentCheckPoint) {
       setQuestComplete(true);
       questContext.completeQuest(quest.id)
-      addQuestCompleteCoins()
 
       // notificationContext.showModal(() => {
       //   return <QuestCompletionSplash quest={quest} />;
@@ -50,17 +49,9 @@ const CheckPointCongratsSplash = (props) => {
       console.log("revised checkpoint", revisedCheckPoint);
       console.log("next checkpoint:", currentCheckPoint);
       questContext.setNextCheckPoint();
-      addCheckpointCoins()
+   
     }
   };
-
-  const addCheckpointCoins = (coins) => {
-   
-  }
-
-  const addQuestCompleteCoins = (coins) => {
-   
-  }
 
 
     useEffect(() => {
@@ -68,21 +59,16 @@ const CheckPointCongratsSplash = (props) => {
         "THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
       fetch(`${HOST_SERVER}/api/users/coins/` + user.uid, {
         method: "PUT",
-        body: JSON.stringify(req),
+        body: JSON.stringify({"coins":15}),
         headers: {
           "Content-Type": "application/json",
         },
       })
         .then((response) => {
-          addQuestCompleteCoins (10)
           console.log(response);
         })
         .catch((ex) => console.log(`fetch failed: ${ex.message}`));
      }, [questComplete]);
-
-
-
-
 
 
   useEffect(() => {

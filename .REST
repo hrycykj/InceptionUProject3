@@ -1,1 +1,1 @@
-POST http://10.0.0.230:5000/api/users/completedQuest/EINh66USExT11KdF0Hs1zDLoYzN2 HTTP1.1
+PUT http://10.0.0.230:5000/api/users/coins/CTZkLHOATiRrlgHRt0buGfdkowe2 HTTP1.1
