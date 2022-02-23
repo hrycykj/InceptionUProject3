@@ -1,4 +1,4 @@
-import { View, Image, ScrollView, StyleSheet } from "react-native";
+import { View, Image, ScrollView, StyleSheet, RecyclerViewBackedScrollViewBase } from "react-native";
 import { useEffect, useState, useContext } from "react";
 import {
   Text,
@@ -25,6 +25,7 @@ const CheckPointCongratsSplash = (props) => {
   let setQuestComplete = props.setQuestComplete;
   let questComplete = props.questComplete;
   let [buttonClick, setButtonClick] = useState(null);
+ 
   const notificationContext = useContext(NotificationContext);
   const questContext = useContext(QuestContext);
 
@@ -48,8 +49,27 @@ const CheckPointCongratsSplash = (props) => {
       console.log("revised checkpoint", revisedCheckPoint);
       console.log("next checkpoint:", currentCheckPoint);
       questContext.setNextCheckPoint();
+   
     }
   };
+
+
+    useEffect(() => {
+      console.log(
+        "THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
+      fetch(`${HOST_SERVER}/api/users/coins/` + user.uid, {
+        method: "PUT",
+        body: JSON.stringify({"coins":15}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((ex) => console.log(`fetch failed: ${ex.message}`));
+     }, [questComplete]);
+
 
   useEffect(() => {
     console.log(
@@ -75,6 +95,14 @@ const CheckPointCongratsSplash = (props) => {
     // .then(() => setQuestComplete(null));
     // }
   }, [questComplete]);
+
+
+
+ 
+
+
+
+
 
   return (
     <ScrollView>

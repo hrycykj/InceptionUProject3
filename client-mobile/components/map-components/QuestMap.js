@@ -13,6 +13,7 @@ import {
   checkPointIsNear,
   handleCheckPointScanned,
 } from "./questMapUtil";
+import QuestFlourish from "../QuestFlourishFAB";
 
 
 
@@ -100,11 +101,12 @@ const QuestMap = (props) => {
     <>
       {location && coords && !checkPointComplete && !questComplete && (
         <>
+        
           <QrScanner
             checkPoint={checkPoint}
             setCheckPoint={setCheckPoint}
-            location={location}
-          >
+            location={location}>
+           
             <View
               style={
                 !insideGeofence
@@ -128,12 +130,14 @@ const QuestMap = (props) => {
                 checkPointLocation={coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
               ></CheckPointMap>
             </View>
+            {/* </QuestFlourish> */}
           </QrScanner>
+          
         </>
       )}
       {!location && <Text>Loading location</Text>}
       {!coords && <Text>Please start a quest</Text>}
-
+      <QuestFlourish />
       {checkPoint?.id === questContext?.currentCheckPoint.id && (
         <CheckPointCongratsSplash
           quest={quest}

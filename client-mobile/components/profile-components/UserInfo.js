@@ -24,9 +24,7 @@ const h = Dimensions.get("window").height;
 
 const UserInfo = (props) => {
   // const [isSignedIn, setIsSignedIn] = useState(false);
-  // const points = props.points;
   const questContext = useContext(QuestContext);
-
   const userData = questContext.userData
   const setUserData = questContext.setUserData
   let [newUser, setNewUser] = useState(null)
@@ -106,6 +104,11 @@ const UserInfo = (props) => {
       
     })()
   }, [userData])
+
+
+
+
+
 
 
   return (
