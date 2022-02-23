@@ -64,7 +64,7 @@ export default function Login() {
             Register
           </Button> 
           <Button
-              style={{marginTop: 5, marginBottom: 5}}
+              // style={{marginTop: 5, marginBottom: 5}}
               mode="contained"
               onPress={()=>{SignInUser(email, password)}}
               title="Sign In User"
@@ -74,7 +74,7 @@ export default function Login() {
             Sign In
           </Button>
           <Button
-            // style={{marginTop:5, marginBottom: 5}}
+            // style={{marginTop:0, marginBottom: 0}}
             onPress= {()=>{
                 console.log('Google login button pressed')
                 loginWithGoogle()
@@ -85,6 +85,20 @@ export default function Login() {
             <Image 
                 source={require('../../assets/google-signin-button.png')}
                 style={{width: 300, height: 40, resizeMode: 'contain'}}
+            />
+          </Button>
+          <Button
+            style={{marginTop:0, marginBottom: 5}}
+            onPress= {()=>{
+                console.log('Facebook login button pressed (not functional yet)')
+                // loginWithFacebook()
+            }}
+            title="Sign in with Facebook"
+            accessibilityLabel="Sign in with Facebook"
+          >
+            <Image 
+                source={require('../../assets/facebook-signin-button.png')}
+                style={{width: 175, height: 30, resizeMode: 'contain'}}
             />
           </Button>
       </View>
