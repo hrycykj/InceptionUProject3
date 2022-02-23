@@ -87,7 +87,7 @@ export default function Login() {
                 style={{width: 300, height: 40, resizeMode: 'contain'}}
             />
           </Button>
-          <Button
+          <Button //Facebook button for show, does not work yet!!
             style={{marginTop:0, marginBottom: 5}}
             onPress= {()=>{
                 console.log('Facebook login button pressed (not functional yet)')
