@@ -3,7 +3,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signInWithCredential
 } from "firebase/auth";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
 
@@ -56,7 +57,23 @@ function AuthProvider(props) {
   const SignOutUser = async () => {
     await signOut(auth);
   };
-  const theValues = { user, SignInUser, SignOutUser, RegisterUser };
+
+  const SignInUserWithCredentials = async (credential, email) => {
+    console.log(`loggin in with credentials ${credential} and ${email}`)
+
+    try {
+        let userCred = await signInWithCredential (auth, credential)
+        if (userCred) {
+            console.log("Logged in with Google!!", userCred.user);
+          } else {
+            console.log("Login with Google failed!");
+          }
+    } catch (ex) {
+        console.log("AUTH FAILURE!", ex.message);
+    }
+  }
+  
+  const theValues = { user, SignInUser, SignOutUser, RegisterUser, SignInUserWithCredentials };
 
   return (
     <AuthContext.Provider value={theValues}>{children}</AuthContext.Provider>

@@ -5,7 +5,7 @@ import { Text, TextInput, Headline, Button, TouchableRipple, useTheme } from "re
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../firebase/AuthProvider";
-// import useGoogleAuthentication from "./useGoogleAuthentication"
+import useGoogleAuthentication from "./useGoogleAuthentication"
 
 
 export default function Login() {
@@ -13,25 +13,25 @@ export default function Login() {
   const RegisterUser = authContext.RegisterUser;
   const SignInUser = authContext.SignInUser;
   const SignOutUser = authContext.SignOutUser;
-  // const SignInUserWithCredentials = authContext.SignInUserWithCredentials
+  const SignInUserWithCredentials = authContext.SignInUserWithCredentials
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = authContext.user;
 
   const defaultTheme = useTheme()
 
-  // const [googleAuthLoading, authWithGoogle] = useGoogleAuthentication()
+  const [googleAuthLoading, authWithGoogle] = useGoogleAuthentication()
 
-  // const loginWithGoogle = async () => {
-  //     try {
-  //         const [credential] = await authWithGoogle()
-  //         await SignInUserWithCredentials(credential)
-  //         console.log("google credentials", await user)
-  //     } catch (error) {
-  //         console.error(error)
-  //         Alert.alert ('Error', 'Something went wrong, please try again')
-  //     }
-  // }
+  const loginWithGoogle = async () => {
+      try {
+          const [credential] = await authWithGoogle()
+          await SignInUserWithCredentials(credential)
+          console.log("google credentials", await user)
+      } catch (error) {
+          console.error(error)
+          Alert.alert ('Error', 'Something went wrong, please try again')
+      }
+  }
 
   return (
     <>
@@ -77,7 +77,7 @@ export default function Login() {
             // style={{marginTop:5, marginBottom: 5}}
             onPress= {()=>{
                 console.log('Google login button pressed')
-                // loginWithGoogle()
+                loginWithGoogle()
             }}
             title="Sign in with Google"
             accessibilityLabel="Sign in with Google"
