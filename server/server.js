@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var questRouter = require('./routes/quest');
 var checkPointRouter = require('./routes/checkPoint');
+var reviewRouter = require('./routes/review');
+
 
 
 var app = express();
@@ -26,6 +28,7 @@ app.use('/api/ping', (req, res)=>{
 app.use('/api/users', usersRouter);
 app.use('/api/quest', questRouter);
 app.use('/api/checkPoint', checkPointRouter);
+app.use('/api/review', reviewRouter);
 
 app.use('/', indexRouter);
 app.use('/', express.static('../client/build'))
