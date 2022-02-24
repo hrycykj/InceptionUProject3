@@ -1,4 +1,10 @@
-import { View, Image, ScrollView, StyleSheet, RecyclerViewBackedScrollViewBase } from "react-native";
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  RecyclerViewBackedScrollViewBase,
+} from "react-native";
 import { useEffect, useState, useContext } from "react";
 import {
   Text,
@@ -13,7 +19,7 @@ import { NotificationContext } from "../../context/NotificationContext";
 import { QuestContext } from "../../context/QuestContext";
 import QuestCompletionSplash from "./QuestCompletionSplash";
 import { AuthContext } from "../../firebase/AuthProvider";
-
+import CoinToss from "../coins-component/CoinToss";
 import { HOST_SERVER } from "../../util/hostServer";
 
 const CheckPointCongratsSplash = (props) => {
@@ -25,7 +31,7 @@ const CheckPointCongratsSplash = (props) => {
   let setQuestComplete = props.setQuestComplete;
   let questComplete = props.questComplete;
   let [buttonClick, setButtonClick] = useState(null);
- 
+
   const notificationContext = useContext(NotificationContext);
   const questContext = useContext(QuestContext);
 
@@ -38,7 +44,7 @@ const CheckPointCongratsSplash = (props) => {
   const handleNextButtonClicked = () => {
     if (quest.checkPoints.length - 1 == currentCheckPoint) {
       setQuestComplete(true);
-      questContext.completeQuest(quest.id)
+      questContext.completeQuest(quest.id);
 
       // notificationContext.showModal(() => {
       //   return <QuestCompletionSplash quest={quest} />;
@@ -49,27 +55,23 @@ const CheckPointCongratsSplash = (props) => {
       console.log("revised checkpoint", revisedCheckPoint);
       console.log("next checkpoint:", currentCheckPoint);
       questContext.setNextCheckPoint();
-   
     }
   };
 
-
-    useEffect(() => {
-      console.log(
-        "THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
-      fetch(`${HOST_SERVER}/api/users/coins/` + user.uid, {
-        method: "PUT",
-        body: JSON.stringify({"coins":15}),
-        headers: {
-          "Content-Type": "application/json",
-        },
+  useEffect(() => {
+    console.log("THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
+    fetch(`${HOST_SERVER}/api/users/coins/` + user.uid, {
+      method: "PUT",
+      body: JSON.stringify({ coins: 15 }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response);
       })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((ex) => console.log(`fetch failed: ${ex.message}`));
-     }, [questComplete]);
-
+      .catch((ex) => console.log(`fetch failed: ${ex.message}`));
+  }, [questComplete]);
 
   useEffect(() => {
     console.log(
@@ -82,7 +84,7 @@ const CheckPointCongratsSplash = (props) => {
     // if (questComplete) {
     fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
       method: "PUT",
-      body: JSON.stringify({"completedQuest": quest.id}),
+      body: JSON.stringify({ completedQuest: quest.id }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -95,14 +97,6 @@ const CheckPointCongratsSplash = (props) => {
     // .then(() => setQuestComplete(null));
     // }
   }, [questComplete]);
-
-
-
- 
-
-
-
-
 
   return (
     <ScrollView>
@@ -117,6 +111,7 @@ const CheckPointCongratsSplash = (props) => {
         <Card.Actions style={styles.button}>
           <Button
             // mode="contained"
+
             onPress={() => {
               handleNextButtonClicked();
             }}
@@ -127,10 +122,12 @@ const CheckPointCongratsSplash = (props) => {
               : "Next Check Point"}
           </Button>
         </Card.Actions>
+
         <ProgressBar
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
+        {/* <CoinToss /> */}
       </Card>
     </ScrollView>
   );

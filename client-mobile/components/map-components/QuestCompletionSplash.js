@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 
+
 const QuestCompletionSplash = (props) => {
   const quest = props.quest;
   return (

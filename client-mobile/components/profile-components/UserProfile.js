@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   infoBox: {
-    width: '50%',
+    width: '60%',
     alignItems: 'center',
     justifyContent: 'center',
   },
