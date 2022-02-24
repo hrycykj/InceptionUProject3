@@ -52,16 +52,17 @@ const QuestFilter = (props) => {
     return (
 
         <>
-            <View style={{ ...defaultTheme }, { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.background }}>
+            <View style={{ ...defaultTheme }, { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.background, height: 150, width: 375}}>
                 <View>
-                    <Text>Show Completed</Text>
+                    <Text style={{...defaultTheme}, {fontSize: 22, marginLeft: 15}}>Show Completed</Text>
                     <RadioButton
+
                         value="first"
                         status={completedChecked === true ? 'checked' : 'unchecked'}
                         onPress={() => onPressCompleted()}
                 
                     />
-                    <Text>By location</Text>
+                    <Text style={{...defaultTheme}, {fontSize: 22, marginLeft: 15}}>By location</Text>
                     <RadioButton
                         value="second"
                         status={locationChecked === true ? 'checked' : 'unchecked'}
