@@ -127,7 +127,7 @@ const CheckPointCongratsSplash = (props) => {
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
-        <CoinToss />
+        {/* <CoinToss /> */}
       </Card>
     </ScrollView>
   );
