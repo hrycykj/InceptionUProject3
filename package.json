@@ -12,7 +12,8 @@
     "build-client": "cd client && npm run build && cd ..",
     "start": "npm run start-server",
     "start-server": "cd server && npm start && cd ..",
-    "start-lt": "cd client-mobile/util && node localTunnelServer.js && cd .. && cd .."
+    "start-lt": "cd client-mobile/util && node localTunnelServer.js && cd .. && cd ..",
+    "start-mobile": "cd client-mobile && expo start"
   },
   "repository": {
     "type": "git",
