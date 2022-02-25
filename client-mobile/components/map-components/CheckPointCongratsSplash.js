@@ -102,7 +102,7 @@ const CheckPointCongratsSplash = (props) => {
 
   return (
     <ScrollView>
-      <Card elevation={3} style={({ ...defaultTheme }, styles.card)}>
+      <Card elevation={3} style={{ ...defaultTheme, ...styles.card, zIndex: 10 } } >
         <Card.Cover source={{ uri: checkPoint.objectToFind.url }} />
         <Card.Title title={checkPoint.title} />
         <Card.Content>
@@ -127,9 +127,9 @@ const CheckPointCongratsSplash = (props) => {
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
-        <CoinTossCopy />
         {/* <CoinToss /> */}
       </Card>
+        <CoinTossCopy />
     </ScrollView>
   );
 };

@@ -41,7 +41,7 @@ const QuestContextProvider = (props) => {
         setQuset(currentQuest);
       }
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
   };
   const storeCurrentCheckPoint = async (cpData, cpIndexData) => {
@@ -70,7 +70,7 @@ const QuestContextProvider = (props) => {
       }
 
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
   }
   const setNextCheckPoint = async () => {

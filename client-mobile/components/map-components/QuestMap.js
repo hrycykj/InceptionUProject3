@@ -48,9 +48,9 @@ const QuestMap = (props) => {
   };
   useEffect(() => {
     setMyLocation(setLocation, setErrorMsg).catch((error) =>
-      console.error(error)
+      console.log(error)
     );
-    updateLocation(setLocation).catch((error) => console.error(error));
+    updateLocation(setLocation).catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const QuestMap = (props) => {
       location,
       geofenceSize,
       setInsideGeofence
-    ).catch((error) => console.error(error));
+    ).catch((error) => console.log(error));
   }, [location]);
 
   useEffect(() => {

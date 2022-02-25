@@ -26,7 +26,7 @@ const QuestReviews = (props) => {
             }
         }).catch((error)=>{
             showSnackBar("An error occurred", "OK");
-            console.error(error)
+            console.log(error)
         })
     }
     useEffect(()=>{
@@ -38,7 +38,7 @@ const QuestReviews = (props) => {
             setReviews(res.data)
         }).catch((error)=>{
             showSnackBar("An error occurred getting reviews", "OK");
-            console.error(error)
+            console.log(error)
         })
     }
     return (<>

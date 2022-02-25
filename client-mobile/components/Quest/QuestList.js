@@ -92,7 +92,7 @@ const QuestList = (props) => {
       .then((data) => {
         setQuests(data);
         setFilteredQuests(data);
-      }).catch(err => console.error(err));
+      }).catch(err => console.log(err));
   }, []);
 
   return (
