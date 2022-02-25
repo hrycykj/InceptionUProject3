@@ -20,6 +20,7 @@ import { QuestContext } from "../../context/QuestContext";
 import QuestCompletionSplash from "./QuestCompletionSplash";
 import { AuthContext } from "../../firebase/AuthProvider";
 import CoinToss from "../coins-component/CoinToss";
+import CoinTossCopy from "../coins-component/CoinTossCopy";
 import { HOST_SERVER } from "../../util/hostServer";
 
 const CheckPointCongratsSplash = (props) => {
@@ -42,6 +43,7 @@ const CheckPointCongratsSplash = (props) => {
   const { colors } = useTheme();
 
   const handleNextButtonClicked = () => {
+    console.log("inside the handleNextbuttonClicked function")
     if (quest.checkPoints.length - 1 == currentCheckPoint) {
       setQuestComplete(true);
       questContext.completeQuest(quest.id);
@@ -111,6 +113,7 @@ const CheckPointCongratsSplash = (props) => {
           <Button
             // mode="contained"
             onPress={() => {
+              console.log('boo')
               handleNextButtonClicked();
             }}
             style={({ ...defaultTheme }, { marginRight: 8 })}
@@ -124,7 +127,8 @@ const CheckPointCongratsSplash = (props) => {
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
-        <CoinToss />
+        <CoinTossCopy />
+        {/* <CoinToss /> */}
       </Card>
     </ScrollView>
   );

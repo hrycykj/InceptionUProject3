@@ -52,6 +52,7 @@ export default class BasicExample extends React.Component {
     Animated.timing(this.state.progress, {
       toValue: 1,
       duration: 2150,
+      useNativeDriver: true,
     }).start();
   }
 
