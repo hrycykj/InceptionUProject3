@@ -11,7 +11,7 @@ const QuestFlourish = () => {
   const questContext = useContext(QuestContext)
   const checkPointIndex = questContext.checkPointIndex
   const questDescriptor = questContext.quest.questFlourish
-  console.log("boom quest", questContext.quest)
+  // console.log("boom quest", questContext.quest)
   return(
     <>
     <View>

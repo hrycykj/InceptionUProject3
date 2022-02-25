@@ -28,7 +28,7 @@ export default function Login() {
           await SignInUserWithCredentials(credential)
           console.log("google credentials", await user)
       } catch (error) {
-          console.error(error)
+          console.log(error)
           Alert.alert ('Error', 'Something went wrong, please try again')
       }
   }

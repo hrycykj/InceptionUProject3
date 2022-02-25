@@ -23,7 +23,7 @@ const CoinTossCopy = () => {
         {{
           width: 400,
           height: 600,
-          zIndex: 100,
+          zIndex: 0,
           position: 'absolute',
         }}
         source={require('../../assets/coin-toss.json')}
