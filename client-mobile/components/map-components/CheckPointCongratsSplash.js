@@ -17,7 +17,7 @@ import {
 } from "react-native-paper";
 import { NotificationContext } from "../../context/NotificationContext";
 import { QuestContext } from "../../context/QuestContext";
-import QuestCompletionSplash from "./QuestCompletionSplash";
+import QuestCompletionSplashCopy from "./QuestCompletionSplashCopy";
 import { AuthContext } from "../../firebase/AuthProvider";
 import CoinToss from "../coins-component/CoinToss";
 import CoinTossCopy from "../coins-component/CoinTossCopy";
@@ -48,9 +48,9 @@ const CheckPointCongratsSplash = (props) => {
       setQuestComplete(true);
       questContext.completeQuest(quest.id);
 
-      // notificationContext.showModal(() => {
-      //   return <QuestCompletionSplash quest={quest} />;
-      // });
+      notificationContext.showModal(() => {
+        return <QuestCompletionSplashCopy quest={quest} jumpTo={props.jumpTo} />
+      });
     } else {
       let revisedCheckPoint = currentCheckPoint + 1;
       setCurrentCheckPoint(revisedCheckPoint);
@@ -77,11 +77,9 @@ const CheckPointCongratsSplash = (props) => {
 
   useEffect(() => {
     console.log(
-      "MADE IT INTO USEEFFECT!!",
+      "MADE IT INTO quest complete USEEFFECT!!",
       quest.id,
       questComplete,
-      user.uid,
-      HOST_SERVER
     );
     if (questComplete) {
     fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
@@ -127,7 +125,7 @@ const CheckPointCongratsSplash = (props) => {
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
-        <CoinTossCopy />
+        {/* <CoinTossCopy /> */}
         {/* <CoinToss /> */}
       </Card>
     </ScrollView>
