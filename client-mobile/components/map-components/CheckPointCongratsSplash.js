@@ -81,7 +81,7 @@ const CheckPointCongratsSplash = (props) => {
       user.uid,
       HOST_SERVER
     );
-    // if (questComplete) {
+    if (questComplete) {
     fetch(`${HOST_SERVER}/api/users/completedQuest/` + user.uid, {
       method: "PUT",
       body: JSON.stringify({ completedQuest: quest.id }),
@@ -90,19 +90,18 @@ const CheckPointCongratsSplash = (props) => {
       },
     })
       .then((response) => {
-        // setQuestComplete(req);
+      setQuestComplete(req);
         console.log(response);
       })
-      .catch((ex) => console.log(`fetch failed: ${ex.message}`));
-    // .then(() => setQuestComplete(null));
-    // }
+      .catch((ex) => console.log(`fetch failed: ${ex.message}`))
+     .then(() => setQuestComplete(null));
+    }
   }, [questComplete]);
 
   return (
     <ScrollView>
       <Card elevation={3} style={({ ...defaultTheme }, styles.card)}>
         <Card.Cover source={{ uri: checkPoint.objectToFind.url }} />
-
         <Card.Title title={checkPoint.title} />
         <Card.Content>
           <Paragraph>{`Congratulations, you've found the ${checkPoint.title}.`}</Paragraph>
@@ -111,7 +110,6 @@ const CheckPointCongratsSplash = (props) => {
         <Card.Actions style={styles.button}>
           <Button
             // mode="contained"
-
             onPress={() => {
               handleNextButtonClicked();
             }}
@@ -122,12 +120,11 @@ const CheckPointCongratsSplash = (props) => {
               : "Next Check Point"}
           </Button>
         </Card.Actions>
-
         <ProgressBar
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
-        {/* <CoinToss /> */}
+        <CoinToss />
       </Card>
     </ScrollView>
   );
