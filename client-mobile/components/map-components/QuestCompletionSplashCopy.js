@@ -26,7 +26,7 @@ const QuestCompletionSplash  = (props) => {
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
-              jumpTo("<QuestList />")}
+              jumpTo("quest")}
               }
               >
               

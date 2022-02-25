@@ -42,6 +42,7 @@ const UserInfo = (props) => {
 
  
   useEffect(() => {
+    console.log('ANTI-MOOOOO')
     fetch(`${HOST_SERVER}/api/users/` + user?.uid)
       .then ((fetchedData) => fetchedData.json())
       .then ((isUserNew) => {

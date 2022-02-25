@@ -147,6 +147,7 @@ const QuestMap = (props) => {
           setCheckPointComplete={setCheckPointComplete}
           setQuestComplete={setQuestComplete}
           questComplete = {questComplete}
+          jumpTo = {props.jumpTo}
         />
       )}
 

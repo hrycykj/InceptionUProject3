@@ -35,7 +35,9 @@ const MapRoute = (props) => {
   return (
     <>
       {user && (
-          <QuestMap/>
+          <QuestMap
+            jumpTo={props.jumpTo}
+          />
       )}
       {!user && <RedirectToSignInSplash jumpTo={props.jumpTo}/>}
     </>
