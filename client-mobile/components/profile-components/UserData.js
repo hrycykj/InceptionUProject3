@@ -50,51 +50,6 @@ const UserData = (props) => {
   const onStateChange = ({ open }) => setState({ open });
   const { open } = state;
 
-  // useEffect(() => {
-  //   if (showUserData&&userData) {
-  //     showModal(() => {
-  //       return (
-  //         // update & deuglify modal details
-  //             <View>
-  //               {/* <UserProfile userData={userData} /> */}
-  //               <View style={{...defaultTheme}, styles.container}>
-  //                 <Text>{userData.UID}</Text>
-  //                 <Text>{userData.username}</Text>
-  //                 <Text>{userData.baseLocation}</Text>
-  //                 <Text>Coins: {userData.coins}</Text>
-  //                 <Text>Current Quest: {userData.currentQuest}</Text>
-  //                 <Text>Completed Quests:</Text>
-  //                 {userData.completedQuests.map((quest) => {
-  //                   return (
-  //                       <Text key={quest}>
-  //                         {quest}
-  //                       </Text>
-  //                     )
-  //                   })}
-  //               </View>
-  //           <FAB
-  //             style={{...defaultTheme}, styles.fab}
-  //             small
-  //             icon="account-edit"
-  //             onPress={() => {
-  //               console.log('pressed', showEditProfile)
-  //               setShowEditProfile(showEditProfile+1)
-  //             }}
-  //             title="Edit Profile"
-  //             accessibilityLabel="Edit User Profile"
-  //           />
-  //         </View>
-  //       )
-  //     })
-  //     setShowUserData(false)
-  //   }
-  // }, [showUserData]);
-
-  // const getUsersData = () => {
-  //   console.log("show user data", showUserData, userData.UID)
-  //   setShowUserData(true)
-  // }
-
   function clearAllData() {
     AsyncStorage.getAllKeys()
         .then(keys => AsyncStorage.multiRemove(keys))
@@ -108,7 +63,11 @@ const UserData = (props) => {
         {(!showEditProfile) &&
           <View style={{...defaultTheme}, styles.container}>
             <Text>{userData?.UID}</Text>
-            <Text>{userData?.username}</Text>              
+            <Text> 
+              {userData?.username===""
+              ? user?.email
+              : userData?.username}
+            </Text>              
             <Text>{userData?.baseLocation}</Text>
             <Text>Coins: {userData?.coins}</Text>
             <Text>Current Quest: {userData?.currentQuest}</Text>

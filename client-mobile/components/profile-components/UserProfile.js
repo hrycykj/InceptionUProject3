@@ -6,6 +6,7 @@ import {
   Caption,
   useTheme,
 } from 'react-native-paper';
+import { AuthContext } from "../../firebase/AuthProvider"
 
 
 const UserProfile = (props) => {
@@ -13,6 +14,10 @@ const UserProfile = (props) => {
   let userData=props.userData
   let showUserData=props.showUserData
   let setShowUserData=props.setShowUserData
+
+  const authContext = React.useContext(AuthContext)
+  const user = authContext.user
+
 
   let onPress = () => {
     setShowUserData(!showUserData)
@@ -37,7 +42,11 @@ const UserProfile = (props) => {
             <Title style={{...defaultTheme},[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>{userData?.username}</Title>
+            }]}>
+              {userData?.username===""
+                ? user?.email
+                : userData?.username}
+            </Title>
             <Caption style={{...defaultTheme},styles.caption}>{userData?.baseLocation}</Caption>
           </View>
         </View>
