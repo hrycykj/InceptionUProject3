@@ -21,6 +21,8 @@ const QuestContextProvider = (props) => {
   const [completedQuests, setCompletedQuests] = useState([])
   const [completedChecked, setCompletedChecked] = useState(false);
   const [locationChecked, setLocationChecked] = useState(false);
+  const [reloadUserData, setReloadUserData] = useState(false)
+
   const authContext = useContext(AuthContext)
 
   const storeCurrentQuest = async (data) => {
@@ -110,10 +112,15 @@ const QuestContextProvider = (props) => {
           setCompletedQuests(userCompletedQuests)
           console.log(`MOOOOOOOOOOOOOOOOOO`, userData)
         })
+        .then(() => {
+          if (reloadUserData) {
+            setReloadUserData(false)
+          }
+        })
     }
-  }, [authContext]);
+  }, [authContext, reloadUserData]);
 
-  const theValues = { userData, setUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
+  const theValues = { userData, setUserData, setReloadUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {

@@ -27,6 +27,8 @@ const UserInfo = (props) => {
   const questContext = useContext(QuestContext);
   const userData = questContext.userData
   const setUserData = questContext.setUserData
+  const setReloadUserData = questContext.setReloadUserData
+
   let [newUser, setNewUser] = useState(null)
   let [showUserData, setShowUserData] = useState(false)
   let [showEditProfile, setShowEditProfile] = useState(false)
@@ -41,25 +43,25 @@ const UserInfo = (props) => {
   const userEmail = user?.email;
 
  
-  useEffect(() => {
-    console.log('ANTI-MOOOOO')
-    fetch(`${HOST_SERVER}/api/users/` + user?.uid)
-      .then ((fetchedData) => fetchedData.json())
-      .then ((isUserNew) => {
-        if (isUserNew.UID=='empty') {
-          console.log('new user page required')
-          setNewUser(true)
-        }
-        return isUserNew
-      })
-      .then ((data) => {
-        setUserData(data)
-        return data
-      })
-      .then (()=> {
-        console.log('finished user data fetch')
-      })
-  }, [user]);
+  // useEffect(() => {
+  //   console.log('ANTI-MOOOOO')
+  //   fetch(`${HOST_SERVER}/api/users/` + user?.uid)
+  //     .then ((fetchedData) => fetchedData.json())
+  //     .then ((isUserNew) => {
+  //       if (isUserNew.UID=='empty') {
+  //         console.log('new user page required')
+  //         setNewUser(true)
+  //       }
+  //       return isUserNew
+  //     })
+  //     .then ((data) => {
+  //       setUserData(data)
+  //       return data
+  //     })
+  //     .then (()=> {
+  //       console.log('finished user data fetch')
+  //     })
+  // }, [user]);
 
   useEffect ( () => {
     (async () => {
@@ -100,6 +102,9 @@ const UserInfo = (props) => {
             setShowUserData(false)
             setShowEditProfile(false)
           }
+        })
+        .then (() =>{
+          setReloadUserData(true)
         })
       }
       

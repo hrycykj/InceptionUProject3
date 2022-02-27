@@ -35,6 +35,7 @@ const CheckPointCongratsSplash = (props) => {
 
   const notificationContext = useContext(NotificationContext);
   const questContext = useContext(QuestContext);
+  const setReloadUserData = questContext.setReloadUserData
 
   const authContext = useContext(AuthContext);
   const user = authContext.user;
@@ -72,6 +73,9 @@ const CheckPointCongratsSplash = (props) => {
       .then((response) => {
         console.log(response);
       })
+      .then(() => {
+        setReloadUserData(true)
+      })
       .catch((ex) => console.log(`fetch failed: ${ex.message}`));
   }, [questComplete]);
 
@@ -90,8 +94,11 @@ const CheckPointCongratsSplash = (props) => {
       },
     })
       .then((response) => {
-      setQuestComplete(req);
+      setQuestComplete(false);
         console.log(response);
+      })
+      .then(()=>{
+        setReloadUserData(true)
       })
       .catch((ex) => console.log(`fetch failed: ${ex.message}`))
      .then(() => setQuestComplete(null));

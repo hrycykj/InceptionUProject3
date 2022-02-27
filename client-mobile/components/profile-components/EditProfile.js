@@ -39,6 +39,9 @@ const EditProfile = (props) => {
             },
           })
           .then (()=> setUpdateUserData(false))
+          .then (()=> {
+            setReloadUserData(true)
+          })
         }
       })()
     }, [updateUserData])
