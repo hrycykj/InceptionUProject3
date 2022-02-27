@@ -25,11 +25,11 @@ const QuestCompletionSplash  = (props) => {
             <Text>{quest?.completionStory}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {
+              onPress={() => {setModalVisible(false)
               jumpTo("quest")}
               }
-              >
               
+              >
               <Text style={styles.textStyle}>Go on another adventure</Text>
             </Pressable>
           </View>
