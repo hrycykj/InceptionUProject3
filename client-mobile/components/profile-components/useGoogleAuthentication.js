@@ -2,11 +2,11 @@
 import { GoogleAuthProvider } from "@firebase/auth"
 import { useIdTokenAuthRequest } from 'expo-auth-session/providers/google'
 import { maybeCompleteAuthSession } from "expo-web-browser"
-import { EXPO_CLIENT_ID } from "@env"
+// import { EXPO_CLIENT_ID } from "@env"
 
 maybeCompleteAuthSession()
 
-const expoClientId = EXPO_CLIENT_ID
+const expoClientId = ''
 console.log ('client ID',expoClientId) 
 
 const login = (id_token) => {

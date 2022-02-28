@@ -113,7 +113,7 @@ const UserData = (props) => {
                   setUserData(null)
                   setCompletedQuests([])
                   // set current checkpoint index to zero
-                  // clearAllData()
+                  clearAllData()
                 },
               },
             ]}
