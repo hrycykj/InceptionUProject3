@@ -87,6 +87,8 @@ const UserData = (props) => {
           <EditProfile 
             userData={userData}
             setUserData={setUserData}
+            showEditProfile={showEditProfile}
+            setShowEditProfile={setShowEditProfile}
           />
         }
       </View>

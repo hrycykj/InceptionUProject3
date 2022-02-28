@@ -74,7 +74,7 @@ const handleCheckPointScanned = async (checkPoint, questContext, setCheckPointCo
   if (insideGeofence && checkPoint.id === currentCheckPoint.id) {
     (() => {
       setCheckPointComplete(true);
-      showSnackBar("congratulations you've found the checkpoint", "OK");
+      // showSnackBar("congratulations you've found the checkpoint", "OK");
     })();
   } else {
     (() => {
