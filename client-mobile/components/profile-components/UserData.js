@@ -50,10 +50,12 @@ const UserData = (props) => {
   const onStateChange = ({ open }) => setState({ open });
   const { open } = state;
 
+
+///////////////////////////// ADD FUNCTION THAT RESETS ALL INITIAL KEYS
   function clearAllData() {
     AsyncStorage.getAllKeys()
-        .then(keys => AsyncStorage.multiRemove(keys))
-        .then(() => alert('success'));
+    .then(keys => AsyncStorage.multiRemove(keys))
+    .then(() => alert('Logout successful'));
 }
 
   return (
@@ -113,7 +115,7 @@ const UserData = (props) => {
                   setUserData(null)
                   setCompletedQuests([])
                   // set current checkpoint index to zero
-                  // clearAllData()
+                  clearAllData()
                 },
               },
             ]}

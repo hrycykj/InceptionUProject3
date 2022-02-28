@@ -78,7 +78,7 @@ const UserInfo = (props) => {
           'username':'',
           'currentQuest':'',
           'completedQuests': completed,
-          'coins':0,
+          'coins':5,
           'baseLocation':''
         }
         console.log ("This is a new user, please create a user profile form",req)

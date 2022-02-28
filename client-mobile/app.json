@@ -4,9 +4,9 @@
     "slug": "client-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Logo_trans.png",
+    "icon": "./assets/Logo_white.png",
     "splash": {
-      "image": "./assets/Logo_trans.png",
+      "image": "./assets/Logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/Logo_trans.png",
+        "foregroundImage": "./assets/Logo_white.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/Logo_trans.png"
+      "favicon": "./assets/Logo_white.png"
     },
     "scheme": "somename"
   }
