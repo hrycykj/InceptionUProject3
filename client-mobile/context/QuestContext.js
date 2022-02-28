@@ -24,15 +24,34 @@ const QuestContextProvider = (props) => {
   const [reloadUserData, setReloadUserData] = useState(false)
 
   const authContext = useContext(AuthContext)
+  const user = authContext.user
 
   const storeCurrentQuest = async (data) => {
     try {
       const quest = JSON.stringify(data);
       await AsyncStorage.setItem(CURRENT_QUEST_KEY, quest);
+      await storeCurrentQuestDb (data.id)
     } catch (e) {
       // saving error
     }
   };
+
+  const storeCurrentQuestDb = async (quest) => {
+    try {
+      await fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+        method: "PUT",
+        body: JSON.stringify({"currentQuest": quest}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then (() => {
+        setReloadUserData(true)
+      })
+    } catch (e) {
+      console.log(`store quest to DB error ${e}`)
+    }
+  }
 
   const getCurrentQuest = async () => {
     try {
@@ -52,10 +71,29 @@ const QuestContextProvider = (props) => {
       const cpIndex = JSON.stringify(cpIndexData);
       await AsyncStorage.setItem(CURRENT_CHECKPOINT_KEY, cp);
       await AsyncStorage.setItem(CURRENT_CHECKPOINT_INDEX_KEY, cpIndex);
+      await storeCurrentCheckPointIndex(cpIndexData)
     } catch (e) {
       // saving error
     }
   }
+
+  const storeCurrentCheckPointIndex = async (checkPointIndex) => {
+    try {
+      await fetch(`${HOST_SERVER}/api/users/` + user.uid, {
+        method: "PUT",
+        body: JSON.stringify({"currentCheckPointIndex": checkPointIndex}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then (() => {
+        setReloadUserData(true)
+      })
+    } catch (e) {
+      console.log(`store checkPointIndex to DB error ${e}`)
+    }
+  }
+
   const getCurrentCheckPoint = async () => {
     try {
       let cp = await AsyncStorage.getItem(CURRENT_CHECKPOINT_KEY);
