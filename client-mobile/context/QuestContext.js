@@ -4,11 +4,38 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text } from "react-native";
 import { AuthContext } from "../firebase/AuthProvider";
 
+
 const CURRENT_QUEST_KEY = "current_quest_key";
 const CURRENT_CHECKPOINT_INDEX_KEY = "current_checkpoint_index_key"
 const CURRENT_CHECKPOINT_KEY = "current_checkpoint_key"
 
 const QuestContext = React.createContext();
+
+const updateUserCoins = (uid, coinsEarned) => {
+  fetch(`${HOST_SERVER}/api/users/` + uid)
+      .then ((fetchedData) => fetchedData.json())
+      .then ((userData) => {
+        console.log('User data thing', userData)
+        let currentCoins = userData?.coins 
+        console.log('Current coins inside fetch', currentCoins)
+        return currentCoins
+      })
+      .then ((currentCoins) => {
+        let newCoins = currentCoins + coinsEarned
+        console.log('Added coins', newCoins)
+        return newCoins 
+      })
+      .then ((newTotalCoins) => {
+        fetch(`${HOST_SERVER}/api/users/coins/` + uid, {
+          method: "PUT",
+          body: JSON.stringify({ coins: newTotalCoins }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      })
+  }
+
 
 const QuestContextProvider = (props) => {
   const children = props.children;
@@ -22,6 +49,11 @@ const QuestContextProvider = (props) => {
   const [completedChecked, setCompletedChecked] = useState(false);
   const [locationChecked, setLocationChecked] = useState(false);
   const authContext = useContext(AuthContext)
+  const user = authContext.user;
+  const uid = user?.uid;
+
+  
+  // console.log("Papa John" , updateUserCoins());
 
   const storeCurrentQuest = async (data) => {
     try {
@@ -78,6 +110,8 @@ const QuestContextProvider = (props) => {
     storeCurrentCheckPoint(quest.checkPoints[nextIndex], nextIndex)
     setCheckPointIndex(nextIndex)
     setCurrentCheckPoint(quest.checkPoints[nextIndex])
+    updateUserCoins(uid, 10)
+    // updateFixer()
   }
   //When app is loaded initially, get the current quest data from app storage
   useEffect(() => {
@@ -96,6 +130,8 @@ const QuestContextProvider = (props) => {
   const completeQuest = (questId) => {
     if (!completedQuests.includes(questId)) {
       const newCompletedQuests = [...completedQuests, questId]
+      updateUserCoins(uid, 25)
+      console.log("please call this")      
       setCompletedQuests(newCompletedQuests)
     }
   };
