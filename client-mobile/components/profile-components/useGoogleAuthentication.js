@@ -6,7 +6,7 @@ import { EXPO_CLIENT_ID } from "@env"
 
 maybeCompleteAuthSession()
 
-const expoClientId = EXPO_CLIENT_ID
+const expoClientId = EXPO_CLIENT_ID || ""
 console.log ('client ID',expoClientId) 
 
 const login = (id_token) => {
