@@ -183,7 +183,7 @@ const QuestContextProvider = (props) => {
           let userCompletedQuests = userData.completedQuests
           setUserData(userData)
           setCompletedQuests(userCompletedQuests)
-          console.log(`MOOOOOOOOOOOOOOOOOO`, userData)
+          console.log(`MOOOOOOOOOOOOOOOOOO`)
         })
         .then(() => {
           if (reloadUserData) {

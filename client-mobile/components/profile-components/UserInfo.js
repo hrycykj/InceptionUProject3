@@ -94,7 +94,7 @@ const UserInfo = (props) => {
         })
         .then ((response)=>{
           setUserData(req)
-          console.log(response)
+          // console.log(response)
         })
         .then (()=> setNewUser(false))
         .then (()=> {

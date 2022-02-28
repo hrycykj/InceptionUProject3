@@ -92,7 +92,7 @@ const CheckPointCongratsSplash = (props) => {
     })
       .then((response) => {
       setQuestComplete(false);
-        console.log(response);
+        // console.log(response);
       })
       .then(()=>{
         setReloadUserData(true)
