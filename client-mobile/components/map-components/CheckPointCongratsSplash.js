@@ -60,24 +60,21 @@ const CheckPointCongratsSplash = (props) => {
       questContext.setNextCheckPoint();
     }
   };
-
-  useEffect(() => {
-    console.log("THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
-    fetch(`${HOST_SERVER}/api/users/coins/` + user.uid, {
-      method: "PUT",
-      body: JSON.stringify({ coins: 15 }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .then(() => {
-        setReloadUserData(true)
-      })
-      .catch((ex) => console.log(`fetch failed: ${ex.message}`));
-  }, [questComplete]);
+  // Changed to updateUserCoins in quest context - Called on nextcheckpoint and quest complete 
+  // useEffect(() => {
+  //   console.log("THIS IS THE UPDATE COINS USEEFFECT!!", user.uid);
+  //   fetch(`${HOST_SERVER}/api/users/coins/` + user.uid, {
+  //     method: "PUT",
+  //     body: JSON.stringify({ coins: 15 }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((ex) => console.log(`fetch failed: ${ex.message}`));
+  // }, [questComplete]);
 
   useEffect(() => {
     console.log(
@@ -94,7 +91,11 @@ const CheckPointCongratsSplash = (props) => {
       },
     })
       .then((response) => {
+<<<<<<< HEAD
       setQuestComplete(false);
+=======
+      setQuestComplete(true);
+>>>>>>> b4706aa3bb10e0fb01808160f6d6a4d844d40682
         console.log(response);
       })
       .then(()=>{
