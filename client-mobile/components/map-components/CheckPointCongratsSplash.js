@@ -70,10 +70,11 @@ const CheckPointCongratsSplash = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => {
-        console.log(response);
-      })
+      // .then((response) => {
+      //   console.log(response);
+      // })
       .then(() => {
+        console.log('coins useEffect, setting the ReloadUserData state')
         setReloadUserData(true)
       })
       .catch((ex) => console.log(`fetch failed: ${ex.message}`));
@@ -101,7 +102,7 @@ const CheckPointCongratsSplash = (props) => {
         setReloadUserData(true)
       })
       .catch((ex) => console.log(`fetch failed: ${ex.message}`))
-     .then(() => setQuestComplete(null));
+    //  .then(() => setQuestComplete(null));
     }
   }, [questComplete]);
 
