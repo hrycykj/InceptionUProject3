@@ -18,10 +18,13 @@ import QuestFlourish from "../QuestFlourishFAB";
 
 
 const QuestMap = (props) => {
-  const questContext = useContext(QuestContext);
   const notificationContext = useContext(NotificationContext);
   const authContext = useContext(AuthContext);
   const user = authContext.user;
+  
+  const questContext = useContext(QuestContext);
+  const insideGeofence = questContext.insideGeofence;
+  const setInsideGeofence = questContext.setInsideGeofence;
 
 
   let [location, setLocation] = useState(null);
@@ -34,12 +37,16 @@ const QuestMap = (props) => {
   let [checkPoint, setCheckPoint] = useState(null);
   let [checkPointComplete, setCheckPointComplete] = useState(null);
   let [questComplete, setQuestComplete] = useState(null);
+  const [mapCenter, setMapCenter] = useState ({
+    'latitude': 51.0447,
+    'longitude': -114.0719,
+    'latitudeDelta': 0.0025,
+    'longitudeDelta': 0.001,
+  })
 
-  const insideGeofence = questContext.insideGeofence;
-  const setInsideGeofence = questContext.setInsideGeofence;
 
   let { colors } = useTheme();
-  let geofenceSize = 100000; //metres
+  let geofenceSize = 10; //metres
 
   const fetchQuest = () => {
     setQuest(questContext.quest);
@@ -128,6 +135,7 @@ const QuestMap = (props) => {
                   longitude: location.coords.longitude,
                 }}
                 checkPointLocation={coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
+                
               ></CheckPointMap>
             </View>
             {/* </QuestFlourish> */}
