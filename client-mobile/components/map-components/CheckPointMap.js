@@ -6,6 +6,8 @@ import CheckpointMarker from './mapping/CheckpointMarker'
 const CheckPointMap = (props) => {
     let coords1 = props.myLocation
     let coords2 = props.checkPointLocation
+    const mapCenter = props.mapCenter
+    const setMapCenter = props.setMapCenter
     let { colors } = useTheme()
 
     return (
@@ -13,6 +15,8 @@ const CheckPointMap = (props) => {
             <CentreMapview
                 coords1= {coords1} 
                 coords2= {coords2}
+                mapCenter = {mapCenter}
+                setMapCenter = {setMapCenter}
             >
                 <CheckpointMarker
                     latitude= {coords1.latitude}

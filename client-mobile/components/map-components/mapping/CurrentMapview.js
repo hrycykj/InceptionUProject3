@@ -14,6 +14,8 @@ const CurrentMapview = (props) => {
     let longitude = props.longitude
     let latitudeDelta = props.latitudeDelta
     let longitudeDelta = props.longitudeDelta
+    let mapCenter = props.mapCenter
+    let setMapCenter = props.setMapCenter
 
     // console.log(latitude, longitude, latitudeDelta, longitudeDelta)
 
@@ -28,6 +30,7 @@ const CurrentMapview = (props) => {
                 latitudeDelta: latitudeDelta,
                 longitudeDelta: longitudeDelta,
             }}
+            onRegionChangeComplete={(region) => setMapCenter(region)} // or do we use onRegionChange which is continuous?
         >
         {props.children}
         </MapView>

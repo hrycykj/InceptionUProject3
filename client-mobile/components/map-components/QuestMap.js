@@ -12,6 +12,7 @@ import {
   updateLocation,
   checkPointIsNear,
   handleCheckPointScanned,
+  newCenterCoordinates,
 } from "./questMapUtil";
 import QuestFlourish from "../QuestFlourishFAB";
 
@@ -101,7 +102,9 @@ const QuestMap = (props) => {
     );
   }, [checkPoint]);
 
-
+  // useEffect(() => {
+  //   location && newCenterCoordinates (location, coords?.[currentCheckPoint].position, setMapCenter)
+  // },[])
 
 
   return (
@@ -135,7 +138,8 @@ const QuestMap = (props) => {
                   longitude: location.coords.longitude,
                 }}
                 checkPointLocation={coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
-                
+                mapCenter = {mapCenter}
+                setMapCenter = {setMapCenter}
               ></CheckPointMap>
             </View>
             {/* </QuestFlourish> */}
