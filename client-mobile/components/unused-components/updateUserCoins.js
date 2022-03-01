@@ -25,4 +25,9 @@ import { HOST_SERVER } from "../util/hostServer";
       })
   }
 
-export default updateUserCoins
+  const updateFixer = () => {
+    console.log("Please be simple fix")
+  }
+
+
+module.export = {updateUserCoins, updateFixer}

@@ -19,6 +19,7 @@ let user = {
   userType: number, // 0 - player, 1 - quest creator, 2 - corporate quest creator, 3 - admin
   username: string,
   currentQuest: quest,
+  currentCheckPointIndex: number,
   completedQuests: quest[],
   coins: coins[],
   baseLocation: string,

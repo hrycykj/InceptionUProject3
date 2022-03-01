@@ -8,12 +8,14 @@ import { AuthContext } from "../../firebase/AuthProvider";
 const EditProfile = (props) => {
     let userData=props.userData
     let setUserData=props.setUserData
+    let setShowEditProfile=props.setShowEditProfile
+    let showEditProfile=props.showEditProfile
     let [username, setUsername] = useState(userData?.username)
     let [userEmail, setUserEmail] = useState(userData?.userEmail)
     let [userLocation, setUserLocation] = useState(userData?.baseLocation)
     let [updateUserData, setUpdateUserData] = useState(false)
     let defaultTheme=useTheme()
-
+ 
     const authContext = React.useContext(AuthContext);
     const user = authContext.user;
 
@@ -39,6 +41,9 @@ const EditProfile = (props) => {
             },
           })
           .then (()=> setUpdateUserData(false))
+          .then (()=> {
+            setReloadUserData(true)
+          })
         }
       })()
     }, [updateUserData])
@@ -73,13 +78,22 @@ const EditProfile = (props) => {
             onChangeText={text => setUserLocation(text)}
           />
         </View>
-        <TouchableOpacity style={{...defaultTheme},styles.commandButton} onPress={onChangeUserData}>
+        <TouchableOpacity 
+        style={{...defaultTheme},styles.commandButton}
+        onPress={() =>{
+          onChangeUserData
+          setShowEditProfile(!showEditProfile)
+         }
+        }
+       >
           <Text style={{...defaultTheme},styles.panelButtonTitle}>Submit</Text>
+           
         </TouchableOpacity>
         </View>
     )
 }
 export default EditProfile;
+
 
 const styles = StyleSheet.create({
     container: {

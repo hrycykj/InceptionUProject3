@@ -23,7 +23,7 @@ const QuestModal = (props) => {
   const startQuest = () => {
     selectQuest(questDetail)
     hideModal()
-    showSnackBar('Starting Quest', 'OK', () => { props.jumpTo("map") })
+    showSnackBar('Adventure awaits in the Rabbit Hole!', 'Jump in', () => { props.jumpTo("map") })
   }
   const continueQuest = () => {
     hideModal()

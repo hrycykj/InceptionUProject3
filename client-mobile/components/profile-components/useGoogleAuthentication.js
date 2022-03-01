@@ -6,7 +6,7 @@ import { maybeCompleteAuthSession } from "expo-web-browser"
 
 maybeCompleteAuthSession()
 
-const expoClientId = ''
+const expoClientId = (EXPO_CLIENT_ID) ? EXPO_CLIENT_ID : ""
 console.log ('client ID',expoClientId) 
 
 const login = (id_token) => {

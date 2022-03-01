@@ -7,6 +7,7 @@ import {
   signInWithCredential
 } from "firebase/auth";
 import { FirebaseContext } from "../firebase/FirebaseProvider";
+import { Alert } from "react-native";
 
 export const AuthContext = React.createContext();
 
@@ -34,9 +35,11 @@ function AuthProvider(props) {
       console.log("Sign up in!!", userCred.user);
     } else {
       console.log("Sign up failed!");
+      Alert.alert ('Error', 'registration failed, please try again')
     }
   } catch (ex) {
     console.log("Auth failed!", ex.message);
+    Alert.alert ('Error', 'registration failed, please try again')
   }
 };
   
@@ -51,6 +54,7 @@ function AuthProvider(props) {
       }
     } catch (ex) {
       console.log("AUTH FAILURE!", ex.message);
+      Alert.alert ('Error', 'log in credentials failed, please try again')
     }
   };
 
@@ -67,6 +71,7 @@ function AuthProvider(props) {
             console.log("Logged in with Google!!", userCred.user);
           } else {
             console.log("Login with Google failed!");
+            Alert.alert ('Error', 'Sign in with Google failed, please try again')
           }
     } catch (ex) {
         console.log("AUTH FAILURE!", ex.message);

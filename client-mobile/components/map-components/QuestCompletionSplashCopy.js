@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import QuestList from "../Quest/QuestList";
+import { NotificationContext } from "../../context/NotificationContext"
 
 
 
@@ -8,6 +9,7 @@ const QuestCompletionSplash  = (props) => {
   const [modalVisible, setModalVisible] = useState(true);
   const quest = props.quest;
   const jumpTo = props.jumpTo;
+  const notificationContext = useContext(NotificationContext)
 
   return (
     <View style={styles.centeredView}>
@@ -25,8 +27,10 @@ const QuestCompletionSplash  = (props) => {
             <Text>{quest?.completionStory}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {setModalVisible(!modalVisible)
-              jumpTo("quest")}
+              onPress={() => {
+                // setModalVisible(false)
+                notificationContext.hideModal()
+                jumpTo("quest")}
               }
               
               >

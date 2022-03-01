@@ -54,14 +54,14 @@ const QuestFilter = (props) => {
         <>
             <View style={{ ...defaultTheme }, { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.background }}>
                 <View>
-                    <Text>Show Completed</Text>
+                    <Text style={{ ...defaultTheme }, {fontSize: 22, marginLeft: 7}}>Show Completed</Text>
                     <RadioButton
                         value="first"
                         status={completedChecked === true ? 'checked' : 'unchecked'}
                         onPress={() => onPressCompleted()}
                 
                     />
-                    <Text>By location</Text>
+                    <Text style={{ ...defaultTheme }, {fontSize: 22, marginLeft: 7}}>By location</Text>
                     <RadioButton
                         value="second"
                         status={locationChecked === true ? 'checked' : 'unchecked'}
