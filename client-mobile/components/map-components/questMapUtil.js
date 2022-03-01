@@ -25,8 +25,8 @@ const updateLocation = async (setLocation) => {
     let locations = await Location.watchPositionAsync(
       {
         accuracy: Location.Accuracy.Highest,
-        timeInterval: 5000,
-        distanceInterval: 5,
+        timeInterval: 1000,
+        distanceInterval: 1,
       },
       (loc) => {
         setLocation(loc);

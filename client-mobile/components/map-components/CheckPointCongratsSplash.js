@@ -22,6 +22,7 @@ import { AuthContext } from "../../firebase/AuthProvider";
 import CoinToss from "../coins-component/CoinToss";
 import CoinTossCopy from "../coins-component/CoinTossCopy";
 import { HOST_SERVER } from "../../util/hostServer";
+import { newCenterCoordinates } from './questMapUtil'
 
 const CheckPointCongratsSplash = (props) => {
   let quest = props.quest;
@@ -32,6 +33,9 @@ const CheckPointCongratsSplash = (props) => {
   let setQuestComplete = props.setQuestComplete;
   let questComplete = props.questComplete;
   let [buttonClick, setButtonClick] = useState(null);
+  let location = props.location
+  let coords = props.coords
+  let setMapCenter = props.setMapCenter
 
   const notificationContext = useContext(NotificationContext);
   const questContext = useContext(QuestContext);
@@ -54,6 +58,7 @@ const CheckPointCongratsSplash = (props) => {
       });
     } else {
       let revisedCheckPoint = currentCheckPoint + 1;
+      newCenterCoordinates (location, coords[revisedCheckPoint].position, setMapCenter)
       setCurrentCheckPoint(revisedCheckPoint);
       console.log("revised checkpoint", revisedCheckPoint);
       console.log("next checkpoint:", currentCheckPoint);

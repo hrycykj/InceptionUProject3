@@ -47,7 +47,7 @@ const QuestMap = (props) => {
 
 
   let { colors } = useTheme();
-  let geofenceSize = 10; //metres
+  let geofenceSize = 20; //metres
 
   const fetchQuest = () => {
     setQuest(questContext.quest);
@@ -160,6 +160,9 @@ const QuestMap = (props) => {
           setQuestComplete={setQuestComplete}
           questComplete = {questComplete}
           jumpTo = {props.jumpTo}
+          location = {location}
+          coords = {coords}
+          setMapCenter = {setMapCenter}
         />
       )}
 
