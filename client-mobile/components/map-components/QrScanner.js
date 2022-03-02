@@ -4,6 +4,8 @@ import { Text, Button, FAB, useTheme } from 'react-native-paper'
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { HOST_SERVER } from "../../util/hostServer";
 import {QuestContext} from "../../context/QuestContext"
+import {newCenterCoordinates} from './questMapUtil'
+import { mdiCrosshairsGps } from '@mdi/js'
 
 //test
 const styles = StyleSheet.create({
@@ -36,7 +38,9 @@ export default function QrScanner(props) {
   const questContext = useContext(QuestContext)
   let checkPoint = props.checkPoint;
   let setCheckPoint = props.setCheckPoint;
-  let location = location;
+  let location = props.location;
+  let coords=props.coords
+  let setMapCenter=props.setMapCenter
 
   let defaultTheme = useTheme()
 
@@ -73,12 +77,17 @@ export default function QrScanner(props) {
     return <Text>No access to camera</Text>;
   }
 
+  const recenterMap = () => {
+    // console.log('recentering the map happens here', coords)
+    newCenterCoordinates(location, coords[questContext.checkPointIndex].position, setMapCenter)
+  }
+
   return (
     <>
       <View style={{...defaultTheme}, styles.container}>
         {props.children}
-        {!scanning && questContext.insideGeofence &&(
-          <FAB
+        {(!scanning && questContext.insideGeofence)
+          ? <FAB
             style={{...defaultTheme}, styles.fab}
             big
             icon="qrcode-scan"
@@ -86,7 +95,15 @@ export default function QrScanner(props) {
             title="Scan Code"
             accessibilityLabel="Scan QR code"
           />
-        )}
+          : <FAB
+            style={{...defaultTheme}, styles.fab}
+            big
+            icon="crosshairs-gps"
+            onPress={recenterMap}
+            title="Recenter Map"
+            accessibilityLabel="Recenter Map"
+          />
+        }
 
         {scanning && (
           <>

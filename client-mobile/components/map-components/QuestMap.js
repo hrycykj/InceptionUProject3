@@ -115,8 +115,10 @@ const QuestMap = (props) => {
           <QrScanner
             checkPoint={checkPoint}
             setCheckPoint={setCheckPoint}
-            location={location}>
-           
+            location={location}
+            setMapCenter={setMapCenter}
+            coords={coords}
+          >
             <View
               style={
                 !insideGeofence
