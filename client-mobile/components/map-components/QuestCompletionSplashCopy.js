@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import QuestList from "../Quest/QuestList";
 import { NotificationContext } from "../../context/NotificationContext"
-
+import {QuestContext} from "../../context/QuestContext"
 
 
 const QuestCompletionSplash  = (props) => {
@@ -10,6 +10,8 @@ const QuestCompletionSplash  = (props) => {
   const quest = props.quest;
   const jumpTo = props.jumpTo;
   const notificationContext = useContext(NotificationContext)
+  const questContext = useContext(QuestContext)
+
 
   return (
     <View style={styles.centeredView}>
@@ -29,6 +31,7 @@ const QuestCompletionSplash  = (props) => {
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
                 // setModalVisible(false)
+                questContext.resetQuest()
                 notificationContext.hideModal()
                 jumpTo("quest")}
               }
