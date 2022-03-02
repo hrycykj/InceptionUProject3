@@ -44,10 +44,11 @@ const QuestMap = (props) => {
     'latitudeDelta': 0.0025,
     'longitudeDelta': 0.001,
   })
+  const [firstMapCenter, setFirstMapCenter] = useState(true)
 
 
   let { colors } = useTheme();
-  let geofenceSize = 20; //metres
+  let geofenceSize = 3000; //metres
 
   const fetchQuest = () => {
     setQuest(questContext.quest);
@@ -66,6 +67,7 @@ const QuestMap = (props) => {
     setCheckPoint(null);
     setCheckPointComplete(false);
     setQuestComplete(false);
+    setFirstMapCenter(true)
   }, [questContext.quest]);
 
   useEffect(() => {
@@ -102,9 +104,13 @@ const QuestMap = (props) => {
     );
   }, [checkPoint]);
 
-  // useEffect(() => {
-  //   location && newCenterCoordinates (location, coords?.[currentCheckPoint].position, setMapCenter)
-  // },[])
+  useEffect(() => {
+    console.log('recentering the first checkpoint', firstMapCenter, currentCheckPoint)
+    if (firstMapCenter&&(currentCheckPoint==0)) {
+      newCenterCoordinates(location, coords[currentCheckPoint].position, setMapCenter)
+      setFirstMapCenter(false)
+    }
+  },[location])
 
 
   return (
