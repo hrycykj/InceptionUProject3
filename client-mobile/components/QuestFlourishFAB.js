@@ -5,8 +5,6 @@ import { Icon } from 'react-native-elements';
 import { QuestContext } from "../context/QuestContext"
 
 
-
-
 const QuestFlourish = () => {
   const questContext = useContext(QuestContext)
   const checkPointIndex = questContext.checkPointIndex
@@ -19,7 +17,7 @@ const QuestFlourish = () => {
       <FAB
       style={styles.fab}
       
-      icon="exclamation"
+      icon= "information-variant" //"exclamation"
       onPress={() => {
         Alert.alert(
           "Quest Details",

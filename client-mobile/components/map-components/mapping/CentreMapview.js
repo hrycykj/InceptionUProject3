@@ -4,6 +4,8 @@ import CurrentMapview from './CurrentMapview'
 const CentreMapview = (props) => {
     const coords1 = props.coords1
     const coords2 = props.coords2
+    const mapCenter = props.mapCenter
+    const setMapCenter = props.setMapCenter
 
     console.log ('coords1:',coords1)
     console.log ('coords2:',coords2)
@@ -20,10 +22,12 @@ const CentreMapview = (props) => {
 
     return (
       <CurrentMapview
-        latitude= {lat} 
-        longitude= {long}
-        latitudeDelta= {deltaLat}
-        longitudeDelta= {deltaLong}
+        latitude= {mapCenter.latitude} 
+        longitude= {mapCenter.longitude}
+        latitudeDelta= {mapCenter.latitudeDelta}
+        longitudeDelta= {mapCenter.longitudeDelta}
+        mapCenter = {mapCenter}
+        setMapCenter = {setMapCenter}
       >
         {props.children}
       </CurrentMapview>

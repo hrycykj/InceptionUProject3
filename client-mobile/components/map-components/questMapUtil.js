@@ -86,9 +86,34 @@ const handleCheckPointScanned = async (checkPoint, questContext, setCheckPointCo
   }
 }
 
+const newCenterCoordinates = (location, checkpointCoords, setMapCenter) => {
+  // console.log('you should be calculating the new coordinates already!')
+  console.log (location.coords.latitude, location.coords.longitude)
+  const coords1 = location?.coords
+  const coords2 = checkpointCoords
+
+  let long = (coords1.longitude+coords2.longitude)/2
+    let lat = (coords1.latitude+coords2.latitude)/2
+    let deltaLong = Math.abs(coords1.longitude-coords2.longitude)*1.2
+    let deltaLat = Math.abs(coords1.latitude-coords2.latitude)*1.2
+
+    console.log(deltaLong, deltaLat)
+    if (deltaLat<0.0025) {deltaLat=0.0025} else {deltaLat=deltaLat}
+    if (deltaLong<.001) {deltaLong=0.001} else {deltaLong=deltaLong}
+    console.log(deltaLong, deltaLat)
+
+    setMapCenter ({
+    'latitude': lat,
+    'longitude': long,
+    'latitudeDelta': deltaLat,
+    'longitudeDelta': deltaLong,
+    })
+}
+
 module.exports = {
   setMyLocation,
   updateLocation,
   checkPointIsNear,
-  handleCheckPointScanned
+  handleCheckPointScanned,
+  newCenterCoordinates,
 };

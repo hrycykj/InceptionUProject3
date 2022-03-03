@@ -12,16 +12,20 @@ import {
   updateLocation,
   checkPointIsNear,
   handleCheckPointScanned,
+  newCenterCoordinates,
 } from "./questMapUtil";
 import QuestFlourish from "../QuestFlourishFAB";
 
 
 
 const QuestMap = (props) => {
-  const questContext = useContext(QuestContext);
   const notificationContext = useContext(NotificationContext);
   const authContext = useContext(AuthContext);
   const user = authContext.user;
+  
+  const questContext = useContext(QuestContext);
+  const insideGeofence = questContext.insideGeofence;
+  const setInsideGeofence = questContext.setInsideGeofence;
 
 
   let [location, setLocation] = useState(null);
@@ -34,12 +38,17 @@ const QuestMap = (props) => {
   let [checkPoint, setCheckPoint] = useState(null);
   let [checkPointComplete, setCheckPointComplete] = useState(null);
   let [questComplete, setQuestComplete] = useState(null);
+  const [mapCenter, setMapCenter] = useState ({
+    'latitude': 51.0447,
+    'longitude': -114.0719,
+    'latitudeDelta': 0.0025,
+    'longitudeDelta': 0.001,
+  })
+  const [firstMapCenter, setFirstMapCenter] = useState(true)
 
-  const insideGeofence = questContext.insideGeofence;
-  const setInsideGeofence = questContext.setInsideGeofence;
 
   let { colors } = useTheme();
-  let geofenceSize = 100000; //metres
+  let geofenceSize = 3000; //metres
 
   const fetchQuest = () => {
     setQuest(questContext.quest);
@@ -58,6 +67,7 @@ const QuestMap = (props) => {
     setCheckPoint(null);
     setCheckPointComplete(false);
     setQuestComplete(false);
+    setFirstMapCenter(true)
   }, [questContext.quest]);
 
   useEffect(() => {
@@ -94,7 +104,13 @@ const QuestMap = (props) => {
     );
   }, [checkPoint]);
 
-
+  useEffect(() => {
+    console.log('recentering the first checkpoint', firstMapCenter, currentCheckPoint)
+    if (firstMapCenter&&(currentCheckPoint==0)) {
+      newCenterCoordinates(location, coords[currentCheckPoint].position, setMapCenter)
+      setFirstMapCenter(false)
+    }
+  },[location])
 
 
   return (
@@ -105,8 +121,10 @@ const QuestMap = (props) => {
           <QrScanner
             checkPoint={checkPoint}
             setCheckPoint={setCheckPoint}
-            location={location}>
-           
+            location={location}
+            setMapCenter={setMapCenter}
+            coords={coords}
+          >
             <View
               style={
                 !insideGeofence
@@ -128,6 +146,8 @@ const QuestMap = (props) => {
                   longitude: location.coords.longitude,
                 }}
                 checkPointLocation={coords[currentCheckPoint].position} // {{'latitude': 51.0724839955983, 'longitude': -114.20429068730083}}      // {coords[currentCheckPoint].position}
+                mapCenter = {mapCenter}
+                setMapCenter = {setMapCenter}
               ></CheckPointMap>
             </View>
             {/* </QuestFlourish> */}
@@ -148,6 +168,9 @@ const QuestMap = (props) => {
           setQuestComplete={setQuestComplete}
           questComplete = {questComplete}
           jumpTo = {props.jumpTo}
+          location = {location}
+          coords = {coords}
+          setMapCenter = {setMapCenter}
         />
       )}
 
