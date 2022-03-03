@@ -48,9 +48,15 @@ export default function QrScanner(props) {
 
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
+      let componentMounted = true
+      if (componentMounted) {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === "granted");
+      }
     })();
+    return () => {
+      componentMounted = false
+    }
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
