@@ -166,6 +166,14 @@ const QuestContextProvider = (props) => {
     storeCurrentCheckPoint(quest.checkPoints[0], 0)
   };
 
+  const resetQuest = () => {
+    setQuset ({"id":"null"});
+    setCheckPointIndex(0)
+    setCurrentCheckPoint({ "id": "51.0447_114.0719", "position": { "latitude": 51.0447, "longitude": 114.0719 } })
+    storeCurrentQuest({"id":"null"});
+    storeCurrentCheckPoint({ "id": "51.0447_114.0719", "position": { "latitude": 51.0447, "longitude": 114.0719 } }, 0)
+  };
+
   const completeQuest = (questId) => {
     if (!completedQuests.includes(questId)) {
       const newCompletedQuests = [...completedQuests, questId]
@@ -193,7 +201,7 @@ const QuestContextProvider = (props) => {
     }
   }, [authContext, reloadUserData]);
 
-  const theValues = { userData, setUserData, setReloadUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
+  const theValues = { resetQuest, userData, setUserData, setReloadUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {

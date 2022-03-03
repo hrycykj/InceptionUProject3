@@ -55,6 +55,7 @@ const CheckPointCongratsSplash = (props) => {
 
       notificationContext.showModal(() => {
         return <QuestCompletionSplashCopy quest={quest} jumpTo={props.jumpTo} />
+        
       });
     } else {
       let revisedCheckPoint = currentCheckPoint + 1;

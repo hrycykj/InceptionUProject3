@@ -3,7 +3,7 @@ import { GoogleAuthProvider } from "@firebase/auth"
 import { useIdTokenAuthRequest } from 'expo-auth-session/providers/google'
 import { maybeCompleteAuthSession } from "expo-web-browser"
 import { EXPO_CLIENT_ID } from "@env"
-
+// console.log(GREG)
 maybeCompleteAuthSession()
 
 const expoClientId = (EXPO_CLIENT_ID) ? EXPO_CLIENT_ID : ""

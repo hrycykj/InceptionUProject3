@@ -26,6 +26,7 @@ import EditProfile from "./EditProfile";
 import { colors } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 const UserData = (props) => {
   // let [showUserData, setShowUserData] = useState(false)
   let [showEditProfile, setShowEditProfile] = useState(false);
@@ -112,6 +113,7 @@ const UserData = (props) => {
                 icon: "logout",
                 label: "Logout",
                 onPress: () => {
+                  questContext.resetQuest()
                   console.log("Pressed logout");
                   SignOutUser()
                   setUserData(null)
