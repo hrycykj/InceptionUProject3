@@ -33,6 +33,7 @@ const CheckPointCongratsSplash = (props) => {
   let setQuestComplete = props.setQuestComplete;
   let questComplete = props.questComplete;
   let [buttonClick, setButtonClick] = useState(null);
+  const [showCoinAnimation, setShowCoinAnimation] = useState(true)
   let location = props.location
   let coords = props.coords
   let setMapCenter = props.setMapCenter
@@ -110,7 +111,10 @@ const CheckPointCongratsSplash = (props) => {
 
   return (
     <ScrollView>
+
+        {showCoinAnimation && <CoinTossCopy setShowCoinAnimation={setShowCoinAnimation}/> }
       <Card elevation={3} style={{ ...defaultTheme, ...styles.card, zIndex: 10 } } >
+
         <Card.Cover source={{ uri: checkPoint.objectToFind.url }} />
         <Card.Title title={checkPoint.title} />
         <Card.Content>
@@ -121,7 +125,7 @@ const CheckPointCongratsSplash = (props) => {
           <Button
             // mode="contained"
             onPress={() => {
-              console.log('boo')
+              // console.log('boo')
               handleNextButtonClicked();
             }}
             style={({ ...defaultTheme }, { marginRight: 8 })}
@@ -135,9 +139,8 @@ const CheckPointCongratsSplash = (props) => {
           progress={(currentCheckPoint + 1) / quest.checkPoints.length}
           color={colors.accent}
         />
-        {/* <CoinToss /> */}
+        
       </Card>
-        <CoinTossCopy />
     </ScrollView>
   );
 };
