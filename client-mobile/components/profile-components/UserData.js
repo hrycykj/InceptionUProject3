@@ -73,7 +73,10 @@ const UserData = (props) => {
             </Text>              
             <Text>{userData?.baseLocation}</Text>
             <Text>Coins: {userData?.coins}</Text>
-            <Text>Current Quest: {userData?.currentQuest}</Text>
+            <Text>Current Quest: {userData?.currentQuest=="null" 
+                                  ? "Its time to pick another quest!" 
+                                  : userData?.currentQuest}
+            </Text>
             <Text>Completed Quests:</Text>
             {userData?.completedQuests?.map((quest) => {
               return (
