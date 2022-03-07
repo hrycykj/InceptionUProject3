@@ -116,13 +116,15 @@ const UserData = (props) => {
                 icon: "logout",
                 label: "Logout",
                 onPress: () => {
-                  questContext.resetQuest()
+                  // questContext.resetQuest() //resets and stores default values in quset, CurrentCheckPointIndex and CurrentCheckPoint, then stores them to Async Storage & the database
                   console.log("Pressed logout");
-                  SignOutUser()
-                  setUserData(null)
-                  setCompletedQuests([])
-                  // set current checkpoint index to zero
-                  clearAllData()
+                  SignOutUser() //signs out user from Firebase Auth
+                  setUserData(null) //deletes user data
+                  setCompletedQuests([]) //deletes CompletedQuests
+                  questContext.setQuset({"id":"null"})
+                  questContext.setCheckPointIndex(0)
+                  questContext.setCurrentCheckPoint({ "id": "51.0447_114.0719", "position": { "latitude": 51.0447, "longitude": 114.0719 } })
+                  clearAllData() //clears async data storage
                 },
               },
             ]}
