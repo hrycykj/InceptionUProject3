@@ -5,6 +5,7 @@ import { Text, TextInput, Headline, Button, TouchableRipple, useTheme } from "re
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../firebase/AuthProvider";
+import { QuestContext } from "../../context/QuestContext"
 import useGoogleAuthentication from "./useGoogleAuthentication"
 
 
@@ -14,6 +15,8 @@ export default function Login() {
   const SignInUser = authContext.SignInUser;
   const SignOutUser = authContext.SignOutUser;
   const SignInUserWithCredentials = authContext.SignInUserWithCredentials
+  const questContext = useContext(QuestContext)
+  const onLoginLoadQuest = questContext.onLoginLoadQuest
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = authContext.user;
@@ -66,7 +69,10 @@ export default function Login() {
           <Button
               // style={{marginTop: 5, marginBottom: 5}}
               mode="contained"
-              onPress={()=>{SignInUser(email, password)}}
+              onPress={()=>{
+                SignInUser(email, password)
+                onLoginLoadQuest()
+                }}
               title="Sign In User"
               accessibilityLabel="Sign In User"
               color= {defaultTheme.colors.accent}
@@ -78,6 +84,7 @@ export default function Login() {
             onPress= {()=>{
                 console.log('Google login button pressed')
                 loginWithGoogle()
+                onLoginLoadQuest()
             }}
             title="Sign in with Google"
             accessibilityLabel="Sign in with Google"
@@ -92,6 +99,7 @@ export default function Login() {
             onPress= {()=>{
                 console.log('Facebook login button pressed (not functional yet)')
                 // loginWithFacebook()
+                // onLoginLoadQuest()
             }}
             title="Sign in with Facebook"
             accessibilityLabel="Sign in with Facebook"

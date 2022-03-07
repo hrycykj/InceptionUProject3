@@ -49,6 +49,7 @@ const QuestContextProvider = (props) => {
   const [completedChecked, setCompletedChecked] = useState(false);
   const [locationChecked, setLocationChecked] = useState(false);
   const [reloadUserData, setReloadUserData] = useState(false)
+  const [loginLoadQuest, setLoginLoadQuest] = useState(false)
 
   const authContext = useContext(AuthContext)
   const user = authContext.user;
@@ -184,6 +185,28 @@ const QuestContextProvider = (props) => {
   };
 
   useEffect(() => {
+    if (loginLoadQuest&&userData) {
+       fetch(`${HOST_SERVER}/api/quest/${userData?.currentQuest}`)
+       .then((quest) => quest.json())
+       .then((data) => {
+         setQuset(data)
+         setCheckPointIndex(userData.currentCheckPointIndex)
+         setCurrentCheckPoint(data.checkPoints[userData.currentCheckPointIndex])
+         storeCurrentQuest(data)
+         storeCurrentCheckPoint(data.checkPoints[userData.currentCheckPointIndex],userData.currentCheckPointIndex)
+         setLoginLoadQuest(false)
+       });
+     }
+    return
+  }, [userData,loginLoadQuest])
+
+  const onLoginLoadQuest = async () => {
+    if (userData?.currentQuest !== 'null') {
+      setLoginLoadQuest(true) //fetch quest data from database and store appropriate data
+    }
+  }
+
+  useEffect(() => {
     if (authContext.user) {
       fetch(`${HOST_SERVER}/api/users/` + authContext.user?.uid)
         .then((fetchedData) => fetchedData.json())
@@ -201,7 +224,7 @@ const QuestContextProvider = (props) => {
     }
   }, [authContext, reloadUserData]);
 
-  const theValues = { setQuset, setCheckPointIndex, setCurrentCheckPoint, resetQuest, userData, setUserData, setReloadUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
+  const theValues = { onLoginLoadQuest, setQuset, setCheckPointIndex, setCurrentCheckPoint, resetQuest, userData, setUserData, setReloadUserData, showCompletedQuests, completedChecked, setCompletedChecked, locationChecked, setLocationChecked, setShowCompletedQuests, completeQuest, completedQuests, setCompletedQuests, quest, selectQuest, insideGeofence, setInsideGeofence, checkPointIndex, currentCheckPoint, setNextCheckPoint };
   if (!quest) {
     return <View><Text>Loading...</Text></View>;
   } else {
