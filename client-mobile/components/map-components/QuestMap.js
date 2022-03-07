@@ -105,7 +105,7 @@ const QuestMap = (props) => {
   }, [checkPoint]);
 
   useEffect(() => {
-    console.log('recentering the first checkpoint', firstMapCenter, currentCheckPoint)
+    // console.log('recentering the first checkpoint', firstMapCenter, currentCheckPoint)
     if (firstMapCenter&&(currentCheckPoint==0)&&coords) {
       newCenterCoordinates(location, coords[currentCheckPoint].position, setMapCenter)
       setFirstMapCenter(false)
