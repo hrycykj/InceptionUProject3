@@ -48,7 +48,7 @@ const QuestMap = (props) => {
 
 
   let { colors } = useTheme();
-  let geofenceSize = 3000000; //metres
+  let geofenceSize = 1000; //metres
 
   const fetchQuest = () => {
     setQuest(questContext.quest);
@@ -93,7 +93,7 @@ const QuestMap = (props) => {
       geofenceSize,
       setInsideGeofence
     ).catch((error) => console.log(error));
-  }, [location]);
+  }, [quest,location]);
 
   useEffect(() => {
     handleCheckPointScanned(
