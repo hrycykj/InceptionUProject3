@@ -185,7 +185,7 @@ const QuestContextProvider = (props) => {
   };
 
   useEffect(() => {
-    if (loginLoadQuest&&userData) {
+    if (loginLoadQuest&&userData&&userData.currentCheckPointIndex) {
        fetch(`${HOST_SERVER}/api/quest/${userData?.currentQuest}`)
        .then((quest) => quest.json())
        .then((data) => {
