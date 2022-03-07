@@ -25,6 +25,7 @@ const EditProfile = (props) => {
         username: username,
         userEmail: userEmail,
         baseLocation: userLocation}
+      console.log('updated user info', dataupdate)
       setUserData(dataupdate)
       setUpdateUserData (true)
       // console.log(userData)
@@ -81,7 +82,7 @@ const EditProfile = (props) => {
       <TouchableOpacity 
       style={{...defaultTheme},styles.commandButton}
       onPress={() =>{
-        onChangeUserData
+        onChangeUserData()
         setShowEditProfile(!showEditProfile)
        }
       }
