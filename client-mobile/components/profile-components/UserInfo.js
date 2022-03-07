@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     height: h,
     width: w,
     alignItems: "center",
+    
     // justifyContent: "center",
   },
   // img: {

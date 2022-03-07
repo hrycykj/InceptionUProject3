@@ -53,8 +53,7 @@ const UserProfile = (props) => {
       </View>
       <View style={{...defaultTheme},styles.infoBoxWrapper}>
           <View style={{...defaultTheme},[styles.infoBox, {
-            
-            borderRightWidth: 1
+            borderRightWidth: 2
           }]}>
             <Title>{userData?.completedQuests?.length}</Title>
             <Caption>Quests Completed</Caption>
@@ -90,20 +89,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 14,
     fontWeight: '500',
+    
   },
   row: {
     flexDirection: 'row',
     marginBottom: 10,
   },
   infoBoxWrapper: {
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
     flexDirection: 'row',
     height: 100,
+    
   },
   infoBox: {
     width: '60%',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
 });
