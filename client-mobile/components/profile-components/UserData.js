@@ -65,22 +65,22 @@ const UserData = (props) => {
     
         {(!showEditProfile) &&
           <View style={{...defaultTheme}, styles.container}>
-            <Text>{userData?.UID}</Text>
-            <Text> 
+            {/* <Text style={styles.container}>{userData?.UID}</Text> */}
+            <Text style={styles.container}> 
               {userData?.username===""
               ? user?.email
               : userData?.username}
             </Text>              
-            <Text>{userData?.baseLocation}</Text>
-            <Text>Coins: {userData?.coins}</Text>
-            <Text>Current Quest: {userData?.currentQuest=="null" 
+            <Text style={styles.container}>{userData?.baseLocation}</Text>
+            <Text style={styles.container}>Coins: {userData?.coins}</Text>
+            <Text style={styles.container}>Current Quest:{"\n"} {userData?.currentQuest=="null" 
                                   ? "Its time to pick another quest!" 
                                   : userData?.currentQuest}
             </Text>
-            <Text>Completed Quests:</Text>
+            <Text style={styles.container}>Completed Quests:</Text>
             {userData?.completedQuests?.map((quest) => {
               return (
-                  <Text key={quest}>
+                  <Text style={styles.container} key={quest}>
                     {quest}
                   </Text>
                 )
@@ -158,7 +158,10 @@ export default UserData;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center",
+   justifyContent:"center",
+    paddingBottom:5,
+    fontSize:20,
+    fontWeight: '600',
   },
   fab: {
     position: "absolute",
